@@ -19,7 +19,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     let nameLabel: UILabel = {
         let name = UILabel()
-        name.frame = CGRect(x: 146, y: 32, width: 100, height: 20)
+        name.frame = CGRect(x: 131, y: 32, width: 100, height: 20)
         name.text = "No name"
         name.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
         name.textColor = .black
