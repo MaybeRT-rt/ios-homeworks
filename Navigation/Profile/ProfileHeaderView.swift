@@ -19,7 +19,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     let nameLabel: UILabel = {
         let name = UILabel()
-        name.frame = CGRect(x: 130, y: 0, width: 100, height: 100)
+        name.frame = CGRect(x: 146, y: 32, width: 100, height: 20)
         name.text = "No name"
         name.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
         name.textColor = .black
@@ -113,6 +113,8 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         self.buttonProfile.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
         self.buttonProfile.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
+    
+    //MARK: - Actions
     
     @objc private func pressedButton() {
         myLabel.text = statusText
