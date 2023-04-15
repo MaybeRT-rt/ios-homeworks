@@ -15,8 +15,6 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationController?.navigationBar.backgroundColor = .white
-        //profileHV.viewedPhoto()
-        profileHV.setupButton()
     }
     
     override func viewWillLayoutSubviews() {

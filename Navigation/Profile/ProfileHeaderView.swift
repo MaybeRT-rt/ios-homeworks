@@ -64,7 +64,6 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         myTextField.textColor = UIColor.black
         myTextField.delegate = self
         myTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        addSubview(myTextField)
         
         return myTextField
     }()
@@ -84,7 +83,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(pressedButton), for: .touchUpInside)
-        addSubview(buttonProfile)
+
         
         return button
         
@@ -96,6 +95,9 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         addSubview(myLabel)
         addSubview(nameLabel)
         addSubview(photoImageView)
+        addSubview(buttonProfile)
+        addSubview(statusTextField)
+        setupButton()
     
     }
     
@@ -103,14 +105,9 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    func viewedPhoto() {
-//
-//        photoImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-//    }
-    
     func setupButton() {
         addSubview(buttonProfile)
-        
+
         self.buttonProfile.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 34).isActive = true
         self.buttonProfile.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
         self.buttonProfile.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
