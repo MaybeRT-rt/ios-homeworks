@@ -128,21 +128,21 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
-            nameLabel.leftAnchor.constraint(equalTo:self.safeAreaLayoutGuide.leftAnchor, constant: 132),
+            nameLabel.leadingAnchor.constraint(equalTo:self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
             nameLabel.widthAnchor.constraint(equalToConstant: 100),
             nameLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         NSLayoutConstraint.activate([
             myLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 68),
-            myLabel.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 132),
+            myLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
             myLabel.widthAnchor.constraint(equalToConstant: 100),
             myLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         NSLayoutConstraint.activate([
             statusTextField.topAnchor.constraint(equalTo: myLabel.bottomAnchor, constant: 16),
-            statusTextField.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 132),
+            statusTextField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
             statusTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             statusTextField.heightAnchor.constraint(equalToConstant: 30)
         ])
