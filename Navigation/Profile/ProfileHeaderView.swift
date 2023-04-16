@@ -12,18 +12,23 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     //MARK: - Status Label
     
-    let myLabel = UILabel(frame: CGRect(x: 130, y: 74, width: 226.00, height: 20))
-    
+    private lazy var myLabel: UILabel = {
+        let statusLabel = UILabel()
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        //(frame: CGRect(x: 130, y: 74, width: 226.00, height: 20))
+        return statusLabel
+    }()
     
     //MARK: - Name Label
     
     let nameLabel: UILabel = {
         let name = UILabel()
-        name.frame = CGRect(x: 131, y: 32, width: 100, height: 20)
+        //name.frame = CGRect(x: 131, y: 32, width: 100, height: 20)
         name.text = "No name"
         name.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
         name.textColor = .black
-
+        name.translatesAutoresizingMaskIntoConstraints = false
+        
         return name
         
     }()
@@ -32,12 +37,13 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     let photoImageView: UIImageView = {
         let photo = UIImageView()
-        photo.frame = CGRect(x: 16.0, y: 32, width: 100, height: 100)
+        //photo.frame = CGRect(x: 16.0, y: 32, width: 100, height: 100)
         photo.layer.cornerRadius = 50
         photo.layer.borderWidth = 3
         photo.layer.borderColor = UIColor.white.cgColor
         photo.clipsToBounds = true
         photo.image = UIImage(named: "bich2")
+        photo.translatesAutoresizingMaskIntoConstraints = false
         
         return photo
         
@@ -52,7 +58,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     private lazy var statusTextField: UITextField = {
         var myTextField = UITextField()
-        myTextField = UITextField(frame: CGRect(x: 130, y: 116, width: 230.00, height: 40))
+        //myTextField = UITextField(frame: CGRect(x: 130, y: 116, width: 230.00, height: 40))
         myTextField.placeholder = "Waiting for something"
         myTextField.text = " "
         myTextField.borderStyle = UITextField.BorderStyle.none
@@ -63,6 +69,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         myTextField.minimumFontSize = 15
         myTextField.textColor = UIColor.black
         myTextField.delegate = self
+        myTextField.translatesAutoresizingMaskIntoConstraints = false
         myTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         
         return myTextField
@@ -83,35 +90,70 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(pressedButton), for: .touchUpInside)
-
         
         return button
         
     }()
     
+    //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemGray4
-        addSubview(myLabel)
-        addSubview(nameLabel)
-        addSubview(photoImageView)
-        addSubview(buttonProfile)
-        addSubview(statusTextField)
-        setupButton()
-    
+        addedSubwiew()
+        setupConstrain()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupButton() {
+    //MARK: - Add Subwiew
+    func addedSubwiew() {
+        addSubview(myLabel)
+        addSubview(nameLabel)
+        addSubview(photoImageView)
         addSubview(buttonProfile)
-
-        self.buttonProfile.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 34).isActive = true
-        self.buttonProfile.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-        self.buttonProfile.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
-        self.buttonProfile.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        addSubview(statusTextField)
+    }
+    //MARK: - Constrain
+    func setupConstrain() {
+        
+        NSLayoutConstraint.activate([
+            photoImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            photoImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            photoImageView.widthAnchor.constraint(equalToConstant: 100),
+            photoImageView.heightAnchor.constraint(equalToConstant: 100),
+        ])
+        
+        NSLayoutConstraint.activate([
+            nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
+            nameLabel.leftAnchor.constraint(equalTo:self.safeAreaLayoutGuide.leftAnchor, constant: 132),
+            nameLabel.widthAnchor.constraint(equalToConstant: 100),
+            nameLabel.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            myLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 68),
+            myLabel.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 132),
+            myLabel.widthAnchor.constraint(equalToConstant: 100),
+            myLabel.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            statusTextField.topAnchor.constraint(equalTo: myLabel.bottomAnchor, constant: 16),
+            statusTextField.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 132),
+            statusTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            statusTextField.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        
+        NSLayoutConstraint.activate([
+            buttonProfile.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 34),
+            self.buttonProfile.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            self.buttonProfile.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            self.buttonProfile.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
     
     //MARK: - Actions
