@@ -27,7 +27,7 @@ class InfoViewController: UIViewController {
         setupButton()
     }
     
-    private func setupButton() {
+    func setupButton() {
         self.view.addSubview(button)
         
         self.button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -400).isActive = true

@@ -20,6 +20,7 @@ class PostViewController: UIViewController {
     private func setupView() {
         self.view.backgroundColor = .lightGray
         self.navigationItem.title = titlePost
+        self.navigationController?.navigationBar.backgroundColor = .white
     }
     
     func setupButton() {

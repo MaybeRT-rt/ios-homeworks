@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A2C95D329E5B1DD006E82F8 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C95D229E5B1DD006E82F8 /* ProfileHeaderView.swift */; };
 		4A7680A729DEACE3007070FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680A629DEACE3007070FD /* AppDelegate.swift */; };
 		4A7680A929DEACE3007070FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680A829DEACE3007070FD /* SceneDelegate.swift */; };
 		4A7680B029DEACE4007070FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A7680AF29DEACE4007070FD /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A2C95D229E5B1DD006E82F8 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		4A7680A329DEACE3007070FD /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A7680A629DEACE3007070FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A7680A829DEACE3007070FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A2C95D129E5B1A8006E82F8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				4A2C95D229E5B1DD006E82F8 /* ProfileHeaderView.swift */,
+				4A7680BC29DEB882007070FD /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		4A76809A29DEACE3007070FD = {
 			isa = PBXGroup;
 			children = (
@@ -62,8 +73,10 @@
 		4A7680A529DEACE3007070FD /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				4A7680C329DEDF20007070FD /* Data */,
 				4A7680A629DEACE3007070FD /* AppDelegate.swift */,
 				4A7680A829DEACE3007070FD /* SceneDelegate.swift */,
+				4A2C95D129E5B1A8006E82F8 /* Profile */,
 				4A7680C029DECB4B007070FD /* Controllers */,
 				4A7680AF29DEACE4007070FD /* Assets.xcassets */,
 				4A7680B129DEACE4007070FD /* LaunchScreen.storyboard */,
@@ -75,11 +88,9 @@
 		4A7680C029DECB4B007070FD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4A7680BC29DEB882007070FD /* ProfileViewController.swift */,
 				4A7680BA29DEB870007070FD /* FeedViewController.swift */,
 				4A7680BE29DEC53C007070FD /* PostViewController.swift */,
 				4A7680C629DF0F3F007070FD /* InfoViewController.swift */,
-				4A7680C329DEDF20007070FD /* Data */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -169,6 +180,7 @@
 				4A7680C229DEDAC8007070FD /* Post.swift in Sources */,
 				4A7680A929DEACE3007070FD /* SceneDelegate.swift in Sources */,
 				4A7680BF29DEC53C007070FD /* PostViewController.swift in Sources */,
+				4A2C95D329E5B1DD006E82F8 /* ProfileHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
