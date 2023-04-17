@@ -22,8 +22,7 @@ class FeedViewController: UIViewController {
         stack.distribution = .fillEqually
         stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
-        //addSubview(stackView)
-        
+       
         return stack
         
     }()
@@ -71,12 +70,12 @@ class FeedViewController: UIViewController {
     
     //MARK: - Add Constraint StackView
     private func setupConstraint() {
+        
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
-    
     
     // MARK: - Costraints Buttons
     func setupButton() {
