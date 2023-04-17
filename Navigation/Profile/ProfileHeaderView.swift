@@ -145,7 +145,6 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
             statusTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
         
-        
         NSLayoutConstraint.activate([
             buttonProfile.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
             self.buttonProfile.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
