@@ -11,7 +11,7 @@ class InfoViewController: UIViewController {
     
     private lazy var button: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .blue
+        button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 12
         button.setTitle("Alert", for: .normal)
         button.setTitleColor(.lightGray, for: .normal)

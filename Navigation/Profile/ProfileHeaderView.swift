@@ -15,7 +15,6 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     private lazy var myLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        //(frame: CGRect(x: 130, y: 74, width: 226.00, height: 20))
         return statusLabel
     }()
     
@@ -23,7 +22,6 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     let nameLabel: UILabel = {
         let name = UILabel()
-        //name.frame = CGRect(x: 131, y: 32, width: 100, height: 20)
         name.text = "No name"
         name.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
         name.textColor = .black
@@ -37,7 +35,6 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     let photoImageView: UIImageView = {
         let photo = UIImageView()
-        //photo.frame = CGRect(x: 16.0, y: 32, width: 100, height: 100)
         photo.layer.cornerRadius = 50
         photo.layer.borderWidth = 3
         photo.layer.borderColor = UIColor.white.cgColor
@@ -58,7 +55,6 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     private lazy var statusTextField: UITextField = {
         var myTextField = UITextField()
-        //myTextField = UITextField(frame: CGRect(x: 130, y: 116, width: 230.00, height: 40))
         myTextField.placeholder = "Waiting for something"
         myTextField.text = " "
         myTextField.borderStyle = UITextField.BorderStyle.none
@@ -80,7 +76,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     private lazy var buttonProfile: UIButton = {
         let button = UIButton()
         buttonProfile = UIButton(frame: CGRect(x: 166, y: 264, width: 200.00, height: 50))
-        button.backgroundColor = .blue
+        button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 4
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = CGFloat(4)
@@ -94,6 +90,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         return button
         
     }()
+    
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -116,6 +113,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         addSubview(buttonProfile)
         addSubview(statusTextField)
     }
+    
     //MARK: - Constrain
     func setupConstrain() {
         
@@ -127,33 +125,34 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         ])
         
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
-            nameLabel.leadingAnchor.constraint(equalTo:self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
+            nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
+            nameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
             nameLabel.widthAnchor.constraint(equalToConstant: 100),
             nameLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         NSLayoutConstraint.activate([
-            myLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 68),
+            myLabel.topAnchor.constraint(equalTo: nameLabel.safeAreaLayoutGuide.topAnchor, constant: 30),
             myLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
             myLabel.widthAnchor.constraint(equalToConstant: 100),
             myLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         NSLayoutConstraint.activate([
-            statusTextField.topAnchor.constraint(equalTo: myLabel.bottomAnchor, constant: 16),
+            statusTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 80),
             statusTextField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
             statusTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            statusTextField.heightAnchor.constraint(equalToConstant: 30)
+            statusTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         
         NSLayoutConstraint.activate([
-            buttonProfile.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 34),
+            buttonProfile.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
             self.buttonProfile.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             self.buttonProfile.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             self.buttonProfile.heightAnchor.constraint(equalToConstant: 50)
         ])
+        
     }
     
     //MARK: - Actions
