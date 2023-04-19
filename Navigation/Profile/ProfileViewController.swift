@@ -34,14 +34,9 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationController?.navigationBar.backgroundColor = .white
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
         profileHV.translatesAutoresizingMaskIntoConstraints = false
         addedSubwiew()
         setupConstraintProfile()
-        setupConstraintButton()
     }
     
     //MARK: - Add Subwiew
@@ -57,11 +52,8 @@ class ProfileViewController: UIViewController {
             profileHV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             profileHV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             profileHV.heightAnchor.constraint(equalToConstant: 220)
-            
         ])
-    }
-    
-    func setupConstraintButton() {
+        
         NSLayoutConstraint.activate([
             buttonProfileGreat.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             buttonProfileGreat.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),

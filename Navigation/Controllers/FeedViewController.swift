@@ -58,7 +58,6 @@ class FeedViewController: UIViewController {
         view.backgroundColor = .white
         addedSubwiew()
         setupConstraint()
-        setupButton()
     }
     
     //MARK: - Add Subwiew
@@ -75,18 +74,14 @@ class FeedViewController: UIViewController {
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
-    }
-    
-    // MARK: - Costraints Buttons
-    func setupButton() {
         
         NSLayoutConstraint.activate([
-            self.button1.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            self.button1.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+            self.button1.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+            self.button1.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
             self.button1.heightAnchor.constraint(equalToConstant: 50),
             
-            self.button2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            self.button2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+            self.button2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+            self.button2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
             self.button2.heightAnchor.constraint(equalToConstant: 50)
         ])
     }

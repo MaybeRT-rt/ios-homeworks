@@ -14,6 +14,8 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     private lazy var myLabel: UILabel = {
         let statusLabel = UILabel()
+        statusLabel.text = "Тут может быть твой статус"
+        statusLabel.textColor = .darkGray
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         return statusLabel
     }()
@@ -56,7 +58,6 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     private lazy var statusTextField: UITextField = {
         var myTextField = UITextField()
         myTextField.placeholder = "Waiting for something"
-        myTextField.text = " "
         myTextField.borderStyle = UITextField.BorderStyle.none
         myTextField.layer.backgroundColor = UIColor.white.cgColor
         myTextField.layer.borderWidth = 1
@@ -134,6 +135,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         NSLayoutConstraint.activate([
             myLabel.topAnchor.constraint(equalTo: nameLabel.safeAreaLayoutGuide.topAnchor, constant: 30),
             myLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
+            myLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             myLabel.widthAnchor.constraint(equalToConstant: 100),
             myLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
