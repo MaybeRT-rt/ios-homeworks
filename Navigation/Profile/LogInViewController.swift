@@ -159,9 +159,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
-        
-        NSLayoutConstraint.activate([
+       
             logoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             logoImageView.widthAnchor.constraint(equalToConstant: 100),
@@ -192,11 +190,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             buttonLogin.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             buttonLogin.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             buttonLogin.heightAnchor.constraint(equalToConstant: 50),
-            buttonLogin.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            buttonLogin.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-        ])
-        
-        NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
