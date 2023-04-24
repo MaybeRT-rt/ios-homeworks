@@ -24,6 +24,29 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return contentV
     }()
     
+    // для textfield
+    private lazy var tFView: UIView = {
+        let textFieldView = UIView()
+        textFieldView.translatesAutoresizingMaskIntoConstraints = false
+        return textFieldView
+    }()
+    
+    private let stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.alignment = .center
+        stack.distribution = .fillEqually
+        stack.clipsToBounds = true
+        stack.layer.cornerRadius = 10
+        stack.layer.borderWidth = 0.5
+        stack.layer.borderColor = UIColor.lightGray.cgColor
+        stack.spacing = 0
+        stack.translatesAutoresizingMaskIntoConstraints = false
+       
+        return stack
+        
+    }()
+    
     let logoImageView: UIImageView = {
         var logo = UIImageView()
         logo.image = UIImage(named: "logo.png")
@@ -35,12 +58,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var loginTextField: UITextField = {
         var loginTF = UITextField()
-        loginTF.placeholder = " Email or phone"
+        loginTF.placeholder = "Email or phone"
+        loginTF.indent(size: 10)
         loginTF.borderStyle = UITextField.BorderStyle.none
         loginTF.layer.backgroundColor = UIColor.systemGray6.cgColor
-        loginTF.layer.borderColor = UIColor.systemGray4.cgColor
+        loginTF.layer.borderColor = UIColor.lightGray.cgColor
         loginTF.layer.borderWidth = 0.5
-        loginTF.layer.cornerRadius = 10
         loginTF.minimumFontSize = 15
         loginTF.autocapitalizationType = .none
         loginTF.textColor = UIColor.black
@@ -55,12 +78,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var passTextField: UITextField = {
         var passTF = UITextField()
-        passTF.placeholder = " Password"
+        passTF.placeholder = "Password"
+        passTF.indent(size: 10)
         passTF.borderStyle = UITextField.BorderStyle.none
         passTF.layer.backgroundColor = UIColor.systemGray6.cgColor
+        passTF.layer.borderColor = UIColor.lightGray.cgColor
         passTF.layer.borderWidth = 0.5
-        passTF.layer.borderColor = UIColor.systemGray4.cgColor
-        passTF.layer.cornerRadius = 10
         passTF.minimumFontSize = 15
         passTF.autocapitalizationType = .none
         passTF.textColor = UIColor.black
@@ -89,7 +112,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }()
     
     
-    //MARK: - LifeCicly
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -116,11 +139,22 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     func addedSubwiew() {
+//        contentView.addSubview(logoImageView)
+//        contentView.addSubview(loginTextField)
+//        contentView.addSubview(passTextField)
+//        contentView.addSubview(buttonLogin)
+//        contentView.addSubview(tFView)
+//        scrollView.addSubview(contentView)
+//        scrollView.addSubview(stackView)
+//        view.addSubview(scrollView)
         contentView.addSubview(logoImageView)
-        contentView.addSubview(loginTextField)
-        contentView.addSubview(passTextField)
+        stackView.addSubview(loginTextField)
+        stackView.addSubview(passTextField)
+        stackView.addSubview(tFView)
+        contentView.addSubview(stackView)
         contentView.addSubview(buttonLogin)
         scrollView.addSubview(contentView)
+        scrollView.addSubview(stackView)
         view.addSubview(scrollView)
         
     }
@@ -145,6 +179,17 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             loginTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             loginTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             loginTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            tFView.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 0),
+            tFView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            tFView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            tFView.heightAnchor.constraint(equalToConstant: 0),
+            
+            stackView.topAnchor.constraint(equalTo: loginTextField.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            stackView.bottomAnchor.constraint(equalTo: passTextField.bottomAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 100),
             
             passTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 0),
             passTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -209,13 +254,17 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         scrollView.contentInset.bottom = 0.0
     }
     
-    
     @objc private func pressButtonLogin() {
         
         let profileVC = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)
     }
-
-    
+}
+// для отступа каретки textfield
+extension UITextField {
+    func indent(size: CGFloat) {
+        self.leftView = UIView(frame: CGRect(x: self.frame.minX, y: self.frame.minY, width: size, height: self.frame.height))
+        self.leftViewMode = .always
+    }
 }
 
