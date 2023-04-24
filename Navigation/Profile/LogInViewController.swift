@@ -139,14 +139,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     func addedSubwiew() {
-//        contentView.addSubview(logoImageView)
-//        contentView.addSubview(loginTextField)
-//        contentView.addSubview(passTextField)
-//        contentView.addSubview(buttonLogin)
-//        contentView.addSubview(tFView)
-//        scrollView.addSubview(contentView)
-//        scrollView.addSubview(stackView)
-//        view.addSubview(scrollView)
         contentView.addSubview(logoImageView)
         stackView.addSubview(loginTextField)
         stackView.addSubview(passTextField)
