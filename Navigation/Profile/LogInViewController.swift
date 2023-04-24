@@ -48,7 +48,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
         loginTF.delegate = self
         loginTF.translatesAutoresizingMaskIntoConstraints = false
-        // loginTF.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        
         
         return loginTF
     }()
@@ -69,19 +69,16 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         passTF.delegate = self
         passTF.isSecureTextEntry = true
         passTF.translatesAutoresizingMaskIntoConstraints = false
-        // loginTF.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        
         
         return passTF
     }()
     
     private lazy var buttonLogin: UIButton = {
         let buttonLog = UIButton()
-        //buttonLog.backgroundColor = .systemBlue
         buttonLog.setBackgroundImage(UIImage(named: "blue_pixel.png"), for: .normal)
-        buttonLog.layer.cornerRadius = 10
-        buttonLog.layer.shadowOffset = CGSize(width: 4, height: 4)
-        buttonLog.layer.shadowRadius = CGFloat(4)
-        buttonLog.layer.shadowOpacity = 0.7
+        buttonLog.layer.masksToBounds = true
+        buttonLog.layer.cornerRadius = 10.0
         buttonLog.setTitle("Log In", for: .normal)
         buttonLog.setTitleColor(.white, for: .normal)
         buttonLog.translatesAutoresizingMaskIntoConstraints = false
@@ -92,13 +89,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }()
     
     
-    //MARK: - Life
+    //MARK: - LifeCicly
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         addedSubwiew()
         setupConstrain()
-        //pressButtonLogi
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -208,6 +204,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    //MARK: - Actions
     @objc func willHideKeyboard(_ notification: NSNotification) {
         scrollView.contentInset.bottom = 0.0
     }
