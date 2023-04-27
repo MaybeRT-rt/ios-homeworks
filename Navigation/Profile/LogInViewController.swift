@@ -242,11 +242,11 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func pressButtonLogin() {
-        
         let profileVC = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)
     }
 }
+
 // для отступа каретки textfield
 extension UITextField {
     func indent(size: CGFloat) {

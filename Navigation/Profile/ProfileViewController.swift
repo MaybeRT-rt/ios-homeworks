@@ -8,73 +8,74 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+
+    fileprivate let data = Post.make()
     
-    let profileHV = ProfileHeaderView()
-    
-    //MARK: - Button
-    private lazy var buttonProfileGreat: UIButton = {
-        let buttonGreat = UIButton()
-        buttonGreat.backgroundColor = .systemBlue
-        buttonGreat.layer.cornerRadius = 4
-        buttonGreat.layer.shadowOffset = CGSize(width: 4, height: 4)
-        buttonGreat.layer.shadowRadius = CGFloat(4)
-        buttonGreat.layer.shadowColor = UIColor.black.cgColor
-        buttonGreat.layer.shadowOpacity = 0.7
-        buttonGreat.setTitle("do well", for: .normal)
-        buttonGreat.setTitleColor(.white, for: .normal)
-        buttonGreat.translatesAutoresizingMaskIntoConstraints = false
-        buttonGreat.addTarget(self, action: #selector(pressButtonGreat), for: .touchUpInside)
+    private lazy var profileTableView: UITableView = {
         
-        return buttonGreat
+        let profileTV = UITableView.init(frame: .zero, style: .plain)
+        profileTV.translatesAutoresizingMaskIntoConstraints = false
         
+        return profileTV
     }()
     
-    //MARK: - Init
+    private enum CellReuseID: String {
+        case base = "PostTableViewCell_ReuseID"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        self.navigationController?.navigationBar.backgroundColor = .white
-        profileHV.translatesAutoresizingMaskIntoConstraints = false
-        addedSubwiew()
-        setupConstraintProfile()
+        addedSubview()
+        setupContrain()
+        tuneTableView()
     }
     
-    //MARK: - Add Subwiew
-    func addedSubwiew() {
-        view.addSubview(profileHV)
-        view.addSubview(buttonProfileGreat)
+    private func addedSubview() {
+        view.addSubview(profileTableView)
     }
-    
-    //MARK: - Add Constraint
-    func setupConstraintProfile() {
-        NSLayoutConstraint.activate([
-            profileHV.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            profileHV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-            profileHV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
-            profileHV.heightAnchor.constraint(equalToConstant: 220),
+
+    func setupContrain() {
         
-            buttonProfileGreat.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            buttonProfileGreat.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            buttonProfileGreat.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            buttonProfileGreat.heightAnchor.constraint(equalToConstant: 50)
+        NSLayoutConstraint.activate([
+            profileTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            profileTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            profileTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            profileTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
-    @objc private func pressButtonGreat() {
-        let alert = UIAlertController(title: "It's soo good", message: "Great?", preferredStyle: UIAlertController.Style.alert )
+    private func tuneTableView() {
+        profileTableView.register(PostsTableViewCell.self, forCellReuseIdentifier: CellReuseID.base.rawValue)
+        profileTableView.dataSource = self
+        profileTableView.delegate = self
+    }
+}
+    
+extension ProfileViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: PostsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell_ReuseID", for: indexPath) as! PostsTableViewCell
         
-        let action = UIAlertAction(title: "To do well", style: .default) { _ in
-            print("Well")
-        }
-        alert.addAction(action)
+        //cell = data[indexPath.row]
+        //cell.update(data[indexPath.row])
         
-        present(alert, animated: true, completion: nil)
+        return cell
     }
 }
 
-extension ProfileViewController: UITextFieldDelegate {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        view.endEditing(true)
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView,
+                   heightForHeaderInSection section: Int) -> CGFloat {
+        return 220
+    }
+
+    func tableView(_ tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
+        let profileHeaderView = ProfileHeaderView()
+
+        return profileHeaderView
     }
 }
