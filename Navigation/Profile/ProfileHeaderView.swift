@@ -14,6 +14,8 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     private lazy var myLabel: UILabel = {
         let statusLabel = UILabel()
+        statusLabel.text = "Тут может быть твой статус"
+        statusLabel.textColor = .darkGray
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         return statusLabel
     }()
@@ -56,7 +58,6 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     private lazy var statusTextField: UITextField = {
         var myTextField = UITextField()
         myTextField.placeholder = "Waiting for something"
-        myTextField.text = " "
         myTextField.borderStyle = UITextField.BorderStyle.none
         myTextField.layer.backgroundColor = UIColor.white.cgColor
         myTextField.layer.borderWidth = 1
@@ -122,30 +123,22 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
             photoImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             photoImageView.widthAnchor.constraint(equalToConstant: 100),
             photoImageView.heightAnchor.constraint(equalToConstant: 100),
-        ])
         
-        NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
             nameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
             nameLabel.widthAnchor.constraint(equalToConstant: 100),
-            nameLabel.heightAnchor.constraint(equalToConstant: 20)
-        ])
+            nameLabel.heightAnchor.constraint(equalToConstant: 20),
         
-        NSLayoutConstraint.activate([
             myLabel.topAnchor.constraint(equalTo: nameLabel.safeAreaLayoutGuide.topAnchor, constant: 30),
             myLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
-            myLabel.widthAnchor.constraint(equalToConstant: 100),
-            myLabel.heightAnchor.constraint(equalToConstant: 20)
-        ])
-        
-        NSLayoutConstraint.activate([
+            myLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            myLabel.heightAnchor.constraint(equalToConstant: 20),
+       
             statusTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 80),
             statusTextField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
             statusTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            statusTextField.heightAnchor.constraint(equalToConstant: 40)
-        ])
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
         
-        NSLayoutConstraint.activate([
             buttonProfile.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
             self.buttonProfile.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             self.buttonProfile.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),

@@ -16,11 +16,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let feedVC = FeedViewController()
-        let profileVC = ProfileViewController()
+        let loginVC =  LogInViewController()
         let window = UIWindow(windowScene: scene)
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [feedVC, profileVC]
+        tabBarController.viewControllers = [feedVC, loginVC]
         
         window.rootViewController = createTBController()
         window.makeKeyAndVisible()
@@ -37,18 +37,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
     }
     
-    func creatProfileNC() -> UINavigationController {
-        let profileVC = ProfileViewController()
-        profileVC.title = "Profile"
-        profileVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
-        
-        return UINavigationController(rootViewController: profileVC)
-    }
+    func logInProfile() -> UINavigationController {
+            let loginVC = LogInViewController()
+            loginVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+            
+            return UINavigationController(rootViewController: loginVC)
+        }
     
     func createTBController() -> UITabBarController {
         let tbController = UITabBarController()
         UITabBar.appearance().backgroundColor = .white
-        tbController.viewControllers = [creatFeedNC(), creatProfileNC()]
+        tbController.viewControllers = [creatFeedNC(), logInProfile()]
         
         return tbController
     }
