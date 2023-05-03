@@ -8,13 +8,13 @@
 import UIKit
 
 class ProfileTableHeaderView: UITableViewHeaderFooterView {
-
+    
     let profileView = ProfileHeaderView()
-        
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-        
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         addedSubview()
@@ -24,7 +24,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     private func addedSubview() {
         contentView.addSubview(profileView)
     }
-
+    
     private func setupConstraint() {
         NSLayoutConstraint.activate([
             profileView.topAnchor.constraint(equalTo: contentView.topAnchor),

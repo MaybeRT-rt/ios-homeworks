@@ -57,6 +57,7 @@
 				4A2C95D229E5B1DD006E82F8 /* ProfileHeaderView.swift */,
 				4A7680BC29DEB882007070FD /* ProfileViewController.swift */,
 				4A51C41529F437CB00767386 /* LogInViewController.swift */,
+				4A66E59729F995B4001055DE /* TableViewCell */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -98,8 +99,8 @@
 		4A7680A529DEACE3007070FD /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				4A66E59C29FA6627001055DE /* AppDelegate */,
 				4A7680C329DEDF20007070FD /* Data */,
+				4A66E59C29FA6627001055DE /* AppDelegate */,
 				4A2C95D129E5B1A8006E82F8 /* Profile */,
 				4A7680C029DECB4B007070FD /* Controllers */,
 				4A7680AF29DEACE4007070FD /* Assets.xcassets */,
@@ -115,7 +116,6 @@
 				4A7680BA29DEB870007070FD /* FeedViewController.swift */,
 				4A7680BE29DEC53C007070FD /* PostViewController.swift */,
 				4A7680C629DF0F3F007070FD /* InfoViewController.swift */,
-				4A66E59729F995B4001055DE /* TableViewCell */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

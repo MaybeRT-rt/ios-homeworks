@@ -17,6 +17,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         statusLabel.text = "Тут может быть твой статус"
         statusLabel.textColor = .darkGray
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         return statusLabel
     }()
     
@@ -96,7 +97,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemGray4
+        backgroundColor = .systemGray6
         addedSubwiew()
         setupConstrain()
         

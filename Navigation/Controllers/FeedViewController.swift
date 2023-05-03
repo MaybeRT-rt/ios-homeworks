@@ -9,7 +9,8 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var post = Post(title: "Интересный факт", author: "No name", description: "Пожилые жуки больше ухаживают за потомством, чем молодые.", image: "bug.jpg", likes: 10, view: 13)
+    
+    var post = Posts(title: "Интересный факт")
     
     let containerView = UIView()
     
