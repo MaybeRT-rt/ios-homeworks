@@ -15,7 +15,7 @@ class PostsTableViewCell: UITableViewCell {
         authorLabel.numberOfLines = 2
         authorLabel.textColor = .black
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return authorLabel
     }()
     
@@ -25,7 +25,8 @@ class PostsTableViewCell: UITableViewCell {
         descriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         descriptionLabel.textColor = .systemGray
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        descriptionLabel.lineBreakMode = .byWordWrapping
+        
         return descriptionLabel
     }()
     
@@ -44,7 +45,7 @@ class PostsTableViewCell: UITableViewCell {
         likeLabel.translatesAutoresizingMaskIntoConstraints = false
         return likeLabel
     }()
-
+    
     private lazy var viewLabel: UILabel = {
         let viewLabel = UILabel()
         viewLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -77,17 +78,18 @@ class PostsTableViewCell: UITableViewCell {
             
             authtorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             authtorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            authtorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            authtorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            imagePostView.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -16),
             imagePostView.topAnchor.constraint(equalTo: authtorLabel.bottomAnchor, constant: 12),
+            imagePostView.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -16),
             imagePostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imagePostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imagePostView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1.0),
+            imagePostView.heightAnchor.constraint(equalTo: imagePostView.widthAnchor),
             
+            descriptionLabel.topAnchor.constraint(equalTo: imagePostView.bottomAnchor, constant: 16),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
+        
             likeLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             likeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             likeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
