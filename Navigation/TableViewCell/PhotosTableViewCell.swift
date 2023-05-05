@@ -1,0 +1,91 @@
+//
+//  PhotosTableViewCell.swift
+//  Navigation
+//
+//  Created by Liz-Mary on 04.05.2023.
+//
+
+import UIKit
+
+class PhotosTableViewCell: UITableViewCell {
+    
+    fileprivate let photo = PhotoGallery.getImage()
+    var imagesArray = [UIImage]()
+
+    
+    private lazy var photoLabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Photo"
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        return label
+    }()
+    
+    private lazy var images: UIImageView = {
+        var image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    private lazy var imageStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.distribution = .fillEqually
+        stack.spacing = 8
+        return stack
+    }()
+    
+    private lazy var arrowButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        //button.addTarget(self, action: #selector(galleryButtonAction), for: .touchUpInside)
+        return button
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addedSubview()
+        setupConstraint()
+        setupPhoto()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addedSubview() {
+        contentView.addSubview(photoLabel)
+        contentView.addSubview(arrowButton)
+        //contentView.addSubview(imageStackView)
+        imageStackView.addSubview(images)
+        contentView.addSubview(imageStackView)
+    }
+    
+    func setupConstraint() {
+        NSLayoutConstraint.activate([
+            
+            photoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            photoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            
+            arrowButton.centerYAnchor.constraint(equalTo: photoLabel.centerYAnchor),
+            arrowButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            arrowButton.widthAnchor.constraint(equalToConstant: 50),
+            arrowButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            imageStackView.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: 12),
+            imageStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            imageStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
+            imageStackView.heightAnchor.constraint(equalToConstant: 100),
+            imageStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+        ])
+    }
+    
+    func setupPhoto() {
+    }
+}
+
+
