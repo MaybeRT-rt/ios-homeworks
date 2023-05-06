@@ -41,7 +41,7 @@ class PhotosTableViewCell: UITableViewCell {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-        //button.addTarget(self, action: #selector(galleryButtonAction), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(pressButtonGallary), for: .touchUpInside)
         return button
     }()
     
@@ -77,7 +77,7 @@ class PhotosTableViewCell: UITableViewCell {
             arrowButton.heightAnchor.constraint(equalToConstant: 50),
             
             imageStackView.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: 12),
-            imageStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            imageStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             imageStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             imageStackView.heightAnchor.constraint(equalToConstant: 65),
             imageStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
