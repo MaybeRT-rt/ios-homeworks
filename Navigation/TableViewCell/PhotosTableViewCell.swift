@@ -10,8 +10,7 @@ import UIKit
 class PhotosTableViewCell: UITableViewCell {
     
     fileprivate let photo = PhotoGallery.getImage()
-    var imagesArray = [UIImage]()
-
+    
     
     private lazy var photoLabel = {
         var label = UILabel()
@@ -50,7 +49,8 @@ class PhotosTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addedSubview()
         setupConstraint()
-        setupPhoto()
+        setupPreviews() 
+        
     }
     
     required init?(coder: NSCoder) {
@@ -78,14 +78,28 @@ class PhotosTableViewCell: UITableViewCell {
             
             imageStackView.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: 12),
             imageStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            imageStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
-            imageStackView.heightAnchor.constraint(equalToConstant: 100),
+            imageStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            imageStackView.heightAnchor.constraint(equalToConstant: 65),
             imageStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
         ])
     }
-    
-    func setupPhoto() {
+
+    private func setupPreviews() {
+        
+        let photoGallery = PhotoGallery.shared
+        let shuffledPhotos = photoGallery.shuffled() // перемешивает элементы массива
+        
+        for photo in shuffledPhotos.prefix(4) {
+            let imageView = UIImageView(image: UIImage(named: photo.image))
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.layer.cornerRadius = 6
+            imageStackView.addArrangedSubview(imageView)
+            NSLayoutConstraint.activate([
+                imageView.widthAnchor.constraint(greaterThanOrEqualToConstant: (imageStackView.bounds.width - 24) / 4),
+                imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1),
+            ])
+        }
     }
 }
-
 
