@@ -19,8 +19,6 @@ class ProfileViewController: UIViewController {
         return profileTV
     }()
     
-   // let headerID = "profileHeaderView"
-    
     private enum CellReuseID: String {
         case base = "PostTableViewCell_ReuseID"
         case photos = "PhotoTableViewCell_ReuseID"
