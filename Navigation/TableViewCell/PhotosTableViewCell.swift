@@ -35,11 +35,11 @@ class PhotosTableViewCell: UITableViewCell {
         return stack
     }()
     
-    private lazy var arrowButton: UIButton = {
-        var button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-        return button
+    private lazy var arrow: UIImageView = {
+        let arrow = UIImageView()
+        arrow.translatesAutoresizingMaskIntoConstraints = false
+        arrow.image = UIImage(systemName: "arrow.right")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        return arrow
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -56,7 +56,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     func addedSubview() {
         contentView.addSubview(photoLabel)
-        contentView.addSubview(arrowButton)
+        contentView.addSubview(arrow)
         //contentView.addSubview(imageStackView)
         imageStackView.addSubview(images)
         contentView.addSubview(imageStackView)
@@ -68,10 +68,10 @@ class PhotosTableViewCell: UITableViewCell {
             photoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             photoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             
-            arrowButton.centerYAnchor.constraint(equalTo: photoLabel.centerYAnchor),
-            arrowButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            arrowButton.widthAnchor.constraint(equalToConstant: 50),
-            arrowButton.heightAnchor.constraint(equalToConstant: 50),
+            arrow.centerYAnchor.constraint(equalTo: photoLabel.centerYAnchor),
+            arrow.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            arrow.widthAnchor.constraint(equalToConstant: 25),
+            arrow.heightAnchor.constraint(equalToConstant: 25),
             
             imageStackView.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: 12),
             imageStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),

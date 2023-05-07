@@ -86,7 +86,8 @@ extension ProfileViewController: UITableViewDataSource {
             return cell
         case 1:
             let cell: PostsTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell_ReuseID", for: indexPath)) as! PostsTableViewCell
-            
+            cell.selectionStyle = .none
+
             let model = data[indexPath.row]
             cell.update(model)
             return cell
