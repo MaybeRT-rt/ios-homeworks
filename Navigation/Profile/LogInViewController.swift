@@ -42,7 +42,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         stack.layer.borderColor = UIColor.lightGray.cgColor
         stack.spacing = 0
         stack.translatesAutoresizingMaskIntoConstraints = false
-       
+
         return stack
         
     }()

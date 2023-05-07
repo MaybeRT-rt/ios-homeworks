@@ -19,11 +19,12 @@ class ProfileViewController: UIViewController {
         return profileTV
     }()
     
-    let headerID = "profileHeaderView"
+   // let headerID = "profileHeaderView"
     
     private enum CellReuseID: String {
         case base = "PostTableViewCell_ReuseID"
         case photos = "PhotoTableViewCell_ReuseID"
+        case headerID = "profileHeaderView"
     }
     
     override func viewDidLoad() {
@@ -48,7 +49,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func tuneTableView() {
-        profileTableView.register(ProfileTableHeaderView.self, forHeaderFooterViewReuseIdentifier: headerID)
+        profileTableView.register(ProfileTableHeaderView.self, forHeaderFooterViewReuseIdentifier: CellReuseID.headerID.rawValue)
         profileTableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: CellReuseID.photos.rawValue)
         profileTableView.register(PostsTableViewCell.self, forCellReuseIdentifier: CellReuseID.base.rawValue)
         
@@ -81,10 +82,8 @@ extension ProfileViewController: UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            
             let cell: PhotosTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "PhotoTableViewCell_ReuseID", for: indexPath)) as! PhotosTableViewCell
             return cell
-            
         case 1:
             let cell: PostsTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell_ReuseID", for: indexPath)) as! PostsTableViewCell
             
@@ -109,5 +108,15 @@ extension ProfileViewController: UITableViewDelegate {
         let profileHeaderView = ProfileHeaderView()
         
         return section == 0 ? profileHeaderView : nil
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? PhotosTableViewCell, cell.reuseIdentifier == "PhotoTableViewCell_ReuseID" {
+            let galleryViewController = PhotosViewController()
+            
+            guard let navigationController = self.navigationController else { return }
+            navigationController.pushViewController(galleryViewController, animated: true)
+        }
     }
 }

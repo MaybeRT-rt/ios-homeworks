@@ -9,8 +9,6 @@ import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
     
-    fileprivate let photo = PhotoGallery.getImage()
-    
     
     private lazy var photoLabel = {
         var label = UILabel()
@@ -41,7 +39,6 @@ class PhotosTableViewCell: UITableViewCell {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-        //button.addTarget(self, action: #selector(pressButtonGallary), for: .touchUpInside)
         return button
     }()
     
