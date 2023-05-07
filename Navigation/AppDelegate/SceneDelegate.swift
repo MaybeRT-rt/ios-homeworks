@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let feedVC = FeedViewController()
-        let loginVC =  LogInViewController()
+        let loginVC = LogInViewController()
         let window = UIWindow(windowScene: scene)
         
         let tabBarController = UITabBarController()
@@ -51,5 +51,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         return tbController
     }
-    
 }

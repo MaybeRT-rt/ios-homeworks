@@ -59,7 +59,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     private lazy var loginTextField: UITextField = {
         var loginTF = UITextField()
         loginTF.placeholder = "Email or phone"
-        loginTF.indent(size: 10)
         loginTF.borderStyle = UITextField.BorderStyle.none
         loginTF.layer.backgroundColor = UIColor.systemGray6.cgColor
         loginTF.layer.borderColor = UIColor.lightGray.cgColor
@@ -79,7 +78,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     private lazy var passTextField: UITextField = {
         var passTF = UITextField()
         passTF.placeholder = "Password"
-        passTF.indent(size: 10)
         passTF.borderStyle = UITextField.BorderStyle.none
         passTF.layer.backgroundColor = UIColor.systemGray6.cgColor
         passTF.layer.borderColor = UIColor.lightGray.cgColor
@@ -242,16 +240,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func pressButtonLogin() {
-        
         let profileVC = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)
     }
 }
-// для отступа каретки textfield
-extension UITextField {
-    func indent(size: CGFloat) {
-        self.leftView = UIView(frame: CGRect(x: self.frame.minX, y: self.frame.minY, width: size, height: self.frame.height))
-        self.leftViewMode = .always
-    }
-}
+
 
