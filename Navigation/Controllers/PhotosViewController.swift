@@ -10,7 +10,6 @@ import UIKit
 class PhotosViewController: UIViewController {
     
     let gallery = PhotoGallery.shared
-    
     let collectionID = "photosCollectionView"
     
     lazy var photoCollection: UICollectionViewFlowLayout = {
