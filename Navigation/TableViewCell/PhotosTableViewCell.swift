@@ -57,7 +57,6 @@ class PhotosTableViewCell: UITableViewCell {
     func addedSubview() {
         contentView.addSubview(photoLabel)
         contentView.addSubview(arrow)
-        //contentView.addSubview(imageStackView)
         imageStackView.addSubview(images)
         contentView.addSubview(imageStackView)
     }
