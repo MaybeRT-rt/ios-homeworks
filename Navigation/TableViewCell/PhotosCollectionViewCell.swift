@@ -9,9 +9,10 @@ import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     var photo: UIImageView = {
-        let photos = UIImageView()
-        photos.translatesAutoresizingMaskIntoConstraints = false
-        return photos
+    let photos = UIImageView()
+    photos.translatesAutoresizingMaskIntoConstraints = false
+    return photos
+        
     }()
     
     override init(frame: CGRect) {

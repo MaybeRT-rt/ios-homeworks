@@ -13,7 +13,7 @@ class PhotosViewController: UIViewController {
     
     let collectionID = "photosCollectionView"
     
-    lazy var photoLayoutCollection: UICollectionViewFlowLayout = {
+    lazy var photoCollection: UICollectionViewFlowLayout = {
         let photoLayout = UICollectionViewFlowLayout()
         photoLayout.scrollDirection = .vertical
         photoLayout.minimumLineSpacing = 8
@@ -23,7 +23,7 @@ class PhotosViewController: UIViewController {
     }()
     
     lazy var photosCollectionView: UICollectionView = {
-        let photos = UICollectionView(frame: .zero, collectionViewLayout: photoLayoutCollection)
+        let photos = UICollectionView(frame: .zero, collectionViewLayout: photoCollection)
         photos.translatesAutoresizingMaskIntoConstraints = false
         photos.backgroundColor = .white
         photos.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: collectionID)
@@ -67,7 +67,6 @@ class PhotosViewController: UIViewController {
 }
 
 extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return PhotoGallery.shared.count
     }
