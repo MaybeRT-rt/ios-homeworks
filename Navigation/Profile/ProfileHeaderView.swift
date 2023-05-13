@@ -10,6 +10,8 @@ import UIKit
 
 class ProfileHeaderView: UIView, UITextFieldDelegate {
     
+    let profileVC = ProfileViewController()
+    
     //MARK: - Status Label
     
     private lazy var myLabel: UILabel = {
@@ -90,16 +92,47 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         button.addTarget(self, action: #selector(pressedButton), for: .touchUpInside)
         
         return button
-        
     }()
     
+    // MARK: - Animatioms
+    let dimmingView: UIView = {
+        let dimmingView = UIView()
+        dimmingView.translatesAutoresizingMaskIntoConstraints = false
+        dimmingView.alpha = 0.8
+        dimmingView.backgroundColor = .black
+        dimmingView.frame = UIScreen.main.bounds
+        
+        return dimmingView
+    }()
+    
+    
+    lazy var buttonCancel: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.alpha = 0
+        button.addTarget(self, action: #selector(pressedCancelButton), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    let fullImage: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "bich2"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.opacity = 0
+        imageView.layer.masksToBounds = false
+        imageView.clipsToBounds = true
+        return imageView
+    }()
     
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemGray6
-        addedSubwiew()
+        addedSubview()
         setupConstrain()
+        tap()
         
     }
     
@@ -108,12 +141,17 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     }
     
     //MARK: - Add Subwiew
-    func addedSubwiew() {
+    func addedSubview() {
         addSubview(myLabel)
         addSubview(nameLabel)
         addSubview(photoImageView)
         addSubview(buttonProfile)
         addSubview(statusTextField)
+        //addSubview(dimmingView)
+        addSubview(buttonCancel)
+        addSubview(fullImage)
+        //addSubview(dimmingView)
+        
     }
     
     //MARK: - Constrain
@@ -124,26 +162,32 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
             photoImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             photoImageView.widthAnchor.constraint(equalToConstant: 100),
             photoImageView.heightAnchor.constraint(equalToConstant: 100),
-        
+            
             nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
             nameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
             nameLabel.widthAnchor.constraint(equalToConstant: 100),
             nameLabel.heightAnchor.constraint(equalToConstant: 20),
-        
+            
             myLabel.topAnchor.constraint(equalTo: nameLabel.safeAreaLayoutGuide.topAnchor, constant: 30),
             myLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
             myLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             myLabel.heightAnchor.constraint(equalToConstant: 20),
-       
-            statusTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 80),
-            statusTextField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
-            statusTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            
+            statusTextField.topAnchor.constraint(equalTo: topAnchor, constant: 80),
+            statusTextField.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 132),
+            statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
-        
+            
             buttonProfile.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
-            self.buttonProfile.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            self.buttonProfile.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            self.buttonProfile.heightAnchor.constraint(equalToConstant: 50)
+            buttonProfile.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            buttonProfile.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            buttonProfile.heightAnchor.constraint(equalToConstant: 50),
+            
+            
+            buttonCancel.topAnchor.constraint(equalTo: self.topAnchor, constant: 40),
+            buttonCancel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
+            buttonCancel.widthAnchor.constraint(equalToConstant: 80),
+            buttonCancel.heightAnchor.constraint(equalToConstant: 80)
         ])
         
     }
@@ -157,5 +201,71 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     @objc func statusTextChanged(_ textField: UITextField) {
         statusText = textField.text ?? ""
     }
+    
+    func tap() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedAwayFunction))
+        photoImageView.isUserInteractionEnabled = true
+        photoImageView.addGestureRecognizer(tapGesture)
+    }
+    
+    func animateSize(width: CGFloat, height: CGFloat) {
+        CATransaction.begin()
+        let sizeAnimation = CABasicAnimation(keyPath: "bounds.size")
+        sizeAnimation.duration = 2
+        sizeAnimation.isRemovedOnCompletion = false
+        sizeAnimation.toValue = CGSize(width: width, height: width)
+        fullImage.layer.add(sizeAnimation, forKey: "bounds.size")
+        fullImage.layer.bounds.size = CGSize(width: width, height: width)
+        CATransaction.commit()
+    }
+    
+    @objc func tappedAwayFunction(_ sender: UITapGestureRecognizer) {
+        let centerOrigin = superview!.center
+        fullImage.translatesAutoresizingMaskIntoConstraints = true
+        
+        UIView.animate(withDuration: 0.5) {
+            
+            self.fullImage.center = CGPoint(x: centerOrigin.x, y: centerOrigin.y - 20)
+            self.animateSize(width: self.superview!.frame.width,
+                             height: self.superview!.frame.width)
+            
+            addedSub()
+            
+            UIView.animate(withDuration: 0.3, delay: 0.2, animations: {
+                self.buttonCancel.alpha = 1
+            })
+            
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0,
+                           options: .curveEaseInOut) {
+                
+                self.dimmingView.layer.opacity = 0.8
+                self.fullImage.layer.cornerRadius = 10
+                self.fullImage.layer.opacity = 1
+                self.dimmingView.layoutIfNeeded()
+            }
+            
+            UIView.animate(withDuration: 0.3, delay: 0.0) {
+                self.buttonCancel.layer.opacity = 1
+            }
+        }
+        
+        func addedSub() {
+            addSubview(dimmingView)
+            addSubview(fullImage)
+            addSubview(buttonCancel)
+        }
+    }
+    @objc func pressedCancelButton() {
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseInOut) {
+            
+            self.buttonCancel.layer.opacity = 0
+            
+        } completion: { _ in
+            UIView.animate(withDuration: 0.5, delay: 0.0) {
+                self.dimmingView.layer.opacity = 0.0
+                self.fullImage.layer.opacity = 0
+                self.dimmingView.layoutIfNeeded()
+            }
+        }
+    }
 }
-

@@ -32,6 +32,5 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
             profileView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             profileView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
-        
     }
 }

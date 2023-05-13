@@ -8,9 +8,10 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    
     fileprivate let data = Post.make()
-   
+    
+    
     private lazy var profileTableView: UITableView = {
         
         let profileTV = UITableView.init(frame: .zero, style: .grouped)
@@ -35,14 +36,16 @@ class ProfileViewController: UIViewController {
     
     private func addedSubview() {
         view.addSubview(profileTableView)
+        
     }
-
+    
     func setupContrain() {
         NSLayoutConstraint.activate([
             profileTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             profileTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             profileTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             profileTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            
         ])
     }
     
@@ -59,6 +62,7 @@ class ProfileViewController: UIViewController {
         
     }
 }
+  
     
 extension ProfileViewController: UITableViewDataSource {
     
