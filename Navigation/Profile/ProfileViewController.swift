@@ -11,7 +11,6 @@ class ProfileViewController: UIViewController {
     
     fileprivate let data = Post.make()
     
-    
     private lazy var profileTableView: UITableView = {
         
         let profileTV = UITableView.init(frame: .zero, style: .grouped)

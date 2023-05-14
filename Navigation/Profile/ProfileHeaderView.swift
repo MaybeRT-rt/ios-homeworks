@@ -147,11 +147,8 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         addSubview(photoImageView)
         addSubview(buttonProfile)
         addSubview(statusTextField)
-        //addSubview(dimmingView)
         addSubview(buttonCancel)
         addSubview(fullImage)
-        //addSubview(dimmingView)
-        
     }
     
     //MARK: - Constrain
@@ -255,6 +252,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
             addSubview(buttonCancel)
         }
     }
+    
     @objc func pressedCancelButton() {
         UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseInOut) {
             
