@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		4A2C95D329E5B1DD006E82F8 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C95D229E5B1DD006E82F8 /* ProfileHeaderView.swift */; };
 		4A51C41629F437CB00767386 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A51C41529F437CB00767386 /* LogInViewController.swift */; };
+		4A60BAE62A30F1F10029FD17 /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = 4A60BAE52A30F1F10029FD17 /* StorageService.docc */; };
+		4A60BAEC2A30F1F10029FD17 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A60BAE22A30F1F10029FD17 /* StorageService.framework */; };
+		4A60BAF32A30F1F10029FD17 /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60BAF22A30F1F10029FD17 /* StorageServiceTests.swift */; };
+		4A60BAF42A30F1F10029FD17 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A60BAE42A30F1F10029FD17 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A60BAF72A30F1F10029FD17 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A60BAE22A30F1F10029FD17 /* StorageService.framework */; };
+		4A60BAF82A30F1F10029FD17 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A60BAE22A30F1F10029FD17 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4A60BB002A30F1FF0029FD17 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680C129DEDAC8007070FD /* Post.swift */; };
 		4A66E59E29FA7AA2001055DE /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A66E59D29FA7AA2001055DE /* PostsTableViewCell.swift */; };
 		4A66E5A029FA7C9C001055DE /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A66E59F29FA7C9C001055DE /* ProfileTableHeaderView.swift */; };
 		4A66E5A22A03D785001055DE /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A66E5A12A03D785001055DE /* PhotosTableViewCell.swift */; };
@@ -19,16 +26,58 @@
 		4A7680BB29DEB870007070FD /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680BA29DEB870007070FD /* FeedViewController.swift */; };
 		4A7680BD29DEB882007070FD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680BC29DEB882007070FD /* ProfileViewController.swift */; };
 		4A7680BF29DEC53C007070FD /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680BE29DEC53C007070FD /* PostViewController.swift */; };
-		4A7680C229DEDAC8007070FD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680C129DEDAC8007070FD /* Post.swift */; };
 		4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680C629DF0F3F007070FD /* InfoViewController.swift */; };
 		4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B884A2A0502C700923D9A /* PhotoGallery.swift */; };
 		4A9B88512A06CD8500923D9A /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88502A06CD8500923D9A /* PhotosViewController.swift */; };
 		4A9B88532A07FF3600923D9A /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88522A07FF3600923D9A /* PhotosCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4A60BAED2A30F1F10029FD17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A76809B29DEACE3007070FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A60BAE12A30F1F10029FD17;
+			remoteInfo = StorageService;
+		};
+		4A60BAEF2A30F1F10029FD17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A76809B29DEACE3007070FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A7680A229DEACE3007070FD;
+			remoteInfo = Navigation;
+		};
+		4A60BAF52A30F1F10029FD17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A76809B29DEACE3007070FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A60BAE12A30F1F10029FD17;
+			remoteInfo = StorageService;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4A60BAF92A30F1F10029FD17 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4A60BAF82A30F1F10029FD17 /* StorageService.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4A2C95D229E5B1DD006E82F8 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		4A51C41529F437CB00767386 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		4A60BAE22A30F1F10029FD17 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A60BAE42A30F1F10029FD17 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
+		4A60BAE52A30F1F10029FD17 /* StorageService.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StorageService.docc; sourceTree = "<group>"; };
+		4A60BAEB2A30F1F10029FD17 /* StorageServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorageServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A60BAF22A30F1F10029FD17 /* StorageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
 		4A66E59D29FA7AA2001055DE /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
 		4A66E59F29FA7C9C001055DE /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		4A66E5A12A03D785001055DE /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
@@ -49,10 +98,26 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4A60BADF2A30F1F10029FD17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A60BAE82A30F1F10029FD17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A60BAEC2A30F1F10029FD17 /* StorageService.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4A7680A029DEACE3007070FD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A60BAF72A30F1F10029FD17 /* StorageService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +132,23 @@
 				4A51C41529F437CB00767386 /* LogInViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		4A60BAE32A30F1F10029FD17 /* StorageService */ = {
+			isa = PBXGroup;
+			children = (
+				4A60BAE42A30F1F10029FD17 /* StorageService.h */,
+				4A60BAE52A30F1F10029FD17 /* StorageService.docc */,
+			);
+			path = StorageService;
+			sourceTree = "<group>";
+		};
+		4A60BAF12A30F1F10029FD17 /* StorageServiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				4A60BAF22A30F1F10029FD17 /* StorageServiceTests.swift */,
+			);
+			path = StorageServiceTests;
 			sourceTree = "<group>";
 		};
 		4A66E59729F995B4001055DE /* TableViewCell */ = {
@@ -93,6 +175,8 @@
 			isa = PBXGroup;
 			children = (
 				4A7680A529DEACE3007070FD /* Navigation */,
+				4A60BAE32A30F1F10029FD17 /* StorageService */,
+				4A60BAF12A30F1F10029FD17 /* StorageServiceTests */,
 				4A7680A429DEACE3007070FD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,6 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				4A7680A329DEACE3007070FD /* Navigation.app */,
+				4A60BAE22A30F1F10029FD17 /* StorageService.framework */,
+				4A60BAEB2A30F1F10029FD17 /* StorageServiceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -142,7 +228,55 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		4A60BADD2A30F1F10029FD17 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A60BAF42A30F1F10029FD17 /* StorageService.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		4A60BAE12A30F1F10029FD17 /* StorageService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A60BAFE2A30F1F10029FD17 /* Build configuration list for PBXNativeTarget "StorageService" */;
+			buildPhases = (
+				4A60BADD2A30F1F10029FD17 /* Headers */,
+				4A60BADE2A30F1F10029FD17 /* Sources */,
+				4A60BADF2A30F1F10029FD17 /* Frameworks */,
+				4A60BAE02A30F1F10029FD17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StorageService;
+			productName = StorageService;
+			productReference = 4A60BAE22A30F1F10029FD17 /* StorageService.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4A60BAEA2A30F1F10029FD17 /* StorageServiceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A60BAFF2A30F1F10029FD17 /* Build configuration list for PBXNativeTarget "StorageServiceTests" */;
+			buildPhases = (
+				4A60BAE72A30F1F10029FD17 /* Sources */,
+				4A60BAE82A30F1F10029FD17 /* Frameworks */,
+				4A60BAE92A30F1F10029FD17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A60BAEE2A30F1F10029FD17 /* PBXTargetDependency */,
+				4A60BAF02A30F1F10029FD17 /* PBXTargetDependency */,
+			);
+			name = StorageServiceTests;
+			productName = StorageServiceTests;
+			productReference = 4A60BAEB2A30F1F10029FD17 /* StorageServiceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4A7680A229DEACE3007070FD /* Navigation */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A7680B729DEACE4007070FD /* Build configuration list for PBXNativeTarget "Navigation" */;
@@ -150,10 +284,12 @@
 				4A76809F29DEACE3007070FD /* Sources */,
 				4A7680A029DEACE3007070FD /* Frameworks */,
 				4A7680A129DEACE3007070FD /* Resources */,
+				4A60BAF92A30F1F10029FD17 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4A60BAF62A30F1F10029FD17 /* PBXTargetDependency */,
 			);
 			name = Navigation;
 			productName = Navigation;
@@ -170,6 +306,13 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					4A60BAE12A30F1F10029FD17 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					4A60BAEA2A30F1F10029FD17 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 4A7680A229DEACE3007070FD;
+					};
 					4A7680A229DEACE3007070FD = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -189,11 +332,27 @@
 			projectRoot = "";
 			targets = (
 				4A7680A229DEACE3007070FD /* Navigation */,
+				4A60BAE12A30F1F10029FD17 /* StorageService */,
+				4A60BAEA2A30F1F10029FD17 /* StorageServiceTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4A60BAE02A30F1F10029FD17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A60BAE92A30F1F10029FD17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4A7680A129DEACE3007070FD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -206,6 +365,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4A60BADE2A30F1F10029FD17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A60BAE62A30F1F10029FD17 /* StorageService.docc in Sources */,
+				4A60BB002A30F1FF0029FD17 /* Post.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A60BAE72A30F1F10029FD17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A60BAF32A30F1F10029FD17 /* StorageServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4A76809F29DEACE3007070FD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -216,7 +392,6 @@
 				4A51C41629F437CB00767386 /* LogInViewController.swift in Sources */,
 				4A7680BD29DEB882007070FD /* ProfileViewController.swift in Sources */,
 				4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */,
-				4A7680C229DEDAC8007070FD /* Post.swift in Sources */,
 				4A7680A929DEACE3007070FD /* SceneDelegate.swift in Sources */,
 				4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */,
 				4A66E59E29FA7AA2001055DE /* PostsTableViewCell.swift in Sources */,
@@ -230,6 +405,24 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		4A60BAEE2A30F1F10029FD17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A60BAE12A30F1F10029FD17 /* StorageService */;
+			targetProxy = 4A60BAED2A30F1F10029FD17 /* PBXContainerItemProxy */;
+		};
+		4A60BAF02A30F1F10029FD17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A7680A229DEACE3007070FD /* Navigation */;
+			targetProxy = 4A60BAEF2A30F1F10029FD17 /* PBXContainerItemProxy */;
+		};
+		4A60BAF62A30F1F10029FD17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A60BAE12A30F1F10029FD17 /* StorageService */;
+			targetProxy = 4A60BAF52A30F1F10029FD17 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		4A7680B129DEACE4007070FD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -242,6 +435,106 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4A60BAFA2A30F1F10029FD17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maybert.StorageService;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4A60BAFB2A30F1F10029FD17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maybert.StorageService;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4A60BAFC2A30F1F10029FD17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7PUJF8P767;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maybert.StorageServiceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navigation.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navigation";
+			};
+			name = Debug;
+		};
+		4A60BAFD2A30F1F10029FD17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7PUJF8P767;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maybert.StorageServiceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navigation.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navigation";
+			};
+			name = Release;
+		};
 		4A7680B529DEACE4007070FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -359,6 +652,7 @@
 		4A7680B829DEACE4007070FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -389,6 +683,7 @@
 		4A7680B929DEACE4007070FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -419,6 +714,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4A60BAFE2A30F1F10029FD17 /* Build configuration list for PBXNativeTarget "StorageService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A60BAFA2A30F1F10029FD17 /* Debug */,
+				4A60BAFB2A30F1F10029FD17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A60BAFF2A30F1F10029FD17 /* Build configuration list for PBXNativeTarget "StorageServiceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A60BAFC2A30F1F10029FD17 /* Debug */,
+				4A60BAFD2A30F1F10029FD17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4A76809E29DEACE3007070FD /* Build configuration list for PBXProject "Navigation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
