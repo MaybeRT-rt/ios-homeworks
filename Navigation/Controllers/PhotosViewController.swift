@@ -71,23 +71,29 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionID, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionID, for: indexPath) as? PhotosCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
         let photo = gallery[indexPath.item]
-        guard let imageView = UIImage(named: photo.image) else { return UICollectionViewCell() }
-        cell.configCellCollection(photo: imageView)
+        
+        if let image = UIImage(named: photo.image) {
+            cell.photo.image = image
+            cell.photo.contentMode = .scaleAspectFill
+            cell.photo.clipsToBounds = true
+        }
+        
         return cell
     }
-    
 }
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let count: CGFloat = 3
-        let width = collectionView.frame.width - 32
-        let widthItem = (width / count)
-        
-        return CGSize(width: widthItem, height: widthItem * 1)
+        let spacing: CGFloat = 8
+        let width = (collectionView.bounds.width - (spacing * (count - 1)) - 16) / count
+        return CGSize(width: width, height: width)
     }
 }
 
