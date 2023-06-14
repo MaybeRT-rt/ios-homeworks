@@ -15,7 +15,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     //MARK: - Status Label
     
-    private lazy var myLabel: UILabel = {
+     lazy var myLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.text = "Тут может быть твой статус"
         statusLabel.textColor = .darkGray
