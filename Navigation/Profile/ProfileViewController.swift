@@ -12,8 +12,6 @@ class ProfileViewController: UIViewController {
     
     fileprivate let data = Post.make()
     
-    var user: User?
-    
     private lazy var profileTableView: UITableView = {
         
         let profileTV = UITableView.init(frame: .zero, style: .grouped)
@@ -38,10 +36,10 @@ class ProfileViewController: UIViewController {
     
     private func changeBackgraund() {
 #if DEBUG
+        view.backgroundColor = .systemBackground
+#else
         view.backgroundColor = .systemGray
         profileTableView.backgroundColor = .systemGray
-#else
-        view.backgroundColor = .systemBackground
 #endif
     }
     
@@ -119,17 +117,9 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            let profileHeaderView = ProfileHeaderView()
-            if let user = user {
-                profileHeaderView.nameLabel.text = user.fullName
-                profileHeaderView.photoImageView.image = user.avatar
-                profileHeaderView.myLabel.text = user.status
-            }
-            return profileHeaderView
-        } else {
-            return nil
-        }
+        let profileHeaderView = ProfileHeaderView()
+        
+        return section == 0 ? profileHeaderView : nil
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

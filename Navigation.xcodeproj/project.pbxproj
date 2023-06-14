@@ -28,10 +28,6 @@
 		4A7680BD29DEB882007070FD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680BC29DEB882007070FD /* ProfileViewController.swift */; };
 		4A7680BF29DEC53C007070FD /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680BE29DEC53C007070FD /* PostViewController.swift */; };
 		4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680C629DF0F3F007070FD /* InfoViewController.swift */; };
-		4A98084A2A39ADD600DA0478 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9808492A39ADD600DA0478 /* User.swift */; };
-		4A98084F2A39B0C100DA0478 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */; };
-		4A9808522A39D0F100DA0478 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9808512A39D0F100DA0478 /* Toast */; };
-		4A9808542A39D52B00DA0478 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9808532A39D52B00DA0478 /* TestUserService.swift */; };
 		4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B884A2A0502C700923D9A /* PhotoGallery.swift */; };
 		4A9B88512A06CD8500923D9A /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88502A06CD8500923D9A /* PhotosViewController.swift */; };
 		4A9B88532A07FF3600923D9A /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88522A07FF3600923D9A /* PhotosCollectionViewCell.swift */; };
@@ -101,9 +97,6 @@
 		4A7680BE29DEC53C007070FD /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		4A7680C129DEDAC8007070FD /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		4A7680C629DF0F3F007070FD /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
-		4A9808492A39ADD600DA0478 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
-		4A9808532A39D52B00DA0478 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		4A9B884A2A0502C700923D9A /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
 		4A9B88502A06CD8500923D9A /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		4A9B88522A07FF3600923D9A /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -139,10 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
-				4A9808522A39D0F100DA0478 /* Toast in Frameworks */,
 				4A60BB032A34C8090029FD17 /* iOSIntPackage in Frameworks */,
-
 				4A60BAF72A30F1F10029FD17 /* StorageService.framework in Frameworks */,
 				BFE9912AE16534B13649D269 /* Pods_Navigation.framework in Frameworks */,
 			);
@@ -223,7 +213,6 @@
 		4A7680A529DEACE3007070FD /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				4A98084B2A39B07E00DA0478 /* User */,
 				4A7680C329DEDF20007070FD /* Data */,
 				4A66E59C29FA6627001055DE /* AppDelegate */,
 				4A2C95D129E5B1A8006E82F8 /* Profile */,
@@ -256,16 +245,27 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-
-		4A98084B2A39B07E00DA0478 /* User */ = {
+		9BC4EF76980544188807A5B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4A9808492A39ADD600DA0478 /* User.swift */,
-				4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */,
-				4A9808532A39D52B00DA0478 /* TestUserService.swift */,
+				E3F866B04151171A50F34A78 /* Pods_Navigation.framework */,
+				CF88CB6AD7AA39029F33A7B0 /* Pods_StorageService.framework */,
+				25E3225CF57F81AECEAB32E2 /* Pods_StorageService_StorageServiceTests.framework */,
 			);
-			path = User;
-
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F52774AE019B24220222AE9D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E909429DDF2921358D19AF3C /* Pods-Navigation.debug.xcconfig */,
+				80CF18D343F1B30F82F6F193 /* Pods-Navigation.release.xcconfig */,
+				B7313180B64D317B585FBA77 /* Pods-StorageService.debug.xcconfig */,
+				AC6F4ABB204B44F65A8D5045 /* Pods-StorageService.release.xcconfig */,
+				634C5E40FB56BABEB22EB429 /* Pods-StorageService-StorageServiceTests.debug.xcconfig */,
+				A3ECB87252150CF31E834B4B /* Pods-StorageService-StorageServiceTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,11 +340,7 @@
 			);
 			name = Navigation;
 			packageProductDependencies = (
-
-				4A9808512A39D0F100DA0478 /* Toast */,
-
 				4A60BB022A34C8090029FD17 /* iOSIntPackage */,
-
 			);
 			productName = Navigation;
 			productReference = 4A7680A329DEACE3007070FD /* Navigation.app */;
@@ -382,11 +378,7 @@
 			);
 			mainGroup = 4A76809A29DEACE3007070FD;
 			packageReferences = (
-
-				4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
-
 				4A60BB012A34C8090029FD17 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
-
 			);
 			productRefGroup = 4A7680A429DEACE3007070FD /* Products */;
 			projectDirPath = "";
@@ -556,14 +548,11 @@
 				4A51C41629F437CB00767386 /* LogInViewController.swift in Sources */,
 				4A7680BD29DEB882007070FD /* ProfileViewController.swift in Sources */,
 				4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */,
-				4A98084F2A39B0C100DA0478 /* CurrentUserService.swift in Sources */,
 				4A7680A929DEACE3007070FD /* SceneDelegate.swift in Sources */,
 				4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */,
-				4A98084A2A39ADD600DA0478 /* User.swift in Sources */,
 				4A66E59E29FA7AA2001055DE /* PostsTableViewCell.swift in Sources */,
 				4A7680BF29DEC53C007070FD /* PostViewController.swift in Sources */,
 				4A9B88532A07FF3600923D9A /* PhotosCollectionViewCell.swift in Sources */,
-				4A9808542A39D52B00DA0478 /* TestUserService.swift in Sources */,
 				4A9B88512A06CD8500923D9A /* PhotosViewController.swift in Sources */,
 				4A66E5A029FA7C9C001055DE /* ProfileTableHeaderView.swift in Sources */,
 				4A2C95D329E5B1DD006E82F8 /* ProfileHeaderView.swift in Sources */,
@@ -930,37 +919,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-
-		4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scalessec/Toast-Swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-
 		4A60BB012A34C8090029FD17 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.0.0;
-
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-
-		4A9808512A39D0F100DA0478 /* Toast */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
-			productName = Toast;
-
 		4A60BB022A34C8090029FD17 /* iOSIntPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4A60BB012A34C8090029FD17 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
 			productName = iOSIntPackage;
-
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
