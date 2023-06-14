@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Toast
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
+    
+    private var currentUser: User?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -42,7 +45,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         stack.layer.borderColor = UIColor.lightGray.cgColor
         stack.spacing = 0
         stack.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return stack
         
     }()
@@ -130,7 +133,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         removeKeyboardObservers()
     }
     
-
+    
     func setupView() {
         self.navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white
@@ -157,7 +160,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-       
+            
             logoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             logoImageView.widthAnchor.constraint(equalToConstant: 100),
@@ -240,9 +243,35 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func pressButtonLogin() {
-        let profileVC = ProfileViewController()
-        navigationController?.pushViewController(profileVC, animated: true)
+        
+        guard let login = loginTextField.text, !login.isEmpty else {
+            self.view.makeToast("The login field is empty")
+            return
+        }
+        
+        guard let password = passTextField.text, !password.isEmpty else {
+            self.view.makeToast("The password field is empty")
+            return
+        }
+
+#if DEBUG
+        let userService: UserService = TestUserService(user: User(login: "test", fullName: "Test User", avatar: UIImage(named: "7.png") ?? UIImage(named: "avatar.png")!, status: "Testing"))
+#else
+        let userService: UserService = CurrentUserService(user: User(login: "user", fullName: "No name", avatar: UIImage(named: "bich2.png") ?? UIImage(named: "1.png")!, status: "Online"))
+#endif
+        
+        if let user = userService.getUser(login: login) {
+            currentUser = user
+
+            let profileVC = ProfileViewController()
+            profileVC.user = user
+            navigationController?.pushViewController(profileVC, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Incorrect login or password", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
     }
 }
 
-
+    

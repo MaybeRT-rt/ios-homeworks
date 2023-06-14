@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
     
     fileprivate let data = Post.make()
+    
+    var user: User?
     
     private lazy var profileTableView: UITableView = {
         
@@ -27,15 +30,23 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        changeBackgraund() 
         addedSubview()
         setupContrain()
         tuneTableView()
     }
     
+    private func changeBackgraund() {
+#if DEBUG
+        view.backgroundColor = .systemGray
+        profileTableView.backgroundColor = .systemGray 
+#else
+        view.backgroundColor = .systemBackground
+#endif
+    }
+    
     private func addedSubview() {
         view.addSubview(profileTableView)
-        
     }
     
     func setupContrain() {
@@ -107,11 +118,19 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let profileHeaderView = ProfileHeaderView()
-        
-        return section == 0 ? profileHeaderView : nil
+        if section == 0 {
+            let profileHeaderView = ProfileHeaderView()
+            if let user = user {
+                profileHeaderView.nameLabel.text = user.fullName
+                profileHeaderView.photoImageView.image = user.avatar
+                profileHeaderView.myLabel.text = user.status
+            }
+            return profileHeaderView
+        } else {
+            return nil
+        }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let cell = tableView.cellForRow(at: indexPath) as? PhotosTableViewCell, cell.reuseIdentifier == "PhotoTableViewCell_ReuseID" {

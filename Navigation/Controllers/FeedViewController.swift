@@ -6,11 +6,11 @@
 //
 
 import UIKit
+import StorageService
 
 class FeedViewController: UIViewController {
     
-    
-    var post = Posts(title: "Интересный факт")
+     var post = Posts(title: "Интересный факт")
     
     let containerView = UIView()
     
