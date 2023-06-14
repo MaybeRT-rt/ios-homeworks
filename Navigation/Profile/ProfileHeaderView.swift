@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class ProfileHeaderView: UIView, UITextFieldDelegate {
     
@@ -154,39 +155,47 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     //MARK: - Constrain
     func setupConstrain() {
         
-        NSLayoutConstraint.activate([
-            photoImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            photoImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            photoImageView.widthAnchor.constraint(equalToConstant: 100),
-            photoImageView.heightAnchor.constraint(equalToConstant: 100),
-            
-            nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
-            nameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
-            nameLabel.widthAnchor.constraint(equalToConstant: 100),
-            nameLabel.heightAnchor.constraint(equalToConstant: 20),
-            
-            myLabel.topAnchor.constraint(equalTo: nameLabel.safeAreaLayoutGuide.topAnchor, constant: 30),
-            myLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
-            myLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            myLabel.heightAnchor.constraint(equalToConstant: 20),
-            
-            statusTextField.topAnchor.constraint(equalTo: topAnchor, constant: 80),
-            statusTextField.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 132),
-            statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            
-            buttonProfile.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
-            buttonProfile.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            buttonProfile.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            buttonProfile.heightAnchor.constraint(equalToConstant: 50),
-            
-            
-            buttonCancel.topAnchor.constraint(equalTo: self.topAnchor, constant: 40),
-            buttonCancel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
-            buttonCancel.widthAnchor.constraint(equalToConstant: 80),
-            buttonCancel.heightAnchor.constraint(equalToConstant: 80)
-        ])
+        photoImageView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(16)
+            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(16)
+            make.width.equalTo(100)
+            make.height.equalTo(100)
+        }
         
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
+            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(132)
+            make.width.equalTo(100)
+            make.height.equalTo(20)
+        }
+        
+        myLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(50)
+            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(132)
+            make.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(20)
+        }
+        
+        statusTextField.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(80)
+            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(132)
+            make.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(40)
+        }
+        
+        buttonProfile.snp.makeConstraints { make in
+            make.top.equalTo(statusTextField.snp.bottom).offset(16)
+            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(16)
+            make.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(50)
+        }
+        
+        buttonCancel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(40)
+            make.trailing.equalToSuperview().offset(8)
+            make.width.equalTo(80)
+            make.height.equalTo(80)
+        }
     }
     
     //MARK: - Actions
@@ -220,28 +229,28 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         let centerOrigin = superview!.center
         fullImage.translatesAutoresizingMaskIntoConstraints = true
         
-        UIView.animate(withDuration: 0.5) {
-            
+        // Сброс фрейма fullImage
+        fullImage.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        fullImage.alpha = 0
+        
+        UIView.animate(withDuration: 0.4) {
             self.fullImage.center = CGPoint(x: centerOrigin.x, y: centerOrigin.y - 20)
-            self.animateSize(width: self.superview!.frame.width,
-                             height: self.superview!.frame.width)
+            self.animateSize(width: self.superview!.frame.width, height: self.superview!.frame.width)
             
             addedSub()
             
-            UIView.animate(withDuration: 0.3, delay: 0.2, animations: {
+            UIView.animate(withDuration: 0.4, delay: 0, animations: {
                 self.buttonCancel.alpha = 1
             })
             
-            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0,
-                           options: .curveEaseInOut) {
-                
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseInOut) {
                 self.dimmingView.layer.opacity = 0.8
                 self.fullImage.layer.cornerRadius = 10
                 self.fullImage.layer.opacity = 1
                 self.dimmingView.layoutIfNeeded()
             }
             
-            UIView.animate(withDuration: 0.3, delay: 0.0) {
+            UIView.animate(withDuration: 0.2, delay: 0.0) {
                 self.buttonCancel.layer.opacity = 1
             }
         }
@@ -254,12 +263,10 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     }
     
     @objc func pressedCancelButton() {
-        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseInOut) {
-            
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseInOut) {
             self.buttonCancel.layer.opacity = 0
-            
         } completion: { _ in
-            UIView.animate(withDuration: 0.5, delay: 0.0) {
+            UIView.animate(withDuration: 0.4, delay: 0) {
                 self.dimmingView.layer.opacity = 0.0
                 self.fullImage.layer.opacity = 0
                 self.dimmingView.layoutIfNeeded()
