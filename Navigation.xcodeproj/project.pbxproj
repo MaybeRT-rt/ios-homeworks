@@ -27,6 +27,10 @@
 		4A7680BD29DEB882007070FD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680BC29DEB882007070FD /* ProfileViewController.swift */; };
 		4A7680BF29DEC53C007070FD /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680BE29DEC53C007070FD /* PostViewController.swift */; };
 		4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680C629DF0F3F007070FD /* InfoViewController.swift */; };
+		4A98084A2A39ADD600DA0478 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9808492A39ADD600DA0478 /* User.swift */; };
+		4A98084F2A39B0C100DA0478 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */; };
+		4A9808522A39D0F100DA0478 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9808512A39D0F100DA0478 /* Toast */; };
+		4A9808542A39D52B00DA0478 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9808532A39D52B00DA0478 /* TestUserService.swift */; };
 		4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B884A2A0502C700923D9A /* PhotoGallery.swift */; };
 		4A9B88512A06CD8500923D9A /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88502A06CD8500923D9A /* PhotosViewController.swift */; };
 		4A9B88532A07FF3600923D9A /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88522A07FF3600923D9A /* PhotosCollectionViewCell.swift */; };
@@ -92,6 +96,9 @@
 		4A7680BE29DEC53C007070FD /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		4A7680C129DEDAC8007070FD /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		4A7680C629DF0F3F007070FD /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		4A9808492A39ADD600DA0478 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
+		4A9808532A39D52B00DA0478 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		4A9B884A2A0502C700923D9A /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
 		4A9B88502A06CD8500923D9A /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		4A9B88522A07FF3600923D9A /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -117,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A9808522A39D0F100DA0478 /* Toast in Frameworks */,
 				4A60BAF72A30F1F10029FD17 /* StorageService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,6 +202,7 @@
 		4A7680A529DEACE3007070FD /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				4A98084B2A39B07E00DA0478 /* User */,
 				4A7680C329DEDF20007070FD /* Data */,
 				4A66E59C29FA6627001055DE /* AppDelegate */,
 				4A2C95D129E5B1A8006E82F8 /* Profile */,
@@ -224,6 +233,16 @@
 				4A9B884A2A0502C700923D9A /* PhotoGallery.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		4A98084B2A39B07E00DA0478 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				4A9808492A39ADD600DA0478 /* User.swift */,
+				4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */,
+				4A9808532A39D52B00DA0478 /* TestUserService.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +311,9 @@
 				4A60BAF62A30F1F10029FD17 /* PBXTargetDependency */,
 			);
 			name = Navigation;
+			packageProductDependencies = (
+				4A9808512A39D0F100DA0478 /* Toast */,
+			);
 			productName = Navigation;
 			productReference = 4A7680A329DEACE3007070FD /* Navigation.app */;
 			productType = "com.apple.product-type.application";
@@ -327,6 +349,9 @@
 				Base,
 			);
 			mainGroup = 4A76809A29DEACE3007070FD;
+			packageReferences = (
+				4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+			);
 			productRefGroup = 4A7680A429DEACE3007070FD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -392,11 +417,14 @@
 				4A51C41629F437CB00767386 /* LogInViewController.swift in Sources */,
 				4A7680BD29DEB882007070FD /* ProfileViewController.swift in Sources */,
 				4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */,
+				4A98084F2A39B0C100DA0478 /* CurrentUserService.swift in Sources */,
 				4A7680A929DEACE3007070FD /* SceneDelegate.swift in Sources */,
 				4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */,
+				4A98084A2A39ADD600DA0478 /* User.swift in Sources */,
 				4A66E59E29FA7AA2001055DE /* PostsTableViewCell.swift in Sources */,
 				4A7680BF29DEC53C007070FD /* PostViewController.swift in Sources */,
 				4A9B88532A07FF3600923D9A /* PhotosCollectionViewCell.swift in Sources */,
+				4A9808542A39D52B00DA0478 /* TestUserService.swift in Sources */,
 				4A9B88512A06CD8500923D9A /* PhotosViewController.swift in Sources */,
 				4A66E5A029FA7C9C001055DE /* ProfileTableHeaderView.swift in Sources */,
 				4A2C95D329E5B1DD006E82F8 /* ProfileHeaderView.swift in Sources */,
@@ -751,6 +779,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4A9808512A39D0F100DA0478 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4A76809B29DEACE3007070FD /* Project object */;
 }
