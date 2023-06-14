@@ -243,25 +243,26 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func pressButtonLogin() {
+        
         guard let login = loginTextField.text, !login.isEmpty else {
             self.view.makeToast("The login field is empty")
             return
         }
-        
+
         guard let password = passTextField.text, !password.isEmpty else {
             self.view.makeToast("The password field is empty")
             return
         }
-        
+
 #if DEBUG
         let userService: UserService = TestUserService(user: User(login: "test", fullName: "Test User", avatar: UIImage(named: "7.png") ?? UIImage(named: "avatar.png")!, status: "Testing"))
 #else
         let userService: UserService = CurrentUserService(user: User(login: "user", fullName: "No name", avatar: UIImage(named: "bich2.png") ?? UIImage(named: "1.png")!, status: "Online"))
 #endif
-        
+
         if let user = userService.getUser(login: login) {
             currentUser = user
-            
+
             let profileVC = ProfileViewController()
             profileVC.user = user
             navigationController?.pushViewController(profileVC, animated: true)

@@ -47,7 +47,6 @@ class ProfileViewController: UIViewController {
     
     private func addedSubview() {
         view.addSubview(profileTableView)
-        
     }
     
     func setupContrain() {
