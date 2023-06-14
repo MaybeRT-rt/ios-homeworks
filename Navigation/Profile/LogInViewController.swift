@@ -6,11 +6,8 @@
 //
 
 import UIKit
-import Toast
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
-    
-    private var currentUser: User?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -45,7 +42,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         stack.layer.borderColor = UIColor.lightGray.cgColor
         stack.spacing = 0
         stack.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return stack
         
     }()
@@ -133,7 +130,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         removeKeyboardObservers()
     }
     
-    
+
     func setupView() {
         self.navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white
@@ -160,7 +157,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
+       
             logoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             logoImageView.widthAnchor.constraint(equalToConstant: 100),
@@ -274,4 +271,4 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
-    
+
