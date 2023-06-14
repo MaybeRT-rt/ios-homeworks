@@ -253,7 +253,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             self.view.makeToast("The password field is empty")
             return
         }
-
+        
 #if DEBUG
         let userService: UserService = TestUserService(user: User(login: "test", fullName: "Test User", avatar: UIImage(named: "7.png") ?? UIImage(named: "avatar.png")!, status: "Testing"))
 #else
@@ -262,7 +262,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
         if let user = userService.getUser(login: login) {
             currentUser = user
-
+            
             let profileVC = ProfileViewController()
             profileVC.user = user
             navigationController?.pushViewController(profileVC, animated: true)

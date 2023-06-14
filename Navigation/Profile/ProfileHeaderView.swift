@@ -33,7 +33,6 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         name.translatesAutoresizingMaskIntoConstraints = false
         
         return name
-        
     }()
     
     //MARK: - ImageView Avatar
