@@ -39,7 +39,7 @@ class ProfileViewController: UIViewController {
     private func changeBackgraund() {
 #if DEBUG
         view.backgroundColor = .systemGray
-        profileTableView.backgroundColor = .systemGray
+        profileTableView.backgroundColor = .systemGray 
 #else
         view.backgroundColor = .systemBackground
 #endif
@@ -130,7 +130,7 @@ extension ProfileViewController: UITableViewDelegate {
             return nil
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let cell = tableView.cellForRow(at: indexPath) as? PhotosTableViewCell, cell.reuseIdentifier == "PhotoTableViewCell_ReuseID" {

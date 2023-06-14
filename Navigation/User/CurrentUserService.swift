@@ -14,7 +14,7 @@ class CurrentUserService: UserService {
     init(user: User) {
         self.currentUser = user
     }
-    
+
     func getUser(login: String) -> User? {
         if login == currentUser.login {
             return currentUser

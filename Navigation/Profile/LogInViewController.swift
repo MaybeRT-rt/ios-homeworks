@@ -248,7 +248,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             self.view.makeToast("The login field is empty")
             return
         }
-
+        
         guard let password = passTextField.text, !password.isEmpty else {
             self.view.makeToast("The password field is empty")
             return
@@ -259,7 +259,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 #else
         let userService: UserService = CurrentUserService(user: User(login: "user", fullName: "No name", avatar: UIImage(named: "bich2.png") ?? UIImage(named: "1.png")!, status: "Online"))
 #endif
-
+        
         if let user = userService.getUser(login: login) {
             currentUser = user
 
