@@ -1,0 +1,35 @@
+//
+//  Checker.swift
+//  Navigation
+//
+//  Created by Liz-Mary on 20.06.2023.
+//
+
+import Foundation
+
+class Checker {
+    
+    static let shared = Checker()
+    
+    private let login: String
+    private let password: String
+    
+    private init() {
+        login = "adm"
+        password = "qwerty"
+    }
+    
+    func check(login: String, password: String) -> Bool {
+        return self.login == login && self.password == password
+    }
+}
+
+protocol LoginViewControllerDelegate {
+    func check(login: String, password: String) -> Bool
+}
+
+struct LoginInspector: LoginViewControllerDelegate {
+    func check(login: String, password: String) -> Bool {
+        return Checker.shared.check(login: login, password: password)
+    }
+}

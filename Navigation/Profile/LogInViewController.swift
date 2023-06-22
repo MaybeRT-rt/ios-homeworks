@@ -8,7 +8,10 @@
 import UIKit
 import Toast
 
+
 class LogInViewController: UIViewController, UITextFieldDelegate {
+     
+    var loginDelegate: LoginViewControllerDelegate? = LoginInspector()
     
     private var currentUser: User?
     
@@ -244,6 +247,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     @objc private func pressButtonLogin() {
         
+        guard let delegate = loginDelegate else {
+            return
+        }
+        
         guard let login = loginTextField.text, !login.isEmpty else {
             self.view.makeToast("The login field is empty")
             return
@@ -254,17 +261,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-#if DEBUG
-        let userService: UserService = TestUserService(user: User(login: "test", fullName: "Test User", avatar: UIImage(named: "7.png") ?? UIImage(named: "avatar.png")!, status: "Testing"))
-#else
-        let userService: UserService = CurrentUserService(user: User(login: "user", fullName: "No name", avatar: UIImage(named: "bich2.png") ?? UIImage(named: "1.png")!, status: "Online"))
-#endif
+        let isValid = delegate.check(login: login, password: password)
         
-        if let user = userService.getUser(login: login) {
-            currentUser = user
-            
+        if isValid {
             let profileVC = ProfileViewController()
-            profileVC.user = user
             navigationController?.pushViewController(profileVC, animated: true)
         } else {
             let alert = UIAlertController(title: "Error", message: "Incorrect login or password", preferredStyle: .alert)
@@ -273,5 +273,24 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
-
-    
+//#if DEBUG
+//        let userService: UserService = TestUserService(user: User(login: "test", fullName: "Test User", avatar: UIImage(named: "7.png") ?? UIImage(named: "avatar.png")!, status: "Testing"))
+//#else
+//        let userService: UserService = CurrentUserService(user: User(login: "user", fullName: "No name", avatar: UIImage(named: "bich2.png") ?? UIImage(named: "1.png")!, status: "Online"))
+//#endif
+//
+//        if let user = userService.getUser(login: login) {
+//            currentUser = user
+//
+//            let profileVC = ProfileViewController()
+//            profileVC.user = user
+//            navigationController?.pushViewController(profileVC, animated: true)
+//        } else {
+//            let alert = UIAlertController(title: "Error", message: "Incorrect login or password", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//            present(alert, animated: true, completion: nil)
+//        }
+//    }
+//}
+//
+//
