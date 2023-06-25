@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    
+    let loginFactory: LoginFactory = MyLoginFactory()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
@@ -18,6 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let feedVC = FeedViewController()
         let loginVC = LogInViewController()
         let window = UIWindow(windowScene: scene)
+        
+        let loginInspector = LoginInspector()
+        let loginViewController = LogInViewController()
+        loginViewController.loginDelegate = loginInspector
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [feedVC, loginVC]

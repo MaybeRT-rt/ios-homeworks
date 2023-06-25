@@ -10,7 +10,8 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     
-    fileprivate let data = Post.make()
+    let data = Post.make()
+    var user: User?
     
     private lazy var profileTableView: UITableView = {
         
@@ -116,7 +117,17 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return ProfileHeaderView()
+        if section == 0 {
+            let profileHeaderView = ProfileHeaderView()
+            if let user = user {
+                profileHeaderView.nameLabel.text = user.fullName
+                profileHeaderView.photoImageView.image = user.avatar
+                profileHeaderView.myLabel.text = user.status
+            }
+            return profileHeaderView
+        } else {
+            return nil
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

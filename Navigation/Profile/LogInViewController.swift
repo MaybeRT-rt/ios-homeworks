@@ -10,11 +10,14 @@ import Toast
 
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
-     
+    
     var loginDelegate: LoginViewControllerDelegate? = LoginInspector()
     
-    private var currentUser: User?
+    var loginFactory: LoginFactory?
+    private var loginInspector: LoginInspector?
     
+    private var currentUser: User?
+   
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -122,7 +125,14 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         setupView()
         addedSubwiew()
         setupConstrain()
+        
+        let factory = MyLoginFactory()
+        if let loginFactory = loginFactory {
+            let loginInspector = loginFactory.makeLoginInspector()
+            loginDelegate = loginInspector
+        }
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -261,10 +271,20 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        let loginInspector = loginFactory?.makeLoginInspector()
         let isValid = delegate.check(login: login, password: password)
         
+#if DEBUG
+        let userService: UserService = TestUserService(user: User(login: "test", fullName: "Test User", avatar: UIImage(named: "7.png") ?? UIImage(named: "avatar.png")!, status: "Testing"))
+#else
+        let userService: UserService = CurrentUserService(user: User(login: "user", fullName: "No name", avatar: UIImage(named: "bich2.png") ?? UIImage(named: "1.png")!, status: "Online"))
+#endif
+        
         if isValid {
+            let user = userService.getUser(login: login)
+            currentUser = user
             let profileVC = ProfileViewController()
+            profileVC.user = user
             navigationController?.pushViewController(profileVC, animated: true)
         } else {
             let alert = UIAlertController(title: "Error", message: "Incorrect login or password", preferredStyle: .alert)
@@ -273,24 +293,3 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
-//#if DEBUG
-//        let userService: UserService = TestUserService(user: User(login: "test", fullName: "Test User", avatar: UIImage(named: "7.png") ?? UIImage(named: "avatar.png")!, status: "Testing"))
-//#else
-//        let userService: UserService = CurrentUserService(user: User(login: "user", fullName: "No name", avatar: UIImage(named: "bich2.png") ?? UIImage(named: "1.png")!, status: "Online"))
-//#endif
-//
-//        if let user = userService.getUser(login: login) {
-//            currentUser = user
-//
-//            let profileVC = ProfileViewController()
-//            profileVC.user = user
-//            navigationController?.pushViewController(profileVC, animated: true)
-//        } else {
-//            let alert = UIAlertController(title: "Error", message: "Incorrect login or password", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//            present(alert, animated: true, completion: nil)
-//        }
-//    }
-//}
-//
-//
