@@ -126,7 +126,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         addedSubwiew()
         setupConstrain()
         
-        let factory = MyLoginFactory()
         if let loginFactory = loginFactory {
             let loginInspector = loginFactory.makeLoginInspector()
             loginDelegate = loginInspector
