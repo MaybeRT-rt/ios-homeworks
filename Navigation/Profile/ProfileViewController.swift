@@ -10,8 +10,7 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     
-    fileprivate let data = Post.make()
-    
+    let data = Post.make()
     var user: User?
     
     private lazy var profileTableView: UITableView = {

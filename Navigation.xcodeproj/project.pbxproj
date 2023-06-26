@@ -31,6 +31,7 @@
 		4A98084F2A39B0C100DA0478 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */; };
 		4A9808522A39D0F100DA0478 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9808512A39D0F100DA0478 /* Toast */; };
 		4A9808542A39D52B00DA0478 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9808532A39D52B00DA0478 /* TestUserService.swift */; };
+		4A98086D2A41C2BA00DA0478 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98086C2A41C2BA00DA0478 /* Checker.swift */; };
 		4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B884A2A0502C700923D9A /* PhotoGallery.swift */; };
 		4A9B88512A06CD8500923D9A /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88502A06CD8500923D9A /* PhotosViewController.swift */; };
 		4A9B88532A07FF3600923D9A /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88522A07FF3600923D9A /* PhotosCollectionViewCell.swift */; };
@@ -99,6 +100,7 @@
 		4A9808492A39ADD600DA0478 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		4A9808532A39D52B00DA0478 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
+		4A98086C2A41C2BA00DA0478 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		4A9B884A2A0502C700923D9A /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
 		4A9B88502A06CD8500923D9A /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		4A9B88522A07FF3600923D9A /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				4A9808492A39ADD600DA0478 /* User.swift */,
 				4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */,
 				4A9808532A39D52B00DA0478 /* TestUserService.swift */,
+				4A98086C2A41C2BA00DA0478 /* Checker.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				4A7680BD29DEB882007070FD /* ProfileViewController.swift in Sources */,
 				4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */,
 				4A98084F2A39B0C100DA0478 /* CurrentUserService.swift in Sources */,
+				4A98086D2A41C2BA00DA0478 /* Checker.swift in Sources */,
 				4A7680A929DEACE3007070FD /* SceneDelegate.swift in Sources */,
 				4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */,
 				4A98084A2A39ADD600DA0478 /* User.swift in Sources */,

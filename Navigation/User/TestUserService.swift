@@ -14,7 +14,7 @@ class TestUserService: UserService {
     init(user: User) {
         self.testUser = user
     }
-
+    
     func getUser(login: String) -> User? {
         if login == testUser.login {
             return testUser

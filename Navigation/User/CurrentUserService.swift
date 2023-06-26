@@ -8,7 +8,7 @@
 import Foundation
 
 class CurrentUserService: UserService {
-
+    
     private let currentUser: User
     
     init(user: User) {

@@ -8,10 +8,16 @@
 import UIKit
 import Toast
 
+
 class LogInViewController: UIViewController, UITextFieldDelegate {
     
-    private var currentUser: User?
+    var loginDelegate: LoginViewControllerDelegate? = LoginInspector()
     
+    var loginFactory: LoginFactory?
+    private var loginInspector: LoginInspector?
+    
+    private var currentUser: User?
+   
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -119,7 +125,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         setupView()
         addedSubwiew()
         setupConstrain()
+        
+        if let loginFactory = loginFactory {
+            let loginInspector = loginFactory.makeLoginInspector()
+            loginDelegate = loginInspector
+        }
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -242,27 +254,42 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         scrollView.contentInset.bottom = 0.0
     }
     
-    @objc private func pressButtonLogin() {
-        
-        guard let login = loginTextField.text, !login.isEmpty else {
-            self.view.makeToast("The login field is empty")
-            return
-        }
-        
-        guard let password = passTextField.text, !password.isEmpty else {
-            self.view.makeToast("The password field is empty")
-            return
+    private func setupDefaultValues() {
+        let defaultLogin = "adm"
+        let defaultPassword = "qwerty"
+
+        if loginTextField.text?.isEmpty ?? true {
+            loginTextField.text = defaultLogin
         }
 
+        if passTextField.text?.isEmpty ?? true {
+            passTextField.text = defaultPassword
+        }
+    }
+    
+    @objc private func pressButtonLogin() {
+        
+        guard let delegate = loginDelegate else {
+            return
+        }
+        
+        guard let login = loginTextField.text, !login.isEmpty, let password = passTextField.text, !password.isEmpty  else {
+            setupDefaultValues()
+            //self.view.makeToast("The login field is empty")
+            return
+        }
+        
+        let isValid = delegate.check(login: login, password: password)
+        
 #if DEBUG
         let userService: UserService = TestUserService(user: User(login: "test", fullName: "Test User", avatar: UIImage(named: "7.png") ?? UIImage(named: "avatar.png")!, status: "Testing"))
 #else
         let userService: UserService = CurrentUserService(user: User(login: "user", fullName: "No name", avatar: UIImage(named: "bich2.png") ?? UIImage(named: "1.png")!, status: "Online"))
 #endif
         
-        if let user = userService.getUser(login: login) {
+        if isValid {
+            let user = userService.getUser(login: login)
             currentUser = user
-
             let profileVC = ProfileViewController()
             profileVC.user = user
             navigationController?.pushViewController(profileVC, animated: true)
@@ -273,5 +300,3 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
-
-    

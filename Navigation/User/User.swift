@@ -9,6 +9,7 @@ import UIKit
 import Foundation
 
 class User {
+    
     let login: String
     let fullName: String
     let avatar: UIImage
