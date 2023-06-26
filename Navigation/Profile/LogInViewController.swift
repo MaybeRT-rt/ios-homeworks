@@ -254,23 +254,31 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         scrollView.contentInset.bottom = 0.0
     }
     
+    private func setupDefaultValues() {
+        let defaultLogin = "adm"
+        let defaultPassword = "qwerty"
+
+        if loginTextField.text?.isEmpty ?? true {
+            loginTextField.text = defaultLogin
+        }
+
+        if passTextField.text?.isEmpty ?? true {
+            passTextField.text = defaultPassword
+        }
+    }
+    
     @objc private func pressButtonLogin() {
         
         guard let delegate = loginDelegate else {
             return
         }
         
-        guard let login = loginTextField.text, !login.isEmpty else {
-            self.view.makeToast("The login field is empty")
+        guard let login = loginTextField.text, !login.isEmpty, let password = passTextField.text, !password.isEmpty  else {
+            setupDefaultValues()
+            //self.view.makeToast("The login field is empty")
             return
         }
         
-        guard let password = passTextField.text, !password.isEmpty else {
-            self.view.makeToast("The password field is empty")
-            return
-        }
-        
-        let loginInspector = loginFactory?.makeLoginInspector()
         let isValid = delegate.check(login: login, password: password)
         
 #if DEBUG

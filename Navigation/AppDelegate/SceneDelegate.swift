@@ -19,9 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let loginVC = LogInViewController()
         let window = UIWindow(windowScene: scene)
         
-        let loginInspector = LoginInspector()
         let loginViewController = LogInViewController()
-        loginViewController.loginDelegate = loginInspector
+        loginViewController.loginDelegate = loginFactory.makeLoginInspector()
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [feedVC, loginVC]
