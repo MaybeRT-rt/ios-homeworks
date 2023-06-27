@@ -83,14 +83,15 @@ class PhotosTableViewCell: UITableViewCell {
     private func setupPreviews() {
         
         let photoGallery = PhotoGallery.shared
-        let shuffledPhotos = photoGallery.shuffled() // перемешивает элементы массива
+        let shuffledPhotos = photoGallery.images.shuffled() // перемешивает элементы массива
         
         for photo in shuffledPhotos.prefix(4) {
-            let imageView = UIImageView(image: UIImage(named: photo.image))
+            let imageView = UIImageView(image: photo)
             imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true
             imageView.layer.cornerRadius = 6
             imageStackView.addArrangedSubview(imageView)
+            
             NSLayoutConstraint.activate([
                 imageView.widthAnchor.constraint(greaterThanOrEqualToConstant: (imageStackView.bounds.width - 24) / 4),
                 imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1),

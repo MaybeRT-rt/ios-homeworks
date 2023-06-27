@@ -6,10 +6,15 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
-    let gallery = PhotoGallery.shared
+    let imagePublisherFacade = ImagePublisherFacade()
+    var photosArray = [UIImage]()
+    var indexArray = 0
+    
+    var gallery = PhotoGallery.shared
     let collectionID = "photosCollectionView"
     
     lazy var photoCollection: UICollectionViewFlowLayout = {
@@ -36,6 +41,13 @@ class PhotosViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
         setupView()
         setupConstraints()
+        
+        imagePublisherFacade.subscribe(self)
+        imagePublisherFacade.addImagesWithTimer(time: 1, repeat: 20, userImages: gallery.images)
+    }
+    
+    deinit {
+        imagePublisherFacade.removeSubscription(for: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,14 +79,14 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return PhotoGallery.shared.count
+        return photosArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionID, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
-        let photo = gallery[indexPath.item]
-        guard let imageView = UIImage(named: photo.image) else { return UICollectionViewCell() }
-        cell.configCellCollection(photo: imageView)
+        let photo = photosArray[indexPath.item]
+        //guard let imageView = UIImage(named: photo.image) else { return UICollectionViewCell() }
+        cell.configCellCollection(photo: photo)
         return cell
     }
     
@@ -91,3 +103,13 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        if indexArray < gallery.images.count {
+            let image = gallery.images[indexArray]
+            self.photosArray.append(image)
+            self.photosCollectionView.reloadData()
+            indexArray += 1
+        }
+    }
+}
