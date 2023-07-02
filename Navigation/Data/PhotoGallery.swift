@@ -9,33 +9,32 @@ import Foundation
 import UIKit
 
 struct PhotoGallery {
-    var image: String
+    var images: [UIImage]
     
+    static let shared = PhotoGallery(images: getImage())
 
-    static let shared = getImage()
-
-    static func getImage() -> [PhotoGallery] {
-        var images = [PhotoGallery]()
-    
-        images.append(PhotoGallery(image: "1"))
-        images.append(PhotoGallery(image: "2"))
-        images.append(PhotoGallery(image: "3"))
-        images.append(PhotoGallery(image: "4"))
-        images.append(PhotoGallery(image: "5"))
-        images.append(PhotoGallery(image: "6"))
-        images.append(PhotoGallery(image: "7"))
-        images.append(PhotoGallery(image: "8"))
-        images.append(PhotoGallery(image: "9"))
-        images.append(PhotoGallery(image: "10"))
-        images.append(PhotoGallery(image: "11"))
-        images.append(PhotoGallery(image: "bich8.png"))
-        images.append(PhotoGallery(image: "bich7.png"))
-        images.append(PhotoGallery(image: "bich6.png"))
-        images.append(PhotoGallery(image: "bich5.png"))
-        images.append(PhotoGallery(image: "bich4.png"))
-        images.append(PhotoGallery(image: "bich3.png"))
-        images.append(PhotoGallery(image: "bich2.png"))
-        images.append(PhotoGallery(image: "bich.png"))
+    static func getImage() -> [UIImage] {
+        var images = [UIImage]()
+        
+        images.append(UIImage(named: "1")!)
+        images.append(UIImage(named: "2")!)
+        images.append(UIImage(named: "3")!)
+        images.append(UIImage(named: "4")!)
+        images.append(UIImage(named: "5")!)
+        images.append(UIImage(named: "6")!)
+        images.append(UIImage(named: "7")!)
+        images.append(UIImage(named: "8")!)
+        images.append(UIImage(named: "9")!)
+        images.append(UIImage(named: "10")!)
+        images.append(UIImage(named: "11")!)
+        images.append(UIImage(named: "bich8.png")!)
+        images.append(UIImage(named: "bich7.png")!)
+        images.append(UIImage(named: "bich6.png")!)
+        images.append(UIImage(named: "bich5.png")!)
+        images.append(UIImage(named: "bich4.png")!)
+        images.append(UIImage(named: "bich3.png")!)
+        images.append(UIImage(named: "bich2.png")!)
+        images.append(UIImage(named: "bich.png")!)
         
         return images
     }

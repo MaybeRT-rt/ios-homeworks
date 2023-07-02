@@ -32,6 +32,7 @@
 		4A9808522A39D0F100DA0478 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9808512A39D0F100DA0478 /* Toast */; };
 		4A9808542A39D52B00DA0478 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9808532A39D52B00DA0478 /* TestUserService.swift */; };
 		4A98086D2A41C2BA00DA0478 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98086C2A41C2BA00DA0478 /* Checker.swift */; };
+		4A9808762A4979CB00DA0478 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9808752A4979CB00DA0478 /* iOSIntPackage */; };
 		4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B884A2A0502C700923D9A /* PhotoGallery.swift */; };
 		4A9B88512A06CD8500923D9A /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88502A06CD8500923D9A /* PhotosViewController.swift */; };
 		4A9B88532A07FF3600923D9A /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88522A07FF3600923D9A /* PhotosCollectionViewCell.swift */; };
@@ -126,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A9808762A4979CB00DA0478 /* iOSIntPackage in Frameworks */,
 				4A9808522A39D0F100DA0478 /* Toast in Frameworks */,
 				4A60BAF72A30F1F10029FD17 /* StorageService.framework in Frameworks */,
 			);
@@ -316,6 +318,7 @@
 			name = Navigation;
 			packageProductDependencies = (
 				4A9808512A39D0F100DA0478 /* Toast */,
+				4A9808752A4979CB00DA0478 /* iOSIntPackage */,
 			);
 			productName = Navigation;
 			productReference = 4A7680A329DEACE3007070FD /* Navigation.app */;
@@ -354,6 +357,7 @@
 			mainGroup = 4A76809A29DEACE3007070FD;
 			packageReferences = (
 				4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				4A9808742A4979CA00DA0478 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 			);
 			productRefGroup = 4A7680A429DEACE3007070FD /* Products */;
 			projectDirPath = "";
@@ -793,6 +797,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		4A9808742A4979CA00DA0478 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage/";
+			requirement = {
+				branch = imagepublisher;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -800,6 +812,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		4A9808752A4979CB00DA0478 /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4A9808742A4979CA00DA0478 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
