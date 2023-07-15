@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A22B3162A519D5B00859F68 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22B3152A519D5B00859F68 /* CustomButton.swift */; };
+		4A22B3182A602C6900859F68 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22B3172A602C6900859F68 /* FeedModel.swift */; };
 		4A2C95D329E5B1DD006E82F8 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C95D229E5B1DD006E82F8 /* ProfileHeaderView.swift */; };
 		4A51C41629F437CB00767386 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A51C41529F437CB00767386 /* LogInViewController.swift */; };
 		4A60BAE62A30F1F10029FD17 /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = 4A60BAE52A30F1F10029FD17 /* StorageService.docc */; };
@@ -77,6 +79,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4A22B3152A519D5B00859F68 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		4A22B3172A602C6900859F68 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		4A2C95D229E5B1DD006E82F8 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		4A51C41529F437CB00767386 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		4A60BAE22A30F1F10029FD17 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,7 +210,8 @@
 		4A7680A529DEACE3007070FD /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				4A98084B2A39B07E00DA0478 /* User */,
+				4A22B3152A519D5B00859F68 /* CustomButton.swift */,
+				4A98084B2A39B07E00DA0478 /* Model */,
 				4A7680C329DEDF20007070FD /* Data */,
 				4A66E59C29FA6627001055DE /* AppDelegate */,
 				4A2C95D129E5B1A8006E82F8 /* Profile */,
@@ -239,15 +244,16 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		4A98084B2A39B07E00DA0478 /* User */ = {
+		4A98084B2A39B07E00DA0478 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				4A9808492A39ADD600DA0478 /* User.swift */,
 				4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */,
 				4A9808532A39D52B00DA0478 /* TestUserService.swift */,
 				4A98086C2A41C2BA00DA0478 /* Checker.swift */,
+				4A22B3172A602C6900859F68 /* FeedModel.swift */,
 			);
-			path = User;
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,11 +425,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A66E5A22A03D785001055DE /* PhotosTableViewCell.swift in Sources */,
+				4A22B3162A519D5B00859F68 /* CustomButton.swift in Sources */,
 				4A7680A729DEACE3007070FD /* AppDelegate.swift in Sources */,
 				4A7680BB29DEB870007070FD /* FeedViewController.swift in Sources */,
 				4A51C41629F437CB00767386 /* LogInViewController.swift in Sources */,
 				4A7680BD29DEB882007070FD /* ProfileViewController.swift in Sources */,
 				4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */,
+				4A22B3182A602C6900859F68 /* FeedModel.swift in Sources */,
 				4A98084F2A39B0C100DA0478 /* CurrentUserService.swift in Sources */,
 				4A98086D2A41C2BA00DA0478 /* Checker.swift in Sources */,
 				4A7680A929DEACE3007070FD /* SceneDelegate.swift in Sources */,

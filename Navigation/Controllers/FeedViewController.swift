@@ -10,7 +10,7 @@ import StorageService
 
 class FeedViewController: UIViewController {
     
-     var post = Posts(title: "Интересный факт")
+    var post = Posts(title: "Интересный факт")
     
     let containerView = UIView()
     
@@ -29,28 +29,49 @@ class FeedViewController: UIViewController {
     }()
     
     //MARK: - UIButtons
-    private lazy var button1: UIButton = {
-        let button1 = UIButton()
-        button1.backgroundColor = .systemBlue
-        button1.layer.cornerRadius = 12
-        button1.setTitle("Open post", for: .normal)
-        button1.setTitleColor(.white, for: .normal)
-        button1.translatesAutoresizingMaskIntoConstraints = false
-        button1.addTarget(self, action: #selector(pressButton), for: .touchUpInside)
-        
-        return button1
+    
+    private lazy var button1: CustomButton = {
+        let buttonLog = CustomButton(title: "Open post", titleColor: .white) { [weak self] in
+                self?.pressButton()
+            }
+            return buttonLog
     }()
     
-    private lazy var button2: UIButton = {
-        let button2 = UIButton()
-        button2.backgroundColor = .systemBlue
-        button2.layer.cornerRadius = 12
-        button2.setTitle("Open post", for: .normal)
-        button2.setTitleColor(.white, for: .normal)
-        button2.translatesAutoresizingMaskIntoConstraints = false
-        button2.addTarget(self, action: #selector(pressButton), for: .touchUpInside)
+    private lazy var button2: CustomButton = {
+        let buttonLog = CustomButton(title: "Open post", titleColor: .white) { [weak self] in
+                self?.pressButton()
+            }
+            return buttonLog
+    }()
+
+    private lazy var buttonCheck: CustomButton = {
+        let buttonLog = CustomButton(title: "Проверить", titleColor: .white) { [weak self] in
+                self?.checkGuessButtonTapped()
+            }
         
-        return button2
+        
+            return buttonLog
+    }()
+    
+    private lazy var textField: UITextField = {
+        let checkTF = UITextField()
+        checkTF.translatesAutoresizingMaskIntoConstraints = false
+        checkTF.borderStyle = .roundedRect
+        checkTF.placeholder = "Введите слово"
+        
+        return checkTF
+    }()
+    
+    private lazy var buttonView: UIView = {
+        let buttonView = UIView()
+        buttonView.translatesAutoresizingMaskIntoConstraints = false
+        return buttonView
+    }()
+    
+    private var checkWord: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     //MARK: - Init
@@ -63,7 +84,13 @@ class FeedViewController: UIViewController {
     
     //MARK: - Add Subwiew
     func addedSubwiew() {
+        view.addSubview(textField)
+       // view.addSubview(checkWord)
         view.addSubview(stackView)
+        
+        stackView.addArrangedSubview(checkWord)
+        stackView.addArrangedSubview(buttonCheck)
+        stackView.addArrangedSubview(buttonView)
         stackView.addArrangedSubview(button1)
         stackView.addArrangedSubview(button2)
     }
@@ -72,9 +99,29 @@ class FeedViewController: UIViewController {
     private func setupConstraint() {
         
         NSLayoutConstraint.activate([
+            
+            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            textField.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            
+            
+            checkWord.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 150),
+            checkWord.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            checkWord.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
+            checkWord.widthAnchor.constraint(equalToConstant: 100),
+            
+            
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        
+     
+            self.buttonView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+            self.buttonView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
+            self.buttonView.heightAnchor.constraint(equalToConstant: 100),
+            
+            self.buttonCheck.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+            self.buttonCheck.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
+            self.buttonCheck.heightAnchor.constraint(equalToConstant: 50),
+            
             self.button1.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
             self.button1.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
             self.button1.heightAnchor.constraint(equalToConstant: 50),
@@ -93,4 +140,18 @@ class FeedViewController: UIViewController {
         self.navigationController?.pushViewController(postViewController, animated: true)
         
     }
+    
+    @objc private func checkGuessButtonTapped() {
+        guard let word = textField.text else { return }
+        
+        if word.isEmpty {
+            return
+        }
+        
+        let model = FeedModel(secretWord: "cекрет")
+        let isCorrect = model.check(word: word)
+        checkWord.text = isCorrect ? "Верно" : "Неверно"
+        checkWord.textColor = isCorrect ? UIColor.green : UIColor.red
+    }
 }
+
