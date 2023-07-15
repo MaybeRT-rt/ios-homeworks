@@ -46,10 +46,8 @@ class FeedViewController: UIViewController {
 
     private lazy var buttonCheck: CustomButton = {
         let buttonLog = CustomButton(title: "Проверить", titleColor: .white) { [weak self] in
-                self?.checkGuessButtonTapped()
+                self?.checkButtonTapped()
             }
-        
-        
             return buttonLog
     }()
     
@@ -141,14 +139,14 @@ class FeedViewController: UIViewController {
         
     }
     
-    @objc private func checkGuessButtonTapped() {
+    @objc private func checkButtonTapped() {
         guard let word = textField.text else { return }
         
         if word.isEmpty {
             return
         }
         
-        let model = FeedModel(secretWord: "cекрет")
+        let model = FeedModel(secretWord: "Ура")
         let isCorrect = model.check(word: word)
         checkWord.text = isCorrect ? "Верно" : "Неверно"
         checkWord.textColor = isCorrect ? UIColor.green : UIColor.red
