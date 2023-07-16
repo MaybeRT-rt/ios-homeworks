@@ -10,7 +10,7 @@ import StorageService
 
 class FeedViewController: UIViewController {
     
-    private var viewModel: FeedViewModel!
+    private var viewModelFeed: FeedViewModel!
     
     let containerView = UIView()
     
@@ -31,15 +31,15 @@ class FeedViewController: UIViewController {
     //MARK: - UIButtons
     
     private lazy var button1 = CustomButton(title: "Open post", titleColor: .white) { [weak self] in
-        self?.viewModel.button1Tapped()
+        self?.viewModelFeed.button1Tapped()
         }
     
     private lazy var button2 = CustomButton(title: "Open post", titleColor: .white) { [weak self] in
-        self?.viewModel.button2Tapped()
+        self?.viewModelFeed.button2Tapped()
         }
     
     private lazy var buttonCheck = CustomButton(title: "Проверить", titleColor: .white) { [weak self] in
-        self?.viewModel?.checkButtonTapped(word: self?.textField.text ?? "")
+        self?.viewModelFeed?.checkButtonTapped(word: self?.textField.text ?? "")
         }
     
     private lazy var textField: UITextField = {
@@ -69,7 +69,7 @@ class FeedViewController: UIViewController {
         view.backgroundColor = .white
         addedSubwiew()
         setupConstraint()
-        viewModel = FeedViewModel()
+        viewModelFeed = FeedViewModel()
         bindViewModel()
     }
     
@@ -124,12 +124,12 @@ class FeedViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.wordCheckResult = { [weak self] result in
+        viewModelFeed.wordCheckResult = { [weak self] result in
             self?.checkWord.text = result.isCorrect ? "Верно" : "Неверно"
             self?.checkWord.textColor = result.isCorrect ? .green : .red
         }
         
-        viewModel.navigateToPost = { [weak self] title in
+        viewModelFeed.navigateToPost = { [weak self] title in
             let postViewController = PostViewController()
             postViewController.titlePost = title
             self?.navigationController?.pushViewController(postViewController, animated: true)

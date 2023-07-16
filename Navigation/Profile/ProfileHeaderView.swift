@@ -10,8 +10,6 @@ import UIKit
 
 class ProfileHeaderView: UIView, UITextFieldDelegate {
     
-    let profileVC = ProfileViewController()
-    
     //MARK: - Status Label
     
      lazy var myLabel: UILabel = {
@@ -119,10 +117,11 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemGray6
+        let profileViewModel = ProfileViewModel()
+        _ = ProfileViewController(viewModel: profileViewModel)
         addedSubview()
         setupConstrain()
         tap()
-        
     }
     
     required init?(coder: NSCoder) {

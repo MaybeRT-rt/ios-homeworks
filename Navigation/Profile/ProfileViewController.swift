@@ -10,7 +10,9 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     
-    let data = Post.make()
+    private var viewModelProfile: ProfileViewModel
+    
+    //let data = Post.make()
     var user: User?
     
     private lazy var profileTableView: UITableView = {
@@ -27,12 +29,23 @@ class ProfileViewController: UIViewController {
         case headerID = "profileHeaderView"
     }
     
+    init(viewModel: ProfileViewModel) {
+        self.viewModelProfile = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         changeBackgraund() 
         addedSubview()
         setupContrain()
         tuneTableView()
+        bindViewModel()
     }
     
     private func changeBackgraund() {
@@ -70,23 +83,23 @@ class ProfileViewController: UIViewController {
         profileTableView.estimatedRowHeight = 1000
         
     }
+    
+    private func bindViewModel() {
+        viewModelProfile.reloadData = { [weak self] in
+            self?.profileTableView.reloadData()
+        }
+    }
 }
   
     
 extension ProfileViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return viewModelProfile.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else if section == 1 {
-            return data.count
-        } else {
-            return 0
-        }
+        return viewModelProfile.numberOfRows(in: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,8 +111,7 @@ extension ProfileViewController: UITableViewDataSource {
         case 1:
             let cell: PostsTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell_ReuseID", for: indexPath)) as! PostsTableViewCell
             cell.selectionStyle = .none
-
-            let model = data[indexPath.row]
+            guard let model = viewModelProfile.post(at: indexPath.row) else { return UITableViewCell() }
             cell.update(model)
             return cell
             
@@ -119,7 +131,7 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let profileHeaderView = ProfileHeaderView()
-            if let user = user {
+            if let user = viewModelProfile.user {
                 profileHeaderView.nameLabel.text = user.fullName
                 profileHeaderView.photoImageView.image = user.avatar
                 profileHeaderView.myLabel.text = user.status
