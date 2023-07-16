@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4A22B3162A519D5B00859F68 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22B3152A519D5B00859F68 /* CustomButton.swift */; };
 		4A22B3182A602C6900859F68 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22B3172A602C6900859F68 /* FeedModel.swift */; };
+		4A22B31B2A64050800859F68 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22B31A2A64050800859F68 /* FeedViewModel.swift */; };
+		4A22B31F2A64078700859F68 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4A22B31E2A64078700859F68 /* iOSIntPackage */; };
+		4A22B3222A6407B700859F68 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4A22B3212A6407B700859F68 /* Toast */; };
 		4A2C95D329E5B1DD006E82F8 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C95D229E5B1DD006E82F8 /* ProfileHeaderView.swift */; };
 		4A51C41629F437CB00767386 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A51C41529F437CB00767386 /* LogInViewController.swift */; };
 		4A60BAE62A30F1F10029FD17 /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = 4A60BAE52A30F1F10029FD17 /* StorageService.docc */; };
@@ -31,10 +34,8 @@
 		4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680C629DF0F3F007070FD /* InfoViewController.swift */; };
 		4A98084A2A39ADD600DA0478 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9808492A39ADD600DA0478 /* User.swift */; };
 		4A98084F2A39B0C100DA0478 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */; };
-		4A9808522A39D0F100DA0478 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9808512A39D0F100DA0478 /* Toast */; };
 		4A9808542A39D52B00DA0478 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9808532A39D52B00DA0478 /* TestUserService.swift */; };
 		4A98086D2A41C2BA00DA0478 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98086C2A41C2BA00DA0478 /* Checker.swift */; };
-		4A9808762A4979CB00DA0478 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9808752A4979CB00DA0478 /* iOSIntPackage */; };
 		4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B884A2A0502C700923D9A /* PhotoGallery.swift */; };
 		4A9B88512A06CD8500923D9A /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88502A06CD8500923D9A /* PhotosViewController.swift */; };
 		4A9B88532A07FF3600923D9A /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88522A07FF3600923D9A /* PhotosCollectionViewCell.swift */; };
@@ -81,6 +82,7 @@
 /* Begin PBXFileReference section */
 		4A22B3152A519D5B00859F68 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		4A22B3172A602C6900859F68 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
+		4A22B31A2A64050800859F68 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		4A2C95D229E5B1DD006E82F8 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		4A51C41529F437CB00767386 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		4A60BAE22A30F1F10029FD17 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,15 +133,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A9808762A4979CB00DA0478 /* iOSIntPackage in Frameworks */,
-				4A9808522A39D0F100DA0478 /* Toast in Frameworks */,
+				4A22B3222A6407B700859F68 /* Toast in Frameworks */,
 				4A60BAF72A30F1F10029FD17 /* StorageService.framework in Frameworks */,
+				4A22B31F2A64078700859F68 /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A22B3192A6404D200859F68 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				4A7680BA29DEB870007070FD /* FeedViewController.swift */,
+				4A22B31A2A64050800859F68 /* FeedViewModel.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		4A22B3262A6415C500859F68 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				4A22B3152A519D5B00859F68 /* CustomButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		4A2C95D129E5B1A8006E82F8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,9 +229,9 @@
 		4A7680A529DEACE3007070FD /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				4A22B3152A519D5B00859F68 /* CustomButton.swift */,
+				4A22B3262A6415C500859F68 /* Components */,
+				4A22B3192A6404D200859F68 /* Feed */,
 				4A98084B2A39B07E00DA0478 /* Model */,
-				4A7680C329DEDF20007070FD /* Data */,
 				4A66E59C29FA6627001055DE /* AppDelegate */,
 				4A2C95D129E5B1A8006E82F8 /* Profile */,
 				4A66E59729F995B4001055DE /* TableViewCell */,
@@ -227,7 +246,6 @@
 		4A7680C029DECB4B007070FD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4A7680BA29DEB870007070FD /* FeedViewController.swift */,
 				4A7680BE29DEC53C007070FD /* PostViewController.swift */,
 				4A7680C629DF0F3F007070FD /* InfoViewController.swift */,
 				4A9B88502A06CD8500923D9A /* PhotosViewController.swift */,
@@ -252,6 +270,7 @@
 				4A9808532A39D52B00DA0478 /* TestUserService.swift */,
 				4A98086C2A41C2BA00DA0478 /* Checker.swift */,
 				4A22B3172A602C6900859F68 /* FeedModel.swift */,
+				4A7680C329DEDF20007070FD /* Data */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -323,8 +342,8 @@
 			);
 			name = Navigation;
 			packageProductDependencies = (
-				4A9808512A39D0F100DA0478 /* Toast */,
-				4A9808752A4979CB00DA0478 /* iOSIntPackage */,
+				4A22B31E2A64078700859F68 /* iOSIntPackage */,
+				4A22B3212A6407B700859F68 /* Toast */,
 			);
 			productName = Navigation;
 			productReference = 4A7680A329DEACE3007070FD /* Navigation.app */;
@@ -362,8 +381,8 @@
 			);
 			mainGroup = 4A76809A29DEACE3007070FD;
 			packageReferences = (
-				4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
-				4A9808742A4979CA00DA0478 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+				4A22B31D2A64078700859F68 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+				4A22B3202A6407B700859F68 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = 4A7680A429DEACE3007070FD /* Products */;
 			projectDirPath = "";
@@ -438,6 +457,7 @@
 				4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */,
 				4A98084A2A39ADD600DA0478 /* User.swift in Sources */,
 				4A66E59E29FA7AA2001055DE /* PostsTableViewCell.swift in Sources */,
+				4A22B31B2A64050800859F68 /* FeedViewModel.swift in Sources */,
 				4A7680BF29DEC53C007070FD /* PostViewController.swift in Sources */,
 				4A9B88532A07FF3600923D9A /* PhotosCollectionViewCell.swift in Sources */,
 				4A9808542A39D52B00DA0478 /* TestUserService.swift in Sources */,
@@ -797,15 +817,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scalessec/Toast-Swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-		4A9808742A4979CA00DA0478 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+		4A22B31D2A64078700859F68 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TrueMax/iOSIntPackage/";
 			requirement = {
@@ -813,18 +825,26 @@
 				kind = branch;
 			};
 		};
+		4A22B3202A6407B700859F68 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4A9808512A39D0F100DA0478 /* Toast */ = {
+		4A22B31E2A64078700859F68 /* iOSIntPackage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
-			productName = Toast;
-		};
-		4A9808752A4979CB00DA0478 /* iOSIntPackage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4A9808742A4979CA00DA0478 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			package = 4A22B31D2A64078700859F68 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
 			productName = iOSIntPackage;
+		};
+		4A22B3212A6407B700859F68 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4A22B3202A6407B700859F68 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

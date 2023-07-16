@@ -10,7 +10,7 @@ import StorageService
 
 class FeedViewController: UIViewController {
     
-    var post = Posts(title: "Интересный факт")
+    private var viewModel: FeedViewModel!
     
     let containerView = UIView()
     
@@ -23,33 +23,24 @@ class FeedViewController: UIViewController {
         stack.distribution = .fillEqually
         stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
-       
+        
         return stack
         
     }()
     
     //MARK: - UIButtons
     
-    private lazy var button1: CustomButton = {
-        let buttonLog = CustomButton(title: "Open post", titleColor: .white) { [weak self] in
-                self?.pressButton()
-            }
-            return buttonLog
-    }()
+    private lazy var button1 = CustomButton(title: "Open post", titleColor: .white) { [weak self] in
+        self?.viewModel.button1Tapped()
+        }
     
-    private lazy var button2: CustomButton = {
-        let buttonLog = CustomButton(title: "Open post", titleColor: .white) { [weak self] in
-                self?.pressButton()
-            }
-            return buttonLog
-    }()
-
-    private lazy var buttonCheck: CustomButton = {
-        let buttonLog = CustomButton(title: "Проверить", titleColor: .white) { [weak self] in
-                self?.checkButtonTapped()
-            }
-            return buttonLog
-    }()
+    private lazy var button2 = CustomButton(title: "Open post", titleColor: .white) { [weak self] in
+        self?.viewModel.button2Tapped()
+        }
+    
+    private lazy var buttonCheck = CustomButton(title: "Проверить", titleColor: .white) { [weak self] in
+        self?.viewModel?.checkButtonTapped(word: self?.textField.text ?? "")
+        }
     
     private lazy var textField: UITextField = {
         let checkTF = UITextField()
@@ -78,12 +69,14 @@ class FeedViewController: UIViewController {
         view.backgroundColor = .white
         addedSubwiew()
         setupConstraint()
+        viewModel = FeedViewModel()
+        bindViewModel()
     }
     
     //MARK: - Add Subwiew
     func addedSubwiew() {
         view.addSubview(textField)
-       // view.addSubview(checkWord)
+        // view.addSubview(checkWord)
         view.addSubview(stackView)
         
         stackView.addArrangedSubview(checkWord)
@@ -111,7 +104,7 @@ class FeedViewController: UIViewController {
             
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-     
+            
             self.buttonView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
             self.buttonView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
             self.buttonView.heightAnchor.constraint(equalToConstant: 100),
@@ -130,26 +123,17 @@ class FeedViewController: UIViewController {
         ])
     }
     
-    //MARK: - Actions
-    @objc private func pressButton() {
-        let postViewController = PostViewController()
-        
-        postViewController.titlePost = post.title
-        self.navigationController?.pushViewController(postViewController, animated: true)
-        
-    }
-    
-    @objc private func checkButtonTapped() {
-        guard let word = textField.text else { return }
-        
-        if word.isEmpty {
-            return
+    private func bindViewModel() {
+        viewModel.wordCheckResult = { [weak self] result in
+            self?.checkWord.text = result.isCorrect ? "Верно" : "Неверно"
+            self?.checkWord.textColor = result.isCorrect ? .green : .red
         }
         
-        let model = FeedModel(secretWord: "Ура")
-        let isCorrect = model.check(word: word)
-        checkWord.text = isCorrect ? "Верно" : "Неверно"
-        checkWord.textColor = isCorrect ? UIColor.green : UIColor.red
+        viewModel.navigateToPost = { [weak self] title in
+            let postViewController = PostViewController()
+            postViewController.titlePost = title
+            self?.navigationController?.pushViewController(postViewController, animated: true)
+        }
     }
 }
-
+ 
