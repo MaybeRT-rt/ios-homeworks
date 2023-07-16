@@ -9,16 +9,11 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
-    private lazy var button: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 12
-        button.setTitle("Alert", for: .normal)
-        button.setTitleColor(.lightGray, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(pressButtonAlert), for: .touchUpInside)
-        
-        return button
+    private lazy var button: CustomButton = {
+        let buttonLog = CustomButton(title: "Alert", titleColor: .white) { [weak self] in
+                self?.pressButtonAlert()
+            }
+            return buttonLog
     }()
 
     override func viewDidLoad() {

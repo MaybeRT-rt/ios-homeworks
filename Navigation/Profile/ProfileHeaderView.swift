@@ -76,23 +76,13 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     //MARK: - Button
     
-    private lazy var buttonProfile: UIButton = {
-        let button = UIButton()
-        buttonProfile = UIButton(frame: CGRect(x: 166, y: 264, width: 200.00, height: 50))
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 4
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowRadius = CGFloat(4)
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        button.setTitle("Show status", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(pressedButton), for: .touchUpInside)
-        
-        return button
+    private lazy var buttonProfile: CustomButton = {
+        let buttonLog = CustomButton(title: "Show status", titleColor: .white) { [weak self] in
+                self?.pressedButton()
+            }
+            return buttonLog
     }()
-    
+   
     // MARK: - Animatioms
     let dimmingView: UIView = {
         let dimmingView = UIView()

@@ -17,7 +17,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     private var loginInspector: LoginInspector?
     
     private var currentUser: User?
-   
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -104,21 +104,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return passTF
     }()
     
-    private lazy var buttonLogin: UIButton = {
-        let buttonLog = UIButton()
-        buttonLog.setBackgroundImage(UIImage(named: "blue_pixel.png"), for: .normal)
-        buttonLog.layer.masksToBounds = true
-        buttonLog.layer.cornerRadius = 10.0
-        buttonLog.setTitle("Log In", for: .normal)
-        buttonLog.setTitleColor(.white, for: .normal)
-        buttonLog.translatesAutoresizingMaskIntoConstraints = false
-        buttonLog.addTarget(self, action: #selector(pressButtonLogin), for: .touchUpInside)
-        
-        return buttonLog
-        
+    private lazy var buttonLogin: CustomButton = {
+        let buttonLog = CustomButton(title: "Log In", titleColor: .white) { [weak self] in
+                self?.pressButtonLogin()
+            }
+            return buttonLog
     }()
-    
-    
+   
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -257,11 +249,11 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     private func setupDefaultValues() {
         let defaultLogin = "adm"
         let defaultPassword = "qwerty"
-
+        
         if loginTextField.text?.isEmpty ?? true {
             loginTextField.text = defaultLogin
         }
-
+        
         if passTextField.text?.isEmpty ?? true {
             passTextField.text = defaultPassword
         }
