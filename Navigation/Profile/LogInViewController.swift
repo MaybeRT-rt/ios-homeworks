@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Toast
-
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
     
@@ -282,7 +280,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         if isValid {
             let user = userService.getUser(login: login)
             currentUser = user
-            let profileVC = ProfileViewController()
+            let profileViewModel = ProfileViewModel()
+            let profileVC = ProfileViewController(viewModel: profileViewModel)
             profileVC.user = user
             navigationController?.pushViewController(profileVC, animated: true)
         } else {
