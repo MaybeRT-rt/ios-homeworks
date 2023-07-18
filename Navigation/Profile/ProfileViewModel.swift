@@ -16,14 +16,14 @@ class ProfileViewModel {
             reloadData?()
         }
     }
-   
+    
     init() {
-           loadData()
-       }
-       
-       func loadData() {
-           data = Post.make()
-       }
+        loadData()
+    }
+    
+    func loadData() {
+        data = Post.make()
+    }
     
     func numberOfSections() -> Int {
         return 2
