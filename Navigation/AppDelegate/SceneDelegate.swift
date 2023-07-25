@@ -10,7 +10,6 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    let loginFactory: LoginFactory = MyLoginFactory()
     var mainCoordinator: MainCoordinator?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -19,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         self.window = window
         
-        mainCoordinator = MainCoordinator(window: window, loginFactory: loginFactory)
+        mainCoordinator = MainCoordinator(window: window)
         mainCoordinator?.start()
         
     }

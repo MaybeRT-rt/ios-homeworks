@@ -58,7 +58,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     private lazy var statusTextField: UITextField = {
         var myTextField = UITextField()
         myTextField.placeholder = "Waiting for something"
-        myTextField.borderStyle = UITextField.BorderStyle.none
+        myTextField.borderStyle = .roundedRect
         myTextField.layer.backgroundColor = UIColor.white.cgColor
         myTextField.layer.borderWidth = 1
         myTextField.layer.borderColor = UIColor.black.cgColor

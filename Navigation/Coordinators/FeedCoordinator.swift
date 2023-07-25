@@ -7,20 +7,22 @@
 
 import UIKit
 
-class FeedCoordinator {
-    
-    let navigationController: UIViewController
+final class FeedCoordinator: Coordinator {
+    var childCoordinators: [Coordinator] = []
+    let navigationController: UINavigationController
+    let feed = FeedViewModel()
     
     init() {
-        let feedVC = FeedViewController()
-        let viewModel = FeedViewModel()
-        feedVC.title = "Feed"
-        feedVC.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "newspaper.fill"), tag: 0)
+        let feedVC = FeedViewController(viewModelFeed: feed)
         
         navigationController = UINavigationController(rootViewController: feedVC)
     }
     
     func start() {
         
+        let feedVC = FeedViewController(viewModelFeed: feed)
+        feedVC.title = "Feed"
+        
+        navigationController.setViewControllers([feedVC], animated: false)
     }
 }

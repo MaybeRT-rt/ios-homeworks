@@ -7,30 +7,46 @@
 
 import UIKit
 
-final class MainCoordinator {
+final class MainCoordinator: Coordinator {
+    var childCoordinators: [Coordinator] = []
+    var navigationController: UINavigationController
+    
     private let window: UIWindow
-    private let loginFactory: LoginFactory?
-    var tabBarConroller: UITabBarController?
-    var profileCoordinator = ProfileCoordinator()
-    var feedCoordinator = FeedCoordinator()
+    var tabBarController = UITabBarController()
     
-    
-    init(window: UIWindow, loginFactory: LoginFactory?) {
+    init(window: UIWindow) {
         self.window = window
-        self.loginFactory = loginFactory
+        navigationController = UINavigationController()
+        tabBarController.viewControllers = [navigationController]
     }
     
     func start() {
-        tabBarConroller = UITabBarController()
-        window.rootViewController = tabBarConroller
-        window.makeKeyAndVisible()
-        
-        tabBarConroller?.viewControllers = [feedCoordinator.navigationController, profileCoordinator.navigationController]
+        let profileCoordinator = ProfileCoordinator()
+        let feedCoordinator = FeedCoordinator()
+        // var tabBarController = UITabBarController()
         
         feedCoordinator.start()
         profileCoordinator.start()
+        
+        let profileTabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+        let feedTabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "list.bullet"), tag: 0)
+        
+        feedCoordinator.navigationController.tabBarItem = feedTabBarItem
+        profileCoordinator.navigationController.tabBarItem = profileTabBarItem
+        
+        
+        tabBarController.viewControllers = [feedCoordinator.navigationController, profileCoordinator.navigationController]
+        
+        window.rootViewController = tabBarController
+        window.makeKeyAndVisible()
+        
+        addChildCoordinator(profileCoordinator)
+        addChildCoordinator(feedCoordinator)
     }
     
+    func addChildCoordinator(_ coordinator: Coordinator) {
+        childCoordinators.append(coordinator)
+    }
 }
 
 

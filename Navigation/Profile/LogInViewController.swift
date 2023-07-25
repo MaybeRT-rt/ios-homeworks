@@ -16,6 +16,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private var currentUser: User?
     
+    weak var coordinator: ProfileCoordinator?
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -66,7 +68,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     private lazy var loginTextField: UITextField = {
         var loginTF = UITextField()
         loginTF.placeholder = "Email or phone"
-        loginTF.borderStyle = UITextField.BorderStyle.none
+        loginTF.borderStyle = .roundedRect
         loginTF.layer.backgroundColor = UIColor.systemGray6.cgColor
         loginTF.layer.borderColor = UIColor.lightGray.cgColor
         loginTF.layer.borderWidth = 0.5
@@ -85,7 +87,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     private lazy var passTextField: UITextField = {
         var passTF = UITextField()
         passTF.placeholder = "Password"
-        passTF.borderStyle = UITextField.BorderStyle.none
+        passTF.borderStyle = .roundedRect
         passTF.layer.backgroundColor = UIColor.systemGray6.cgColor
         passTF.layer.borderColor = UIColor.lightGray.cgColor
         passTF.layer.borderWidth = 0.5
@@ -206,19 +208,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
         
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(self.willShowKeyboard(_:)),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
+        notificationCenter.addObserver(self, selector: #selector(self.willShowKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(self.willHideKeyboard(_:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
+        notificationCenter.addObserver(self, selector: #selector(self.willHideKeyboard(_:)),
+            name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func removeKeyboardObservers() {
@@ -278,6 +271,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 #endif
         
         if isValid {
+            
+            if let coordinator = coordinator, let user = currentUser {
+                coordinator.showProfile(for: user)
+            }
             let user = userService.getUser(login: login)
             currentUser = user
             let profileViewModel = ProfileViewModel()

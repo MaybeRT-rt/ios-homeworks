@@ -7,25 +7,26 @@
 
 import UIKit
 
-class ProfileCoordinator {
-    
-    let navigationController: UIViewController
+final class ProfileCoordinator: Coordinator {
+    var childCoordinators: [Coordinator] = []
+    let navigationController: UINavigationController
     let profileVM = ProfileViewModel()
-    
+
     init() {
+        navigationController = UINavigationController()
+    }
+
+    func start() {
         let loginFactory: LoginFactory = MyLoginFactory()
         let loginVC = LogInViewController()
         loginVC.loginDelegate = loginFactory.makeLoginInspector()
-        
+        loginVC.coordinator = self
+        navigationController.setViewControllers([loginVC], animated: false)
+    }
+
+    func showProfile(for user: User) {
         let profileVC = ProfileViewController(viewModel: profileVM)
-        profileVC.title = "Profile"
-        profileVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
-        
-        navigationController = UINavigationController(rootViewController: profileVC)
+        profileVC.user = user
+        navigationController.pushViewController(profileVC, animated: true)
     }
-    
-    func start() {
-        
-    }
-    
 }

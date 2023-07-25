@@ -10,10 +10,19 @@ import StorageService
 
 class FeedViewController: UIViewController {
     
-    private var viewModelFeed: FeedViewModel!
+    private var viewModelFeed: FeedViewModel
     
     let containerView = UIView()
     
+    
+    init(viewModelFeed: FeedViewModel) {
+        self.viewModelFeed = viewModelFeed
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     //MARK: - StackView
     
     private let stackView: UIStackView = {
@@ -39,7 +48,7 @@ class FeedViewController: UIViewController {
         }
     
     private lazy var buttonCheck = CustomButton(title: "Проверить", titleColor: .white) { [weak self] in
-        self?.viewModelFeed?.checkButtonTapped(word: self?.textField.text ?? "")
+        self?.viewModelFeed.checkButtonTapped(word: self?.textField.text ?? "")
         }
     
     private lazy var textField: UITextField = {
