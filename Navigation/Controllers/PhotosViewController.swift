@@ -76,23 +76,22 @@ class PhotosViewController: UIViewController {
     // .default - 0.98 секунды
     
     private func loadingImagesInGallery() {
-        self.photosCollectionView.reloadData()
         
-        var sourceImages = [UIImage]()
+        var images = [UIImage]()
         for image in gallery {
-            sourceImages.append(image)
+            images.append(image)
         }
         
         let filters: ColorFilter = .posterize
         
         let start = DispatchTime.now()
         
-        imageProcessor.processImagesOnThread(sourceImages: sourceImages, filter: filters, qos: .utility, completion: { processedImages in
+        imageProcessor.processImagesOnThread(sourceImages: images, filter: filters, qos: .utility, completion: { processedImages in
             
             DispatchQueue.main.async {
                 self.gallery.removeAll()
-                for processedImage in processedImages {
-                    guard let processedImage = processedImage else { continue }
+                for processImage in processedImages {
+                    guard let processedImage = processImage else { continue }
                     
                     self.gallery.append(UIImage(cgImage: processedImage))
                 }
