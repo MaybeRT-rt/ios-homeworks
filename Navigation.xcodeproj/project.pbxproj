@@ -31,7 +31,6 @@
 		4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680C629DF0F3F007070FD /* InfoViewController.swift */; };
 		4A98084A2A39ADD600DA0478 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9808492A39ADD600DA0478 /* User.swift */; };
 		4A98084F2A39B0C100DA0478 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */; };
-		4A9808522A39D0F100DA0478 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9808512A39D0F100DA0478 /* Toast */; };
 		4A9808542A39D52B00DA0478 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9808532A39D52B00DA0478 /* TestUserService.swift */; };
 		4A98086D2A41C2BA00DA0478 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98086C2A41C2BA00DA0478 /* Checker.swift */; };
 		4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B884A2A0502C700923D9A /* PhotoGallery.swift */; };
@@ -132,7 +131,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9E94162A740A9A00E9BDB9 /* iOSIntPackage in Frameworks */,
-				4A9808522A39D0F100DA0478 /* Toast in Frameworks */,
 				4A60BAF72A30F1F10029FD17 /* StorageService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,7 +321,6 @@
 			);
 			name = Navigation;
 			packageProductDependencies = (
-				4A9808512A39D0F100DA0478 /* Toast */,
 				4A9E94152A740A9A00E9BDB9 /* iOSIntPackage */,
 			);
 			productName = Navigation;
@@ -362,7 +359,6 @@
 			);
 			mainGroup = 4A76809A29DEACE3007070FD;
 			packageReferences = (
-				4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				4A9E94142A740A9A00E9BDB9 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 			);
 			productRefGroup = 4A7680A429DEACE3007070FD /* Products */;
@@ -797,14 +793,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scalessec/Toast-Swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 		4A9E94142A740A9A00E9BDB9 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TrueMax/iOSIntPackage/";
@@ -816,11 +804,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4A9808512A39D0F100DA0478 /* Toast */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4A9808502A39D0F100DA0478 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
-			productName = Toast;
-		};
 		4A9E94152A740A9A00E9BDB9 /* iOSIntPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4A9E94142A740A9A00E9BDB9 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
