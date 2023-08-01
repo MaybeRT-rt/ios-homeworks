@@ -221,8 +221,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             buttonBruteForce.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             buttonBruteForce.heightAnchor.constraint(equalToConstant: 50),
             
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.topAnchor.constraint(equalTo: buttonBruteForce.bottomAnchor, constant: 100),
+            activityIndicator.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 15),
+            activityIndicator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
@@ -292,10 +292,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        buttonBruteForce.isEnabled = false
+        
         activityIndicator.startAnimating()
         DispatchQueue.global().async { [weak self] in
             self?.pwdBruteForce.bruteForce(passwordToCrack: pwdCheck) { [weak self] pwdCheck in
                 DispatchQueue.main.async {
+                    self?.buttonBruteForce.isEnabled = true
                     self?.activityIndicator.stopAnimating()
                     self?.passTextField.isSecureTextEntry = false
                     self?.passTextField.text = pwdCheck
