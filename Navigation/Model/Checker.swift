@@ -16,7 +16,7 @@ class Checker {
     
     private init() {
         login = "adm"
-        password = "qwerty"
+        password = "a123"
     }
     
     func check(login: String, password: String) -> Bool {

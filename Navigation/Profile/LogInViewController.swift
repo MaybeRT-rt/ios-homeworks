@@ -16,6 +16,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private var currentUser: User?
     
+    private let pwdBruteForce = PasswordBruteForce()
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -108,6 +110,21 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             }
             return buttonLog
     }()
+    
+    private lazy var buttonBruteForce: CustomButton = {
+        let buttonLog = CustomButton(title: "BruteForce", titleColor: .white) { [weak self] in
+                self?.bruteforcePassword()
+            }
+            return buttonLog
+    }()
+    
+    private var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        
+        return indicator
+    }()
    
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -150,6 +167,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         contentView.addSubview(buttonLogin)
         scrollView.addSubview(contentView)
         scrollView.addSubview(stackView)
+        scrollView.addSubview(buttonBruteForce)
+        scrollView.addSubview(activityIndicator)
         view.addSubview(scrollView)
         
     }
@@ -194,6 +213,14 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             buttonLogin.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             buttonLogin.heightAnchor.constraint(equalToConstant: 50),
             buttonLogin.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            buttonBruteForce.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor, constant: 16),
+            buttonBruteForce.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            buttonBruteForce.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            buttonBruteForce.heightAnchor.constraint(equalToConstant: 50),
+            
+            activityIndicator.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 15),
+            activityIndicator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
@@ -246,7 +273,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private func setupDefaultValues() {
         let defaultLogin = "adm"
-        let defaultPassword = "qwerty"
+        let defaultPassword = "a123"
         
         if loginTextField.text?.isEmpty ?? true {
             loginTextField.text = defaultLogin
@@ -254,6 +281,27 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
         if passTextField.text?.isEmpty ?? true {
             passTextField.text = defaultPassword
+        }
+    }
+
+    @objc private func bruteforcePassword() {
+        guard let pwdCheck = passTextField.text, !pwdCheck.isEmpty else {
+            self.view.makeToast("The password field is empty")
+            return
+        }
+        
+        buttonBruteForce.isEnabled = false
+        
+        activityIndicator.startAnimating()
+        DispatchQueue.global().async { [weak self] in
+            self?.pwdBruteForce.bruteForce(passwordToCrack: pwdCheck) { [weak self] pwdCheck in
+                DispatchQueue.main.async {
+                    self?.buttonBruteForce.isEnabled = true
+                    self?.activityIndicator.stopAnimating()
+                    self?.passTextField.isSecureTextEntry = false
+                    self?.passTextField.text = pwdCheck
+                }
+            }
         }
     }
     
