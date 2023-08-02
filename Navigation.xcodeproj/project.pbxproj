@@ -39,6 +39,7 @@
 		4A9E94162A740A9A00E9BDB9 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9E94152A740A9A00E9BDB9 /* iOSIntPackage */; };
 		4A9E94292A77025C00E9BDB9 /* PasswordBruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E94282A77025C00E9BDB9 /* PasswordBruteForce.swift */; };
 		4A9E942C2A7712A900E9BDB9 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9E942B2A7712A900E9BDB9 /* Toast */; };
+		4A9E94332A79B32E00E9BDB9 /* PhotosViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E94322A79B32E00E9BDB9 /* PhotosViewerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		4A9B88502A06CD8500923D9A /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		4A9B88522A07FF3600923D9A /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		4A9E94282A77025C00E9BDB9 /* PasswordBruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordBruteForce.swift; sourceTree = "<group>"; };
+		4A9E94322A79B32E00E9BDB9 /* PhotosViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +235,7 @@
 				4A7680BE29DEC53C007070FD /* PostViewController.swift */,
 				4A7680C629DF0F3F007070FD /* InfoViewController.swift */,
 				4A9B88502A06CD8500923D9A /* PhotosViewController.swift */,
+				4A9E94322A79B32E00E9BDB9 /* PhotosViewerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				4A7680BD29DEB882007070FD /* ProfileViewController.swift in Sources */,
 				4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */,
 				4A22B3182A602C6900859F68 /* FeedModel.swift in Sources */,
+				4A9E94332A79B32E00E9BDB9 /* PhotosViewerViewController.swift in Sources */,
 				4A98084F2A39B0C100DA0478 /* CurrentUserService.swift in Sources */,
 				4A98086D2A41C2BA00DA0478 /* Checker.swift in Sources */,
 				4A7680A929DEACE3007070FD /* SceneDelegate.swift in Sources */,
