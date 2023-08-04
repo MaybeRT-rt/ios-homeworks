@@ -108,8 +108,10 @@ class PhotosViewerViewController: UIViewController {
         if timer == nil {
             isSlideshowRunning = true
             slideshowButton.setTitle("Остановить", for: .normal)
-            timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(showNextPhoto), userInfo: nil, repeats: true)
-            RunLoop.current.add(timer!, forMode: .common)
+            
+            timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
+                self?.showNextPhoto()
+            }
         }
     }
     
