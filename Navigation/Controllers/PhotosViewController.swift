@@ -39,7 +39,6 @@ class PhotosViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
         setupView()
         setupConstraints()
-        
         loadingImagesInGallery()
     }
     
@@ -120,6 +119,13 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         cell.configCellCollection(photo: photo)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let photoViewerVC = PhotosViewerViewController()
+        photoViewerVC.photos = gallery
+        photoViewerVC.currentIndex = indexPath.item
+        present(photoViewerVC, animated: true, completion: nil)
+    }
 }
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
@@ -132,4 +138,6 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: widthItem, height: widthItem * 1)
     }
 }
+
+
 
