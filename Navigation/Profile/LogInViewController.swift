@@ -20,6 +20,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private let pwdBruteForce = PasswordBruteForce()
     
+    private lazy var loginManager = LoginManager()
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -108,16 +110,16 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var buttonLogin: CustomButton = {
         let buttonLog = CustomButton(title: "Log In", titleColor: .white) { [weak self] in
-                self?.pressButtonLogin()
-            }
-            return buttonLog
+            self?.pressButtonLogin()
+        }
+        return buttonLog
     }()
     
     private lazy var buttonBruteForce: CustomButton = {
         let buttonLog = CustomButton(title: "BruteForce", titleColor: .white) { [weak self] in
-                self?.bruteforcePassword()
-            }
-            return buttonLog
+            self?.bruteforcePassword()
+        }
+        return buttonLog
     }()
     
     private var activityIndicator: UIActivityIndicatorView = {
@@ -127,7 +129,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
         return indicator
     }()
-   
+    
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -285,7 +287,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             passTextField.text = defaultPassword
         }
     }
-
+    
     @objc private func bruteforcePassword() {
         guard let pwdCheck = passTextField.text, !pwdCheck.isEmpty else {
             self.view.makeToast("The password field is empty")
@@ -302,41 +304,66 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
                     self?.activityIndicator.stopAnimating()
                     self?.passTextField.isSecureTextEntry = false
                     self?.passTextField.text = pwdCheck
+                    
                 }
             }
         }
     }
     
+    
     @objc private func pressButtonLogin() {
-        
         guard let delegate = loginDelegate else {
             return
         }
         
-        guard let login = loginTextField.text, !login.isEmpty, let password = passTextField.text, !password.isEmpty  else {
-            setupDefaultValues()
-            //self.view.makeToast("The login field is empty")
-            return
+        let login = loginTextField.text ?? "adm"
+        let password = passTextField.text ?? "a123"
+        setupDefaultValues()
+        self.passTextField.isSecureTextEntry = true
+        
+        let userService: UserService = TestUserService(user: User(login: "adm", fullName: "Test User", avatar: UIImage(named: "7.png") ?? UIImage(named: "avatar.png")!, status: "Testing"))
+        
+        LoginManager.login(
+            withLogin: login,
+            password: password,
+            delegate: delegate,
+            navigationController: self.navigationController,
+            userService: userService
+        ) { [weak self] result in
+            switch result {
+            case .success(let user):
+                DispatchQueue.main.async {
+                    let profileVC = ProfileViewController()
+                    profileVC.user = user
+                    self?.navigationController?.pushViewController(profileVC, animated: true)
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.showErrorAlert(error: error)
+                }
+            }
+        }
+    }
+    
+    private func showErrorAlert(error: AppError) {
+        var errorMessage = ""
+        switch error {
+        case .loginFailed:
+            errorMessage = "Неверный логин или пароль"
+        case .emptyLoginField:
+            errorMessage = "Поле логина не заполнено"
+        case .emptyPasswordField:
+            errorMessage = "Поле пароля не заполнено"
+        case .bruteForceError:
+            errorMessage = "Произошла ошибка перебора пароля"
+        case .userServiceError(let message):
+            errorMessage = "Ошибка сервиса пользователя: \(message)"
+        case .unknownError:
+            errorMessage = "Произошла неизвестная ошибка"
         }
         
-        let isValid = delegate.check(login: login, password: password)
-        
-#if DEBUG
-        let userService: UserService = TestUserService(user: User(login: "test", fullName: "Test User", avatar: UIImage(named: "7.png") ?? UIImage(named: "avatar.png")!, status: "Testing"))
-#else
-        let userService: UserService = CurrentUserService(user: User(login: "user", fullName: "No name", avatar: UIImage(named: "bich2.png") ?? UIImage(named: "1.png")!, status: "Online"))
-#endif
-        
-        if isValid {
-            let user = userService.getUser(login: login)
-            currentUser = user
-            let profileVC = ProfileViewController()
-            profileVC.user = user
-            navigationController?.pushViewController(profileVC, animated: true)
-        } else {
-            let alert = UIAlertController(title: "Error", message: "Incorrect login or password", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
+        let alert = UIAlertController(title: "Ошибка", message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
