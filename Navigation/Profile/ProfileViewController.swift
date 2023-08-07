@@ -10,7 +10,7 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     
-    private var viewModelProfile: ProfileViewModel
+   private var viewModelProfile: ProfileViewModel
 
     var user: User?
     

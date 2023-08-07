@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
     
@@ -331,7 +332,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             switch result {
             case .success(let user):
                 DispatchQueue.main.async {
-                    let profileVC = ProfileViewController()
+                    let profileVC = ProfileViewController(viewModel: ProfileViewModel())
                     profileVC.user = user
                     self?.navigationController?.pushViewController(profileVC, animated: true)
                 }
