@@ -45,8 +45,8 @@
 		4AFCCD922A913C71000A8F45 /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCD912A913C71000A8F45 /* MusicPlayerViewController.swift */; };
 		4AFCCD9A2A914320000A8F45 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4AFCCD992A914320000A8F45 /* Toast */; };
 		4AFCCD9D2A914374000A8F45 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4AFCCD9C2A914374000A8F45 /* iOSIntPackage */; };
-		4AFCCE012A916944000A8F45 /* Track in Resources */ = {isa = PBXBuildFile; fileRef = 4AFCCE002A916944000A8F45 /* Track */; };
 		4AFCCE032A917145000A8F45 /* MusicPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCE022A917145000A8F45 /* MusicPlayerModel.swift */; };
+		4AFCCE042A917376000A8F45 /* Track in Resources */ = {isa = PBXBuildFile; fileRef = 4AFCCE002A916944000A8F45 /* Track */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -455,7 +455,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AFCCE012A916944000A8F45 /* Track in Resources */,
+				4AFCCE042A917376000A8F45 /* Track in Resources */,
 				4A7680B329DEACE4007070FD /* LaunchScreen.storyboard in Resources */,
 				4A7680B029DEACE4007070FD /* Assets.xcassets in Resources */,
 			);
