@@ -9,6 +9,7 @@ import Foundation
 import StorageService
 
 class ProfileViewModel {
+    
     var reloadData: (() -> Void)?
     var user: User?
     var data: [Post] = [] {
@@ -26,14 +27,16 @@ class ProfileViewModel {
     }
     
     func numberOfSections() -> Int {
-        return 2
+        return 3
     }
     
     func numberOfRows(in section: Int) -> Int {
         if section == 0 {
-            return 1
+            return 1 // Секция с фотографиями или другой информацией
         } else if section == 1 {
-            return data.count
+            return 1
+        } else if section == 2 {
+            return data.count // Секция с постами
         } else {
             return 0
         }
@@ -46,3 +49,4 @@ class ProfileViewModel {
         return data[index]
     }
 }
+

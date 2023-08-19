@@ -11,6 +11,7 @@ import StorageService
 class ProfileViewController: UIViewController {
     
     let viewModelProfile: ProfileViewModel
+    private var audioTrackURLs: [URL] = []
 
     var user: User?
     
@@ -25,12 +26,14 @@ class ProfileViewController: UIViewController {
     private enum CellReuseID: String {
         case base = "PostTableViewCell_ReuseID"
         case photos = "PhotoTableViewCell_ReuseID"
+        case music = "TrackTableViewCell_ReuseID"
         case headerID = "profileHeaderView"
     }
     
     init(viewModel: ProfileViewModel) {
         self.viewModelProfile = viewModel
         super.init(nibName: nil, bundle: nil)
+       // audioTrackURLs = viewModel.musicViewModel.audioTracks
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -73,12 +76,13 @@ class ProfileViewController: UIViewController {
     private func tuneTableView() {
         profileTableView.register(ProfileTableHeaderView.self, forHeaderFooterViewReuseIdentifier: CellReuseID.headerID.rawValue)
         profileTableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: CellReuseID.photos.rawValue)
+        profileTableView.register(MyMusicCell.self, forCellReuseIdentifier: CellReuseID.music.rawValue)
         profileTableView.register(PostsTableViewCell.self, forCellReuseIdentifier: CellReuseID.base.rawValue)
         
         profileTableView.dataSource = self
         profileTableView.delegate = self
         
-        profileTableView.rowHeight = UITableView.automaticDimension
+        //profileTableView.rowHeight = UITableView.automaticDimension
         profileTableView.estimatedRowHeight = 1000
         
     }
@@ -108,15 +112,18 @@ extension ProfileViewController: UITableViewDataSource {
             let cell: PhotosTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "PhotoTableViewCell_ReuseID", for: indexPath)) as! PhotosTableViewCell
             return cell
         case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseID.music.rawValue, for: indexPath) as! MyMusicCell
+            return cell
+        case 2:
             let cell: PostsTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell_ReuseID", for: indexPath)) as! PostsTableViewCell
             cell.selectionStyle = .none
             guard let model = viewModelProfile.post(at: indexPath.row) else { return UITableViewCell() }
             cell.update(model)
             return cell
-            
         default:
             return UITableViewCell()
         }
+        
     }
 }
 
@@ -140,14 +147,30 @@ extension ProfileViewController: UITableViewDelegate {
             return nil
         }
     }
-
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 {
+            return 50
+        } else {
+            return UITableView.automaticDimension
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if let cell = tableView.cellForRow(at: indexPath) as? PhotosTableViewCell, cell.reuseIdentifier == "PhotoTableViewCell_ReuseID" {
-            let galleryViewController = PhotosViewController()
-            
-            guard let navigationController = self.navigationController else { return }
-            navigationController.pushViewController(galleryViewController, animated: true)
+        switch indexPath.section {
+        case 0:
+            if let cell = tableView.cellForRow(at: indexPath) as? PhotosTableViewCell, cell.reuseIdentifier == "PhotoTableViewCell_ReuseID" {
+                let galleryViewController = PhotosViewController()
+                
+                navigationController?.pushViewController(galleryViewController, animated: true)
+            }
+        case 1:
+            if let cell = tableView.cellForRow(at: indexPath) as? MyMusicCell, cell.reuseIdentifier == "TrackTableViewCell_ReuseID" {
+                let musicPlayerViewController = MusicPlayerViewController()
+                navigationController?.pushViewController(musicPlayerViewController, animated: true)
+            }
+        default:
+            break
         }
     }
 }

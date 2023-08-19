@@ -12,7 +12,7 @@ class PostsTableViewCell: UITableViewCell {
     
     private lazy var authtorLabel: UILabel = {
         var authorLabel = UILabel()
-        authorLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        authorLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         authorLabel.numberOfLines = 2
         authorLabel.textColor = .black
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
