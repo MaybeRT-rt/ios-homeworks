@@ -46,6 +46,7 @@
 		4AFCCD9A2A914320000A8F45 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4AFCCD992A914320000A8F45 /* Toast */; };
 		4AFCCD9D2A914374000A8F45 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4AFCCD9C2A914374000A8F45 /* iOSIntPackage */; };
 		4AFCCE012A916944000A8F45 /* Track in Resources */ = {isa = PBXBuildFile; fileRef = 4AFCCE002A916944000A8F45 /* Track */; };
+		4AFCCE032A917145000A8F45 /* MusicPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCE022A917145000A8F45 /* MusicPlayerModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,7 @@
 		4AFCCD8B2A9139DE000A8F45 /* MyMusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMusicCell.swift; sourceTree = "<group>"; };
 		4AFCCD912A913C71000A8F45 /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
 		4AFCCE002A916944000A8F45 /* Track */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Track; sourceTree = "<group>"; };
+		4AFCCE022A917145000A8F45 /* MusicPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,6 +311,7 @@
 			children = (
 				4AFCCD8B2A9139DE000A8F45 /* MyMusicCell.swift */,
 				4AFCCD912A913C71000A8F45 /* MusicPlayerViewController.swift */,
+				4AFCCE022A917145000A8F45 /* MusicPlayerModel.swift */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				4A98086D2A41C2BA00DA0478 /* Checker.swift in Sources */,
 				4A7680A929DEACE3007070FD /* SceneDelegate.swift in Sources */,
 				4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */,
+				4AFCCE032A917145000A8F45 /* MusicPlayerModel.swift in Sources */,
 				4ABEB0CF2A80062B000B9B46 /* AppError.swift in Sources */,
 				4A98084A2A39ADD600DA0478 /* User.swift in Sources */,
 				4A66E59E29FA7AA2001055DE /* PostsTableViewCell.swift in Sources */,

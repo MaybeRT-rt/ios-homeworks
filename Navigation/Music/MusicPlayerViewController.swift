@@ -9,10 +9,8 @@ import UIKit
 import AVFoundation
 
 class MusicPlayerViewController: UIViewController {
-    
-    var player: AVAudioPlayer?
-    var currentTrackIndex = 0
-    var trackFiles: [URL] = []
+
+    var model = MusicPlayerModel()
     
     private lazy var playPauseButton: UIImageView = {
         let button = UIImageView()
@@ -66,7 +64,8 @@ class MusicPlayerViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUI()
-        loadAudioTracks()
+        model.loadAudioTracks()
+        model.loadAudioTrack(index: model.currentTrackIndex)
     }
     
     private func setupUI() {
@@ -103,38 +102,9 @@ class MusicPlayerViewController: UIViewController {
         ])
     }
     
-    private func loadAudioTracks() {
-            if let trackDirectoryURL = Bundle.main.url(forResource: "Track", withExtension: nil) {
-                do {
-                    trackFiles = try FileManager.default.contentsOfDirectory(at: trackDirectoryURL, includingPropertiesForKeys: nil, options: [])
-                    
-                    if trackFiles.isEmpty {
-                        print("No audio tracks found in the directory.")
-                    } else {
-                        loadAudioTrack(index: currentTrackIndex)
-                    }
-                } catch {
-                    print("Error reading track directory:", error)
-                }
-            }
-        }
-        
-        private func loadAudioTrack(index: Int) {
-            let fileURL = trackFiles[index]
-            
-            do {
-                player = try AVAudioPlayer(contentsOf: fileURL)
-                player?.prepareToPlay()
-                
-                let trackName = fileURL.deletingPathExtension().lastPathComponent
-                trackLabel.text = trackName
-            } catch {
-                print("Error creating AVAudioPlayer:", error)
-            }
-        }
-    
     @objc func playPauseButtonTapped(_ sender: Any) {
-        if let player = player {
+        trackLabel.text = model.trackName
+        if let player = model.player {
             if player.isPlaying {
                 player.pause()
                 playPauseButton.image = UIImage(systemName: "play.circle.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
@@ -146,7 +116,7 @@ class MusicPlayerViewController: UIViewController {
     }
     
     @objc func stopButtonTapped(_ sender: Any) {
-        if let player = player {
+        if let player = model.player {
             player.stop()
             player.currentTime = 0
             playPauseButton.image = UIImage(systemName: "play.circle.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
@@ -154,18 +124,20 @@ class MusicPlayerViewController: UIViewController {
     }
     
     @objc private func forwardButtonTapped() {
-        if currentTrackIndex < trackFiles.count - 1 {
-            currentTrackIndex += 1
-            loadAudioTrack(index: currentTrackIndex)
-            player?.play()
+        if model.currentTrackIndex < model.trackFiles.count - 1 {
+            model.currentTrackIndex += 1
+            model.loadAudioTrack(index: model.currentTrackIndex)
+            trackLabel.text = model.trackName
+            model.player?.play()
         }
     }
     
     @objc private func backwardButtonTapped() {
-        if currentTrackIndex > 0 {
-            currentTrackIndex -= 1
-            loadAudioTrack(index: currentTrackIndex)
-            player?.play()
+        if model.currentTrackIndex > 0 {
+            model.currentTrackIndex -= 1
+            model.loadAudioTrack(index: model.currentTrackIndex)
+            trackLabel.text = model.trackName
+            model.player?.play()
         }
     }
 }
