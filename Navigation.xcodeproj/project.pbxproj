@@ -10,7 +10,6 @@
 		4A22B3162A519D5B00859F68 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22B3152A519D5B00859F68 /* CustomButton.swift */; };
 		4A22B3182A602C6900859F68 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22B3172A602C6900859F68 /* FeedModel.swift */; };
 		4A22B31B2A64050800859F68 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22B31A2A64050800859F68 /* FeedViewModel.swift */; };
-		4A22B31F2A64078700859F68 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4A22B31E2A64078700859F68 /* iOSIntPackage */; };
 		4A22B3282A647A6D00859F68 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22B3272A647A6D00859F68 /* ProfileViewModel.swift */; };
 		4A2C95D329E5B1DD006E82F8 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C95D229E5B1DD006E82F8 /* ProfileHeaderView.swift */; };
 		4A51C41629F437CB00767386 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A51C41529F437CB00767386 /* LogInViewController.swift */; };
@@ -18,7 +17,6 @@
 		4A60BAEC2A30F1F10029FD17 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A60BAE22A30F1F10029FD17 /* StorageService.framework */; };
 		4A60BAF32A30F1F10029FD17 /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60BAF22A30F1F10029FD17 /* StorageServiceTests.swift */; };
 		4A60BAF42A30F1F10029FD17 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A60BAE42A30F1F10029FD17 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4A60BAF72A30F1F10029FD17 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A60BAE22A30F1F10029FD17 /* StorageService.framework */; };
 		4A60BAF82A30F1F10029FD17 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A60BAE22A30F1F10029FD17 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A60BB002A30F1FF0029FD17 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7680C129DEDAC8007070FD /* Post.swift */; };
 		4A66E59E29FA7AA2001055DE /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A66E59D29FA7AA2001055DE /* PostsTableViewCell.swift */; };
@@ -39,12 +37,16 @@
 		4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B884A2A0502C700923D9A /* PhotoGallery.swift */; };
 		4A9B88512A06CD8500923D9A /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88502A06CD8500923D9A /* PhotosViewController.swift */; };
 		4A9B88532A07FF3600923D9A /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B88522A07FF3600923D9A /* PhotosCollectionViewCell.swift */; };
-		4A9E94162A740A9A00E9BDB9 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9E94152A740A9A00E9BDB9 /* iOSIntPackage */; };
 		4A9E94292A77025C00E9BDB9 /* PasswordBruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E94282A77025C00E9BDB9 /* PasswordBruteForce.swift */; };
-		4A9E942C2A7712A900E9BDB9 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9E942B2A7712A900E9BDB9 /* Toast */; };
 		4A9E94332A79B32E00E9BDB9 /* PhotosViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E94322A79B32E00E9BDB9 /* PhotosViewerViewController.swift */; };
 		4ABEB0CF2A80062B000B9B46 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABEB0CE2A80062B000B9B46 /* AppError.swift */; };
 		4ABEB0D12A80091B000B9B46 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABEB0D02A80091B000B9B46 /* LoginManager.swift */; };
+		4AFCCD8C2A9139DE000A8F45 /* MyMusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCD8B2A9139DE000A8F45 /* MyMusicCell.swift */; };
+		4AFCCD922A913C71000A8F45 /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCD912A913C71000A8F45 /* MusicPlayerViewController.swift */; };
+		4AFCCD9A2A914320000A8F45 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4AFCCD992A914320000A8F45 /* Toast */; };
+		4AFCCD9D2A914374000A8F45 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4AFCCD9C2A914374000A8F45 /* iOSIntPackage */; };
+		4AFCCE032A917145000A8F45 /* MusicPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCE022A917145000A8F45 /* MusicPlayerModel.swift */; };
+		4AFCCE062A917422000A8F45 /* Track in Resources */ = {isa = PBXBuildFile; fileRef = 4AFCCE052A917422000A8F45 /* Track */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +124,10 @@
 		4A9E94322A79B32E00E9BDB9 /* PhotosViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewerViewController.swift; sourceTree = "<group>"; };
 		4ABEB0CE2A80062B000B9B46 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		4ABEB0D02A80091B000B9B46 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		4AFCCD8B2A9139DE000A8F45 /* MyMusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMusicCell.swift; sourceTree = "<group>"; };
+		4AFCCD912A913C71000A8F45 /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
+		4AFCCE022A917145000A8F45 /* MusicPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerModel.swift; sourceTree = "<group>"; };
+		4AFCCE052A917422000A8F45 /* Track */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Track; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,9 +150,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
-				4A9E942C2A7712A900E9BDB9 /* Toast in Frameworks */,
-				4A9E94162A740A9A00E9BDB9 /* iOSIntPackage in Frameworks */,
+				4AFCCD9A2A914320000A8F45 /* Toast in Frameworks */,
+				4AFCCD9D2A914374000A8F45 /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,10 +178,10 @@
 		4A2C95D129E5B1A8006E82F8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				4A22B3272A647A6D00859F68 /* ProfileViewModel.swift */,
 				4A2C95D229E5B1DD006E82F8 /* ProfileHeaderView.swift */,
 				4A7680BC29DEB882007070FD /* ProfileViewController.swift */,
 				4A51C41529F437CB00767386 /* LogInViewController.swift */,
-				4A22B3272A647A6D00859F68 /* ProfileViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 		4A76809A29DEACE3007070FD = {
 			isa = PBXGroup;
 			children = (
+				4AFCCE052A917422000A8F45 /* Track */,
 				4A7680A529DEACE3007070FD /* Navigation */,
 				4A60BAE32A30F1F10029FD17 /* StorageService */,
 				4A60BAF12A30F1F10029FD17 /* StorageServiceTests */,
@@ -241,6 +247,7 @@
 		4A7680A529DEACE3007070FD /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				4AFCCD592A8E24BB000A8F45 /* Music */,
 				4A22B3262A6415C500859F68 /* Components */,
 				4A22B3192A6404D200859F68 /* Feed */,
 				4A98084B2A39B07E00DA0478 /* Model */,
@@ -278,18 +285,15 @@
 		4A98084B2A39B07E00DA0478 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4ABEB0CD2A80060E000B9B46 /* AppError */,
 				4A9808492A39ADD600DA0478 /* User.swift */,
 				4ABEB0D02A80091B000B9B46 /* LoginManager.swift */,
 				4A98084E2A39B0C100DA0478 /* CurrentUserService.swift */,
 				4A9808532A39D52B00DA0478 /* TestUserService.swift */,
 				4A98086C2A41C2BA00DA0478 /* Checker.swift */,
 				4A22B3172A602C6900859F68 /* FeedModel.swift */,
-
 				4A9E94282A77025C00E9BDB9 /* PasswordBruteForce.swift */,
-
 				4A7680C329DEDF20007070FD /* Data */,
-
+				4ABEB0CD2A80060E000B9B46 /* AppError */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -300,6 +304,16 @@
 				4ABEB0CE2A80062B000B9B46 /* AppError.swift */,
 			);
 			path = AppError;
+			sourceTree = "<group>";
+		};
+		4AFCCD592A8E24BB000A8F45 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				4AFCCD8B2A9139DE000A8F45 /* MyMusicCell.swift */,
+				4AFCCD912A913C71000A8F45 /* MusicPlayerViewController.swift */,
+				4AFCCE022A917145000A8F45 /* MusicPlayerModel.swift */,
+			);
+			path = Music;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,9 +383,8 @@
 			);
 			name = Navigation;
 			packageProductDependencies = (
-
-				4A9E94152A740A9A00E9BDB9 /* iOSIntPackage */,
-				4A9E942B2A7712A900E9BDB9 /* Toast */,
+				4AFCCD992A914320000A8F45 /* Toast */,
+				4AFCCD9C2A914374000A8F45 /* iOSIntPackage */,
 			);
 			productName = Navigation;
 			productReference = 4A7680A329DEACE3007070FD /* Navigation.app */;
@@ -409,10 +422,8 @@
 			);
 			mainGroup = 4A76809A29DEACE3007070FD;
 			packageReferences = (
-
-				4A9E94142A740A9A00E9BDB9 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
-				4A9E942A2A7712A900E9BDB9 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
-
+				4AFCCD982A914320000A8F45 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				4AFCCD9B2A914374000A8F45 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 			);
 			productRefGroup = 4A7680A429DEACE3007070FD /* Products */;
 			projectDirPath = "";
@@ -444,6 +455,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AFCCE062A917422000A8F45 /* Track in Resources */,
 				4A7680B329DEACE4007070FD /* LaunchScreen.storyboard in Resources */,
 				4A7680B029DEACE4007070FD /* Assets.xcassets in Resources */,
 			);
@@ -481,23 +493,24 @@
 				4A7680BD29DEB882007070FD /* ProfileViewController.swift in Sources */,
 				4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */,
 				4A22B3182A602C6900859F68 /* FeedModel.swift in Sources */,
+				4AFCCD8C2A9139DE000A8F45 /* MyMusicCell.swift in Sources */,
 				4A9E94332A79B32E00E9BDB9 /* PhotosViewerViewController.swift in Sources */,
 				4A98084F2A39B0C100DA0478 /* CurrentUserService.swift in Sources */,
 				4A98086D2A41C2BA00DA0478 /* Checker.swift in Sources */,
 				4A7680A929DEACE3007070FD /* SceneDelegate.swift in Sources */,
 				4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */,
+				4AFCCE032A917145000A8F45 /* MusicPlayerModel.swift in Sources */,
 				4ABEB0CF2A80062B000B9B46 /* AppError.swift in Sources */,
 				4A98084A2A39ADD600DA0478 /* User.swift in Sources */,
 				4A66E59E29FA7AA2001055DE /* PostsTableViewCell.swift in Sources */,
 				4A22B31B2A64050800859F68 /* FeedViewModel.swift in Sources */,
+				4AFCCD922A913C71000A8F45 /* MusicPlayerViewController.swift in Sources */,
 				4A7680BF29DEC53C007070FD /* PostViewController.swift in Sources */,
 				4ABEB0D12A80091B000B9B46 /* LoginManager.swift in Sources */,
 				4A9B88532A07FF3600923D9A /* PhotosCollectionViewCell.swift in Sources */,
 				4A9808542A39D52B00DA0478 /* TestUserService.swift in Sources */,
-
 				4A9E94292A77025C00E9BDB9 /* PasswordBruteForce.swift in Sources */,
 				4A22B3282A647A6D00859F68 /* ProfileViewModel.swift in Sources */,
-
 				4A9B88512A06CD8500923D9A /* PhotosViewController.swift in Sources */,
 				4A66E5A029FA7C9C001055DE /* ProfileTableHeaderView.swift in Sources */,
 				4A2C95D329E5B1DD006E82F8 /* ProfileHeaderView.swift in Sources */,
@@ -758,6 +771,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7PUJF8P767;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -789,6 +803,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7PUJF8P767;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -854,17 +869,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-
-		4A9E94142A740A9A00E9BDB9 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/TrueMax/iOSIntPackage/";
-			requirement = {
-				kind = exactVersion;
-				version = 3.2.3;
-			};
-		};
-		4A9E942A2A7712A900E9BDB9 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
-
+		4AFCCD982A914320000A8F45 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scalessec/Toast-Swift";
 			requirement = {
@@ -872,20 +877,26 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		4AFCCD9B2A914374000A8F45 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage/";
+			requirement = {
+				branch = imagepublisher;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-
-		4A9E94152A740A9A00E9BDB9 /* iOSIntPackage */ = {
+		4AFCCD992A914320000A8F45 /* Toast */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4A9E94142A740A9A00E9BDB9 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
-			productName = iOSIntPackage;
-		};
-		4A9E942B2A7712A900E9BDB9 /* Toast */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4A9E942A2A7712A900E9BDB9 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			package = 4AFCCD982A914320000A8F45 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
-
+		};
+		4AFCCD9C2A914374000A8F45 /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4AFCCD9B2A914374000A8F45 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
