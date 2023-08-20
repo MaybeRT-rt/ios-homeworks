@@ -46,7 +46,7 @@
 		4AFCCD9A2A914320000A8F45 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4AFCCD992A914320000A8F45 /* Toast */; };
 		4AFCCD9D2A914374000A8F45 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4AFCCD9C2A914374000A8F45 /* iOSIntPackage */; };
 		4AFCCE032A917145000A8F45 /* MusicPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCE022A917145000A8F45 /* MusicPlayerModel.swift */; };
-		4AFCCE042A917376000A8F45 /* Track in Resources */ = {isa = PBXBuildFile; fileRef = 4AFCCE002A916944000A8F45 /* Track */; };
+		4AFCCE062A917422000A8F45 /* Track in Resources */ = {isa = PBXBuildFile; fileRef = 4AFCCE052A917422000A8F45 /* Track */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,8 +126,8 @@
 		4ABEB0D02A80091B000B9B46 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		4AFCCD8B2A9139DE000A8F45 /* MyMusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMusicCell.swift; sourceTree = "<group>"; };
 		4AFCCD912A913C71000A8F45 /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
-		4AFCCE002A916944000A8F45 /* Track */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Track; sourceTree = "<group>"; };
 		4AFCCE022A917145000A8F45 /* MusicPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerModel.swift; sourceTree = "<group>"; };
+		4AFCCE052A917422000A8F45 /* Track */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Track; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,7 +226,7 @@
 		4A76809A29DEACE3007070FD = {
 			isa = PBXGroup;
 			children = (
-				4AFCCE002A916944000A8F45 /* Track */,
+				4AFCCE052A917422000A8F45 /* Track */,
 				4A7680A529DEACE3007070FD /* Navigation */,
 				4A60BAE32A30F1F10029FD17 /* StorageService */,
 				4A60BAF12A30F1F10029FD17 /* StorageServiceTests */,
@@ -455,7 +455,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AFCCE042A917376000A8F45 /* Track in Resources */,
+				4AFCCE062A917422000A8F45 /* Track in Resources */,
 				4A7680B329DEACE4007070FD /* LaunchScreen.storyboard in Resources */,
 				4A7680B029DEACE4007070FD /* Assets.xcassets in Resources */,
 			);

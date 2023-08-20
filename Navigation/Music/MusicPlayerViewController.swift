@@ -68,6 +68,16 @@ class MusicPlayerViewController: UIViewController {
         model.loadAudioTrack(index: model.currentTrackIndex)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     private func setupUI() {
         view.addSubview(playPauseButton)
         view.addSubview(stopButton)
