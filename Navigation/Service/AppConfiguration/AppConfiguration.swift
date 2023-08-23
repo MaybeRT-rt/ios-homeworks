@@ -8,16 +8,16 @@
 import Foundation
 
 enum AppConfiguration {
-    case people, films, planet
+    case people, films, planets
     
     var url: URL {
         switch self{
         case .people:
-            return URL(string: "https://swapi.dev/api/peoples/7")!
+            return URL(string: "https://swapi.dev/api/peoples/3")!
         case .films:
-            return URL(string: "https://swapi.dev/api/films/10")!
-        case .planet:
-            return URL(string: "https://swapi.dev/api/planets/5")!
+            return URL(string: "https://swapi.dev/api/films/3")!
+        case .planets:
+            return URL(string: "https://swapi.dev/api/planets/7")!
         }
     }
 }
