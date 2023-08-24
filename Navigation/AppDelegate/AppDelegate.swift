@@ -11,6 +11,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        DispatchQueue.global().async {
+            
+            let randomConfiguration = [AppConfiguration.people, AppConfiguration.films, AppConfiguration.planets].randomElement()!
+            
+            NetworkService.request(for: randomConfiguration) { result in
+                switch result {
+                case .success(let response):
+                    print("Response:", response)
+                case .failure(let error):
+                    print("Error:", error)
+                }
+            }
+        }
+        
         return true
     }
 

@@ -11,20 +11,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     let loginFactory: LoginFactory = MyLoginFactory()
+    var appConfiguration: AppConfiguration?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
         guard let scene = (scene as? UIWindowScene) else { return }
         
-        let feedVC = FeedViewController()
-        let loginVC = LogInViewController()
+        let randomConfiguration = [AppConfiguration.people, AppConfiguration.planets, AppConfiguration.films].randomElement()
+        appConfiguration = randomConfiguration
+        
         let window = UIWindow(windowScene: scene)
-        
-        let loginViewController = LogInViewController()
-        loginViewController.loginDelegate = loginFactory.makeLoginInspector()
-        
-        let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [feedVC, loginVC]
-        
         window.rootViewController = createTBController()
         window.makeKeyAndVisible()
         
@@ -37,15 +33,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         feedVC.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "newspaper.fill"), tag: 0)
         
         return UINavigationController(rootViewController: feedVC)
-        
     }
     
     func logInProfile() -> UINavigationController {
-            let loginVC = LogInViewController()
-            loginVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
-            
-            return UINavigationController(rootViewController: loginVC)
-        }
+        let loginVC = LogInViewController()
+        loginVC.loginDelegate = loginFactory.makeLoginInspector()
+        loginVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+        
+        return UINavigationController(rootViewController: loginVC)
+    }
     
     func createTBController() -> UITabBarController {
         let tbController = UITabBarController()
