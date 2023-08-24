@@ -8,31 +8,34 @@
 import Foundation
 import UIKit
 //error code: -1009
+import Foundation
+import UIKit
+//error code: -1009
 struct NetworkService {
-    static func request(for configuration: AppConfiguration, completion: @escaping (Result<String, Error>) -> Void) {
-        let session = URLSession.shared
+    static func request(for configuration: AppConfigurations, completion: @escaping (Result<[String: Any], Error>) -> Void) {
+        let session = URLSession(configuration: .default)
+
         let task = session.dataTask(with: configuration.url) { data, response, error in
             if let error = error {
-                if let urlError = error as? URLError {
-                    if urlError.code == .notConnectedToInternet {
-                        print("No internet connection: \(urlError.localizedDescription)")
-                    } else {
-                        print("Network error: \(urlError.localizedDescription)")
-                    }
-                } else {
-                    print("Error: \(error.localizedDescription)")
-                }
+                completion(.failure(error))
+                return
             }
             
-            if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                print("Data:", dataString)
-                
-                if let httpResponse = response as? HTTPURLResponse {
-                    print("Status Code:", httpResponse.statusCode)
-                    print("Headers:", httpResponse.allHeaderFields)
+
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                let statusCodeError = NSError(domain: "HTTP", code: -1, userInfo: [NSLocalizedDescriptionKey: "HTTP request failed"])
+                completion(.failure(statusCodeError))
+                return
+            }
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                    completion(.success(json))
+                } catch {
+                    completion(.failure(error))
                 }
-                
-                completion(.success(dataString))
             }
         }
         task.resume()

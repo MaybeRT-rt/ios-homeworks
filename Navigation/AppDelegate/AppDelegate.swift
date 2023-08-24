@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DispatchQueue.global().async {
             
-            let randomConfiguration = [AppConfiguration.people, AppConfiguration.films, AppConfiguration.planets].randomElement()!
+            let randomConfiguration = AppConfigurations(url: [AppConfiguration.people, AppConfiguration.films, AppConfiguration.planets].randomElement()!.url)
             
             NetworkService.request(for: randomConfiguration) { result in
                 switch result {
