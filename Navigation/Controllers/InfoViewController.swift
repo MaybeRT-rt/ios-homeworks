@@ -9,6 +9,7 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -22,6 +23,7 @@ class InfoViewController: UIViewController {
             self?.pressButtonAlert()
         }
         return buttonLog
+
     }()
 
     override func viewDidLoad() {

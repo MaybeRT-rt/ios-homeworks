@@ -25,3 +25,4 @@ enum AppConfiguration {
 struct AppConfigurations {
     let url: URL
 }
+

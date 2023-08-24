@@ -50,7 +50,9 @@
 		4AFCCE092A9267B5000A8F45 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCE082A9267B5000A8F45 /* NetworkService.swift */; };
 		4AFCCE0C2A9268DA000A8F45 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCE0B2A9268DA000A8F45 /* AppConfiguration.swift */; };
 		4AFCCE0E2A926FC5000A8F45 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCE0D2A926FC5000A8F45 /* NetworkError.swift */; };
+
 		4AFCCE182A975AFB000A8F45 /* TodoItemCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCE172A975AFB000A8F45 /* TodoItemCodable.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +138,7 @@
 		4AFCCE0B2A9268DA000A8F45 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		4AFCCE0D2A926FC5000A8F45 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		4AFCCE172A975AFB000A8F45 /* TodoItemCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemCodable.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +306,7 @@
 				4A22B3172A602C6900859F68 /* FeedModel.swift */,
 				4A9E94282A77025C00E9BDB9 /* PasswordBruteForce.swift */,
 				4A7680C329DEDF20007070FD /* Data */,
+
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -313,6 +317,7 @@
 				4ABEB0CE2A80062B000B9B46 /* AppError.swift */,
 				4AFCCE0D2A926FC5000A8F45 /* NetworkError.swift */,
 			);
+
 			path = AppError;
 			sourceTree = "<group>";
 		};
@@ -342,6 +347,7 @@
 				4ABEB0CD2A80060E000B9B46 /* AppError */,
 			);
 			path = AppConfiguration;
+
 			sourceTree = "<group>";
 		};
 		4AFCCE162A975AC8000A8F45 /* Response */ = {
@@ -350,6 +356,7 @@
 				4AFCCE172A975AFB000A8F45 /* TodoItemCodable.swift */,
 			);
 			path = Response;
+
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
