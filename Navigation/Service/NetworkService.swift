@@ -8,13 +8,10 @@
 import Foundation
 import UIKit
 //error code: -1009
-import Foundation
-import UIKit
-//error code: -1009
 struct NetworkService {
     static func request(for configuration: AppConfigurations, completion: @escaping (Result<[String: Any], Error>) -> Void) {
         let session = URLSession(configuration: .default)
-
+        
         let task = session.dataTask(with: configuration.url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
