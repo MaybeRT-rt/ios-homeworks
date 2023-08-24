@@ -13,9 +13,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let operationQueue = OperationQueue()
         operationQueue.qualityOfService = .background
         
+<<<<<<< HEAD
         let randomConfiguration = AppConfigurations(url: [AppConfiguration.people, AppConfiguration.films, AppConfiguration.planets].randomElement()!.url)
         
         operationQueue.addOperation {
+=======
+        DispatchQueue.global().async {
+            
+
+            let randomConfiguration = AppConfigurations(url: [AppConfiguration.people, AppConfiguration.films, AppConfiguration.planets].randomElement()!.url)
+
+            
+>>>>>>> b9a518b39c4e59e3b95b30206575dd282081d5c3
             NetworkService.request(for: randomConfiguration) { result in
                 switch result {
                 case .success(let response):
