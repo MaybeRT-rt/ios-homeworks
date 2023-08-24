@@ -21,14 +21,6 @@ struct NetworkService {
                 return
             }
             
-
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                let statusCodeError = NSError(domain: "HTTP", code: -1, userInfo: [NSLocalizedDescriptionKey: "HTTP request failed"])
-                completion(.failure(statusCodeError))
-                return
-            }
-            
             if let data = data {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
