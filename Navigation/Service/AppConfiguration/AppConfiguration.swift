@@ -13,11 +13,11 @@ enum AppConfiguration {
     var url: URL {
         switch self{
         case .people:
-            return URL(string: "https://swapi.dev/api/peoples/")!
+            return URL(string: "https://swapi.dev/api/people/7")!
         case .films:
-            return URL(string: "https://swapi.dev/api/films/")!
+            return URL(string: "https://swapi.dev/api/films/4")!
         case .planets:
-            return URL(string: "https://swapi.dev/api/planets/")!
+            return URL(string: "https://swapi.dev/api/planets/1")!
         }
     }
 }

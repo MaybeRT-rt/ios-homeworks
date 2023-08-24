@@ -51,6 +51,7 @@
 		4AFCCE0C2A9268DA000A8F45 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCE0B2A9268DA000A8F45 /* AppConfiguration.swift */; };
 		4AFCCE0E2A926FC5000A8F45 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCE0D2A926FC5000A8F45 /* NetworkError.swift */; };
 		4AFCCE182A975AFB000A8F45 /* TodoItemCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCE172A975AFB000A8F45 /* TodoItemCodable.swift */; };
+		4AFCCE1A2A97A1FD000A8F45 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCE192A97A1FD000A8F45 /* Planet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,7 @@
 		4AFCCE0B2A9268DA000A8F45 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		4AFCCE0D2A926FC5000A8F45 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		4AFCCE172A975AFB000A8F45 /* TodoItemCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemCodable.swift; sourceTree = "<group>"; };
+		4AFCCE192A97A1FD000A8F45 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				4AFCCE172A975AFB000A8F45 /* TodoItemCodable.swift */,
+				4AFCCE192A97A1FD000A8F45 /* Planet.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				4A7680BD29DEB882007070FD /* ProfileViewController.swift in Sources */,
 				4A7680C729DF0F3F007070FD /* InfoViewController.swift in Sources */,
 				4A22B3182A602C6900859F68 /* FeedModel.swift in Sources */,
+				4AFCCE1A2A97A1FD000A8F45 /* Planet.swift in Sources */,
 				4AFCCD8C2A9139DE000A8F45 /* MyMusicCell.swift in Sources */,
 				4A9E94332A79B32E00E9BDB9 /* PhotosViewerViewController.swift in Sources */,
 				4AFCCE092A9267B5000A8F45 /* NetworkService.swift in Sources */,

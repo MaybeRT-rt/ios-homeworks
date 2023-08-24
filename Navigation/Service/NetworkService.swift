@@ -9,16 +9,28 @@ import Foundation
 import UIKit
 //error code: -1009
 struct NetworkService {
-    static func request(for configuration: AppConfigurations, completion: @escaping (Result<String, Error>) -> Void) {
-        let session = URLSession.shared
+    static func request(for configuration: AppConfigurations, completion: @escaping (Result<[String: Any], Error>) -> Void) {
+        let session = URLSession(configuration: .default)
         let task = session.dataTask(with: configuration.url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
             
-            if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                completion(.success(dataString))
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                let statusCodeError = NSError(domain: "HTTP", code: -1, userInfo: [NSLocalizedDescriptionKey: "HTTP request failed"])
+                completion(.failure(statusCodeError))
+                return
+            }
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                    completion(.success(json))
+                } catch {
+                    completion(.failure(error))
+                }
             }
         }
         task.resume()
