@@ -10,20 +10,38 @@ import UIKit
 //error code: -1009
 struct NetworkService {
     static func request(for configuration: AppConfigurations, completion: @escaping (Result<[String: Any], Error>) -> Void) {
-        let session = URLSession(configuration: .default)
+        let session = URLSession.shared
         
         let task = session.dataTask(with: configuration.url) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            if let data = data {
+            DispatchQueue.global().async {
+                if let error = error {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                    return
+                }
+                
+                guard let data = data else {
+                    DispatchQueue.main.async {
+                        completion(.failure(NetworkError.noData))
+                    }
+                    return
+                }
+                
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                    completion(.success(json))
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        DispatchQueue.main.async {
+                            completion(.success(json))
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            completion(.failure(NetworkError.invalidResponse))
+                        }
+                    }
                 } catch {
-                    completion(.failure(error))
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
                 }
             }
         }

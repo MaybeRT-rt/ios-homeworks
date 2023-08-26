@@ -7,9 +7,10 @@
 
 import Foundation
 
-enum NetworkError {
+enum NetworkError: Error {
     case invalideURL
     case requestFailed(statusCode: Int)
+    case invalidResponse
     case noData
     case noEnternetConnection
 }
