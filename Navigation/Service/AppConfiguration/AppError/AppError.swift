@@ -14,4 +14,5 @@ enum AppError: Error {
     case bruteForceError
     case userServiceError(String)
     case unknownError
+    case userExists
 }

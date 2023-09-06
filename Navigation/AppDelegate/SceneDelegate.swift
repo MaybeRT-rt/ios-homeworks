@@ -37,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func logInProfile() -> UINavigationController {
         let loginVC = LogInViewController()
-        loginVC.loginDelegate = loginFactory.makeLoginInspector()
+        loginVC.checkerService = loginFactory.makeLoginInspector()
         loginVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
         
         return UINavigationController(rootViewController: loginVC)
