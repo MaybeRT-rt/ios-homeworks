@@ -266,23 +266,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         scrollView.contentInset.bottom = 0.0
     }
     
-    private func setupDefaultValues() {
-        let defaultLogin = "adm@ya.ru"
-        let defaultPassword = "123456"
-        
-        if loginTextField.text?.isEmpty ?? true {
-            loginTextField.text = defaultLogin
-        }
-        
-        if passTextField.text?.isEmpty ?? true {
-            passTextField.text = defaultPassword
-        }
-    }
-    
-    
     private func pressButtonLogin() {
-        
-        setupDefaultValues()
         
         guard let email = loginTextField.text, !email.isEmpty,
               let password = passTextField.text, !password.isEmpty else {
