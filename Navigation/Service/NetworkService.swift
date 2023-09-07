@@ -9,30 +9,40 @@ import Foundation
 import UIKit
 //error code: -1009
 struct NetworkService {
-    static func request(for configuration: AppConfiguration, completion: @escaping (Result<String, Error>) -> Void) {
+    static func request(for configuration: AppConfigurations, completion: @escaping (Result<[String: Any], Error>) -> Void) {
         let session = URLSession.shared
+        
         let task = session.dataTask(with: configuration.url) { data, response, error in
-            if let error = error {
-                if let urlError = error as? URLError {
-                    if urlError.code == .notConnectedToInternet {
-                        print("No internet connection: \(urlError.localizedDescription)")
-                    } else {
-                        print("Network error: \(urlError.localizedDescription)")
+            DispatchQueue.global().async {
+                if let error = error {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
                     }
-                } else {
-                    print("Error: \(error.localizedDescription)")
-                }
-            }
-            
-            if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                print("Data:", dataString)
-                
-                if let httpResponse = response as? HTTPURLResponse {
-                    print("Status Code:", httpResponse.statusCode)
-                    print("Headers:", httpResponse.allHeaderFields)
+                    return
                 }
                 
-                completion(.success(dataString))
+                guard let data = data else {
+                    DispatchQueue.main.async {
+                        completion(.failure(NetworkError.noData))
+                    }
+                    return
+                }
+                
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        DispatchQueue.main.async {
+                            completion(.success(json))
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            completion(.failure(NetworkError.invalidResponse))
+                        }
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                }
             }
         }
         task.resume()

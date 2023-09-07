@@ -9,42 +9,64 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
-    private lazy var button: CustomButton = {
-        let buttonLog = CustomButton(title: "Alert", titleColor: .white) { [weak self] in
-                self?.pressButtonAlert()
-            }
-            return buttonLog
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        return label
     }()
-
+    
+    private lazy var orbitalPeriodLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        return label
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .darkGray
+        view.backgroundColor = .white
         setupButton()
+        fetchData()
     }
+    
     
     func setupButton() {
-        self.view.addSubview(button)
+        self.view.addSubview(titleLabel)
+        self.view.addSubview(orbitalPeriodLabel)
         
-        self.button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -400).isActive = true
-        self.button.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
-        self.button.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
-        self.button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        NSLayoutConstraint.activate([
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            
+            orbitalPeriodLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            orbitalPeriodLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 150)
+            
+        ])
     }
     
-    @objc private func pressButtonAlert() {
-        let alert = UIAlertController(title: "someAlert", message: "someMessage", preferredStyle: UIAlertController.Style.alert )
-
-        let actionOne = UIAlertAction(title: "Ok", style: .default) { _ in
-            print("You tapped Ok")
+    func fetchData() {
+        async {
+            do {
+                let url1 = URL(string: "https://jsonplaceholder.typicode.com/todos/1")!
+                let todoItem: TodoItem = try await URLSession.shared.decode(from: url1)
+                
+                DispatchQueue.main.async {
+                    self.titleLabel.text = todoItem.title
+                }
+                
+                let url2 = URL(string: "https://swapi.dev/api/planets/1")!
+                let planet: Planet = try await URLSession.shared.decode(from: url2)
+                
+                DispatchQueue.main.async {
+                    self.orbitalPeriodLabel.text = "Orbital Period: \(planet.orbitalPeriod)"
+                }
+            } catch {
+                print("Download error: \(error.localizedDescription)")
+            }
         }
-        alert.addAction(actionOne)
-        
-        let actionTwo = UIAlertAction(title: "Cancel", style: .default) { _ in
-            print("You tapped Cancel")
-        }
-        alert.addAction(actionTwo)
-       
-        present(alert, animated: true, completion: nil)
     }
-    
 }
