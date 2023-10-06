@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Navigation/Data/Posts+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Navigation/Data/Posts+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:Navigation.xcodeproj">
    </FileRef>
    <FileRef

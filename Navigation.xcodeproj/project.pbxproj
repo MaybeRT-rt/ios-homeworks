@@ -39,6 +39,10 @@
 		4A9E94332A79B32E00E9BDB9 /* PhotosViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E94322A79B32E00E9BDB9 /* PhotosViewerViewController.swift */; };
 		4ABEB0CF2A80062B000B9B46 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABEB0CE2A80062B000B9B46 /* AppError.swift */; };
 		4AC8F96E2AC6B0BB0099830C /* FavoriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8F96D2AC6B0BB0099830C /* FavoriteController.swift */; };
+		4AC8F9702AC6B16C0099830C /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8F96F2AC6B16C0099830C /* FavoriteView.swift */; };
+		4AC8F9732AC6B1A20099830C /* FavoriteModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8F9712AC6B1A20099830C /* FavoriteModel.xcdatamodeld */; };
+		4AC8F9792AC6B68E0099830C /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8F9782AC6B68E0099830C /* CoreDataHelper.swift */; };
+		4AC8F97B2AC950F00099830C /* EctensionTB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8F97A2AC950F00099830C /* EctensionTB.swift */; };
 		4AFCCD8C2A9139DE000A8F45 /* MyMusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCD8B2A9139DE000A8F45 /* MyMusicCell.swift */; };
 		4AFCCD922A913C71000A8F45 /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCCD912A913C71000A8F45 /* MusicPlayerViewController.swift */; };
 		4AFCCD9A2A914320000A8F45 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 4AFCCD992A914320000A8F45 /* Toast */; };
@@ -132,6 +136,10 @@
 		4A9E94322A79B32E00E9BDB9 /* PhotosViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewerViewController.swift; sourceTree = "<group>"; };
 		4ABEB0CE2A80062B000B9B46 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		4AC8F96D2AC6B0BB0099830C /* FavoriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteController.swift; sourceTree = "<group>"; };
+		4AC8F96F2AC6B16C0099830C /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		4AC8F9722AC6B1A20099830C /* FavoriteModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteModel.xcdatamodel; sourceTree = "<group>"; };
+		4AC8F9782AC6B68E0099830C /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		4AC8F97A2AC950F00099830C /* EctensionTB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EctensionTB.swift; sourceTree = "<group>"; };
 		4AFCCD8B2A9139DE000A8F45 /* MyMusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMusicCell.swift; sourceTree = "<group>"; };
 		4AFCCD912A913C71000A8F45 /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
 		4AFCCE022A917145000A8F45 /* MusicPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerModel.swift; sourceTree = "<group>"; };
@@ -296,8 +304,8 @@
 				4A9E94322A79B32E00E9BDB9 /* PhotosViewerViewController.swift */,
 				4A66E59729F995B4001055DE /* TableViewCell */,
 				4A2C95D129E5B1A8006E82F8 /* Profile */,
-				4A22B3192A6404D200859F68 /* Feed */,
 				4AFCCD592A8E24BB000A8F45 /* Music */,
+				4A22B3192A6404D200859F68 /* Feed */,
 				4AC8F96C2AC6B09B0099830C /* FavoriteMVC */,
 			);
 			path = Controllers;
@@ -336,6 +344,9 @@
 			isa = PBXGroup;
 			children = (
 				4AC8F96D2AC6B0BB0099830C /* FavoriteController.swift */,
+				4AC8F96F2AC6B16C0099830C /* FavoriteView.swift */,
+				4AC8F97A2AC950F00099830C /* EctensionTB.swift */,
+				4AC8F9712AC6B1A20099830C /* FavoriteModel.xcdatamodeld */,
 			);
 			path = FavoriteMVC;
 			sourceTree = "<group>";
@@ -353,6 +364,7 @@
 		4AFCCE072A92677F000A8F45 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				4AC8F9782AC6B68E0099830C /* CoreDataHelper.swift */,
 				4AFCCE082A9267B5000A8F45 /* NetworkService.swift */,
 				4A079D652AA7A3F3009976F8 /* CheckerService.swift */,
 				4AFCCE222A984FF0000A8F45 /* Extension */,
@@ -677,6 +689,8 @@
 				4A7680A729DEACE3007070FD /* AppDelegate.swift in Sources */,
 				4A7680BB29DEB870007070FD /* FeedViewController.swift in Sources */,
 				4A51C41629F437CB00767386 /* LogInViewController.swift in Sources */,
+				4AC8F97B2AC950F00099830C /* EctensionTB.swift in Sources */,
+				4AC8F9792AC6B68E0099830C /* CoreDataHelper.swift in Sources */,
 				4A7680BD29DEB882007070FD /* ProfileViewController.swift in Sources */,
 				4A079D622AA79FD7009976F8 /* FeedModel.swift in Sources */,
 				4AFCCE212A97C80E000A8F45 /* ResidentResponse.swift in Sources */,
@@ -689,6 +703,8 @@
 				4AFCCE242A98501D000A8F45 /* extensionURLSession.swift in Sources */,
 				4A7680A929DEACE3007070FD /* SceneDelegate.swift in Sources */,
 				4A9B884B2A0502C700923D9A /* PhotoGallery.swift in Sources */,
+				4AC8F9732AC6B1A20099830C /* FavoriteModel.xcdatamodeld in Sources */,
+				4AC8F9702AC6B16C0099830C /* FavoriteView.swift in Sources */,
 				4AFCCE032A917145000A8F45 /* MusicPlayerModel.swift in Sources */,
 				4ABEB0CF2A80062B000B9B46 /* AppError.swift in Sources */,
 				4A66E59E29FA7AA2001055DE /* PostsTableViewCell.swift in Sources */,
@@ -1095,6 +1111,19 @@
 			productName = iOSIntPackage;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		4AC8F9712AC6B1A20099830C /* FavoriteModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4AC8F9722AC6B1A20099830C /* FavoriteModel.xcdatamodel */,
+			);
+			currentVersion = 4AC8F9722AC6B1A20099830C /* FavoriteModel.xcdatamodel */;
+			path = FavoriteModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4A76809B29DEACE3007070FD /* Project object */;
 }

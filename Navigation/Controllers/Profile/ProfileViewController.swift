@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
     
     let viewModelProfile: ProfileViewModel
     private var audioTrackURLs: [URL] = []
-
+    
     var user: User?
     
     private lazy var profileTableView: UITableView = {
@@ -33,7 +33,7 @@ class ProfileViewController: UIViewController {
     init(viewModel: ProfileViewModel) {
         self.viewModelProfile = viewModel
         super.init(nibName: nil, bundle: nil)
-       // audioTrackURLs = viewModel.musicViewModel.audioTracks
+        // audioTrackURLs = viewModel.musicViewModel.audioTracks
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        changeBackgraund() 
+        changeBackgraund()
         addedSubview()
         setupContrain()
         tuneTableView()
@@ -53,7 +53,7 @@ class ProfileViewController: UIViewController {
     private func changeBackgraund() {
 #if DEBUG
         view.backgroundColor = .systemGray
-        profileTableView.backgroundColor = .systemGray 
+        profileTableView.backgroundColor = .systemGray
 #else
         view.backgroundColor = .systemBackground
 #endif
@@ -93,8 +93,7 @@ class ProfileViewController: UIViewController {
         }
     }
 }
-  
-    
+
 extension ProfileViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -172,5 +171,11 @@ extension ProfileViewController: UITableViewDelegate {
         default:
             break
         }
+    }
+}
+
+extension ProfileViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

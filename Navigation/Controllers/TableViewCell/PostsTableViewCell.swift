@@ -10,6 +10,10 @@ import StorageService
 
 class PostsTableViewCell: UITableViewCell {
     
+    private let coreDataManager = CoreDataHelper.shared
+    private var post: Post?
+    private var posts: [Post] = []
+    
     private lazy var authtorLabel: UILabel = {
         var authorLabel = UILabel()
         authorLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
@@ -38,6 +42,17 @@ class PostsTableViewCell: UITableViewCell {
         return viewImage
     }()
     
+    lazy var likeImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "heart.fill"))
+        imageView.tintColor = .gray // Серое сердце
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleLikeTap(_:)))
+        imageView.addGestureRecognizer(tapGesture)
+        return imageView
+    }()
+    
     private lazy var likeLabel: UILabel = {
         let likeLabel = UILabel()
         likeLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -58,6 +73,10 @@ class PostsTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addedSubview()
         setupConstraint()
+        
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        contentView.addGestureRecognizer(doubleTapGesture)
     }
     
     required init?(coder: NSCoder) {
@@ -69,6 +88,7 @@ class PostsTableViewCell: UITableViewCell {
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(imagePostView)
         contentView.addSubview(likeLabel)
+        contentView.addSubview(likeImageView)
         contentView.addSubview(viewLabel)
     }
     
@@ -89,9 +109,14 @@ class PostsTableViewCell: UITableViewCell {
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
+            likeImageView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            likeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            likeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            
             likeLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            likeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            likeLabel.trailingAnchor.constraint(equalTo: likeImageView.trailingAnchor, constant: 30),
             likeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            likeLabel.widthAnchor.constraint(equalToConstant: 30),
             
             viewLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             viewLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
@@ -101,10 +126,58 @@ class PostsTableViewCell: UITableViewCell {
     }
     
     func update(_ model: Post) {
+        post = model
         authtorLabel.text = model.author
-        descriptionLabel.text = model.description
+        descriptionLabel.text = model.text
         imagePostView.image = UIImage(named: model.image)
-        likeLabel.text = "Likes: " + String(model.likes)
+        likeLabel.text = "\(model.likes)"
         viewLabel.text = "View: \(model.view)"
+        
+        likeImageView.tintColor = model.isFavorite ? .red : .gray
+    }
+    
+
+    @objc func handleLikeTap(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            if let currentLikes = likeLabel.text, var likes = Int(currentLikes) {
+                if likes >= 0 {
+                    if likeImageView.tintColor == .gray {
+                        likeImageView.tintColor = .red // Красное сердце
+                        likes += 1
+                        coreDataManager.savePost(post!)
+                    } else if likes != 0 {
+                        likeImageView.tintColor = .gray // Серое сердце
+                        likes -= 1
+                        coreDataManager.deletePost(post!)
+                    }
+                    
+                    coreDataManager.persistentContainer.performBackgroundTask { context in
+                        if let post = self.post {
+                            self.coreDataManager.savePost(post) 
+                            DispatchQueue.main.async {
+                                self.likeLabel.text = "\(likes)"
+                            }
+                        }
+                    }
+                    
+                    // Анимация сердца
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.likeImageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                    }) { (_) in
+                        UIView.animate(withDuration: 0.3) {
+                            self.likeImageView.transform = .identity
+                        }
+                    }
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "UpdateFavoriteTable"), object: nil)
+                }
+            }
+        }
+    }
+
+    @objc private func handleDoubleTap(_ gesture: UITapGestureRecognizer) {
+        if gesture.state == .ended {
+            handleLikeTap(gesture)
+        }
     }
 }
