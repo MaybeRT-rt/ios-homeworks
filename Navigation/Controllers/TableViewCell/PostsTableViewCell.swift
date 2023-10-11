@@ -143,14 +143,14 @@ class PostsTableViewCell: UITableViewCell {
         if sender.state == .ended {
             if let currentLikes = likeLabel.text, var likes = Int(currentLikes) {
                 if likeImageView.tintColor == .gray {
-                   likeImageView.tintColor = .red 
+                   likeImageView.tintColor = .red
                     likes += 1
                     post?.likes = likes 
                     coreDataManager.savePost(post!, isFavorite: true)
                     updateTableViewClosure?()
                     
                     likeLabel.text = "\(likes)"
-                } else {
+                } else if likes > 0 {
                     likeImageView.tintColor = .gray
                     likes -= 1
                     post?.likes = likes
@@ -171,7 +171,6 @@ class PostsTableViewCell: UITableViewCell {
         }
     }
 
-    
     @objc private func handleDoubleTap(_ gesture: UITapGestureRecognizer) {
         if gesture.state == .ended {
             handleLikeTap(gesture)
