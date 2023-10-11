@@ -5,8 +5,9 @@
 //  Created by Liz-Mary on 29.09.2023.
 //
 
-import StorageService
 import UIKit
+import CoreData
+import StorageService
 
 class FavoriteController: UIViewController {
     
@@ -14,25 +15,18 @@ class FavoriteController: UIViewController {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.favoritePostsView.tableView.reloadData()
+                self?.favoritePostsView.emptyStateLabel.isHidden = !(self?.favoritePosts.isEmpty)! 
             }
         }
     }
     
-    var updateTableViewClosure: (() -> Void)?
-    
     let coreDataManager = CoreDataHelper.shared
-    
-    private let favoritePostsView = FavoriteView()
+    let favoritePostsView = FavoriteView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUI()
-        loadFavoritePosts()
-        
-        updateTableViewClosure = { [weak self] in
-            self?.favoritePostsView.tableView.reloadData()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,51 +38,40 @@ class FavoriteController: UIViewController {
         favoritePostsView.tableView.register(PostsTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell_ReuseID")
         
         view.addSubview(favoritePostsView.tableView)
+        view.addSubview(favoritePostsView.emptyStateLabel)
+        
         NSLayoutConstraint.activate([
             favoritePostsView.tableView.topAnchor.constraint(equalTo: view.topAnchor),
             favoritePostsView.tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             favoritePostsView.tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            favoritePostsView.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            favoritePostsView.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            favoritePostsView.emptyStateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            favoritePostsView.emptyStateLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
         favoritePostsView.tableView.dataSource = self
         favoritePostsView.tableView.delegate = self
     }
     
-    @objc func updateTableView() {
-        favoritePostsView.tableView.reloadData()
-    }
-    
-    private func loadFavoritePosts() {
-        favoritePosts = coreDataManager.fetchSavedPosts()
-        updateTableViewClosure?()
-    }
-    
-    
+    // Добавление поста в избранное
     func savePostToFavorite(_ post: Post) {
-        coreDataManager.savePost(post)
+        coreDataManager.savePost(post, isFavorite: true)
         loadFavoritePosts()
-        updateTableViewClosure?()
-        //favoritePostsView.tableView.reloadData()
-        //updateTableView()
     }
-    
     
     func removePostFromFavorite(_ post: Post) {
-        coreDataManager.deletePost(post)
-        
-        if let index = favoritePosts.firstIndex(where: { $0.author == post.author && $0.text == post.text }) {
-            favoritePosts.remove(at: index)
+        coreDataManager.savePost(post, isFavorite: false)
+        loadFavoritePosts()
+    }
+    
+    // Загрузка избранных постов
+    func loadFavoritePosts() {
+        favoritePosts = coreDataManager.fetchLikedPosts()
+        DispatchQueue.main.async {
+            self.favoritePostsView.tableView.reloadData()
+            self.favoritePostsView.emptyStateLabel.isHidden = !self.favoritePosts.isEmpty
         }
-        updateTableViewClosure?()
-        // favoritePostsView.tableView.reloadData()
-        //updateTableView()
     }
 }
-    
-//    func updateTableView() {
-//        DispatchQueue.main.async {
-//            self.favoritePostsView.tableView.reloadData()
-//        }
-//    }
-//}
+

@@ -14,13 +14,17 @@ class PostsTableViewCell: UITableViewCell {
     private var post: Post?
     private var posts: [Post] = []
     
+    let favoritePostsView = FavoriteView()
+   
+    var updateTableViewClosure: (() -> Void)?
+    
     private lazy var authtorLabel: UILabel = {
         var authorLabel = UILabel()
         authorLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         authorLabel.numberOfLines = 2
         authorLabel.textColor = .black
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return authorLabel
     }()
     
@@ -30,7 +34,7 @@ class PostsTableViewCell: UITableViewCell {
         descriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         descriptionLabel.textColor = .systemGray
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return descriptionLabel
     }()
     
@@ -60,7 +64,7 @@ class PostsTableViewCell: UITableViewCell {
         likeLabel.translatesAutoresizingMaskIntoConstraints = false
         return likeLabel
     }()
-
+    
     private lazy var viewLabel: UILabel = {
         let viewLabel = UILabel()
         viewLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -73,6 +77,7 @@ class PostsTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addedSubview()
         setupConstraint()
+        
         
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
         doubleTapGesture.numberOfTapsRequired = 2
@@ -132,52 +137,45 @@ class PostsTableViewCell: UITableViewCell {
         imagePostView.image = UIImage(named: model.image)
         likeLabel.text = "\(model.likes)"
         viewLabel.text = "View: \(model.view)"
-        
-        likeImageView.tintColor = model.isFavorite ? .red : .gray
     }
     
-
     @objc func handleLikeTap(_ sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             if let currentLikes = likeLabel.text, var likes = Int(currentLikes) {
-                if likes >= 0 {
-                    if likeImageView.tintColor == .gray {
-                        likeImageView.tintColor = .red // Красное сердце
-                        likes += 1
-                        coreDataManager.savePost(post!)
-                    } else if likes != 0 {
-                        likeImageView.tintColor = .gray // Серое сердце
-                        likes -= 1
-                        coreDataManager.deletePost(post!)
-                    }
+                if likeImageView.tintColor == .gray {
+                   likeImageView.tintColor = .red 
+                    likes += 1
+                    post?.likes = likes 
+                    coreDataManager.savePost(post!, isFavorite: true)
+                    updateTableViewClosure?()
                     
-                    coreDataManager.persistentContainer.performBackgroundTask { context in
-                        if let post = self.post {
-                            self.coreDataManager.savePost(post) 
-                            DispatchQueue.main.async {
-                                self.likeLabel.text = "\(likes)"
-                            }
-                        }
-                    }
+                    likeLabel.text = "\(likes)"
+                } else {
+                    likeImageView.tintColor = .gray
+                    likes -= 1
+                    post?.likes = likes
+                    coreDataManager.savePost(post!, isFavorite: false)
+                    updateTableViewClosure?()
                     
-                    // Анимация сердца
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.likeImageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-                    }) { (_) in
-                        UIView.animate(withDuration: 0.3) {
-                            self.likeImageView.transform = .identity
-                        }
+                    likeLabel.text = "\(likes)"
+                }
+                // Анимация сердца
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.likeImageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                }) { (_) in
+                    UIView.animate(withDuration: 0.3) {
+                        self.likeImageView.transform = .identity
                     }
-                    
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "UpdateFavoriteTable"), object: nil)
                 }
             }
         }
     }
 
+    
     @objc private func handleDoubleTap(_ gesture: UITapGestureRecognizer) {
         if gesture.state == .ended {
             handleLikeTap(gesture)
         }
     }
 }
+

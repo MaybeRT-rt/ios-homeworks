@@ -2,7 +2,7 @@
 //  Posts+CoreDataProperties.swift
 //  
 //
-//  Created by Liz-Mary on 29.09.2023.
+//  Created by Liz-Mary on 06.10.2023.
 //
 //
 
@@ -15,7 +15,7 @@ extension Posts {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Posts> {
         return NSFetchRequest<Posts>(entityName: "Posts")
     }
-
+    @NSManaged public let postId: UUID
     @NSManaged public var author: String?
     @NSManaged public var text: String?
     @NSManaged public var image: String?

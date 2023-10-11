@@ -48,6 +48,7 @@ class ProfileViewController: UIViewController {
         setupContrain()
         tuneTableView()
         bindViewModel()
+        
     }
     
     private func changeBackgraund() {
