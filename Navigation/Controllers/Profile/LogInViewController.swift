@@ -7,19 +7,15 @@
 
 import UIKit
 import Toast
+import FirebaseAuth
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
-    
-    var loginDelegate: LoginViewControllerDelegate? = LoginInspector()
-    
+
     var loginFactory: LoginFactory?
-    private var loginInspector: LoginInspector?
-    
+  
     private var currentUser: User?
-    
-    private let pwdBruteForce = PasswordBruteForce()
-    
-    private lazy var loginManager = LoginManager()
+
+    var checkerService: CheckerServiceProtocol?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -114,9 +110,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return buttonLog
     }()
     
-    private lazy var buttonBruteForce: CustomButton = {
-        let buttonLog = CustomButton(title: "BruteForce", titleColor: .white) { [weak self] in
-            self?.bruteforcePassword()
+    private lazy var signupAlert: CustomButton = {
+        let buttonLog = CustomButton(title: "Регистрация", titleColor: .white) { [weak self] in
+            self?.presentSignupAlert()
         }
         return buttonLog
     }()
@@ -136,10 +132,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         addedSubwiew()
         setupConstrain()
         
-        if let loginFactory = loginFactory {
-            let loginInspector = loginFactory.makeLoginInspector()
-            loginDelegate = loginInspector
-        }
     }
     
     
@@ -170,7 +162,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         contentView.addSubview(buttonLogin)
         scrollView.addSubview(contentView)
         scrollView.addSubview(stackView)
-        scrollView.addSubview(buttonBruteForce)
+        scrollView.addSubview(signupAlert)
         scrollView.addSubview(activityIndicator)
         view.addSubview(scrollView)
         
@@ -217,10 +209,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             buttonLogin.heightAnchor.constraint(equalToConstant: 50),
             buttonLogin.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            buttonBruteForce.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor, constant: 16),
-            buttonBruteForce.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            buttonBruteForce.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            buttonBruteForce.heightAnchor.constraint(equalToConstant: 50),
+            signupAlert.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor, constant: 16),
+            signupAlert.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            signupAlert.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            signupAlert.heightAnchor.constraint(equalToConstant: 50),
             
             activityIndicator.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 15),
             activityIndicator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
@@ -274,75 +266,74 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         scrollView.contentInset.bottom = 0.0
     }
     
-    private func setupDefaultValues() {
-        let defaultLogin = "adm"
-        let defaultPassword = "a123"
+    private func pressButtonLogin() {
         
-        if loginTextField.text?.isEmpty ?? true {
-            loginTextField.text = defaultLogin
-        }
-        
-        if passTextField.text?.isEmpty ?? true {
-            passTextField.text = defaultPassword
-        }
-    }
-    
-    @objc private func bruteforcePassword() {
-        guard let pwdCheck = passTextField.text, !pwdCheck.isEmpty else {
-            self.view.makeToast("The password field is empty")
+        guard let email = loginTextField.text, !email.isEmpty,
+              let password = passTextField.text, !password.isEmpty else {
+            showErrorAlert(error: .emptyLoginField)
             return
         }
         
-        buttonBruteForce.isEnabled = false
-        
-        activityIndicator.startAnimating()
-        DispatchQueue.global().async { [weak self] in
-            self?.pwdBruteForce.bruteForce(passwordToCrack: pwdCheck) { [weak self] pwdCheck in
-                DispatchQueue.main.async {
-                    self?.buttonBruteForce.isEnabled = true
-                    self?.activityIndicator.stopAnimating()
-                    self?.passTextField.isSecureTextEntry = false
-                    self?.passTextField.text = pwdCheck
-                    
-                }
-            }
-        }
-    }
-    
-    
-    @objc private func pressButtonLogin() {
-        guard let delegate = loginDelegate else {
-            return
-        }
-        
-        let login = loginTextField.text ?? "adm"
-        let password = passTextField.text ?? "a123"
-        setupDefaultValues()
-        self.passTextField.isSecureTextEntry = true
-        
-        let userService: UserService = TestUserService(user: User(login: "adm", fullName: "Test User", avatar: UIImage(named: "7.png") ?? UIImage(named: "avatar.png")!, status: "Testing"))
-        
-        LoginManager.login(
-            withLogin: login,
-            password: password,
-            delegate: delegate,
-            navigationController: self.navigationController,
-            userService: userService
-        ) { [weak self] result in
+        checkerService?.checkCredentials(email: email, password: password) { [weak self] result in
             switch result {
-            case .success(let user):
+            case .success:
                 DispatchQueue.main.async {
                     let profileVC = ProfileViewController(viewModel: ProfileViewModel())
-                    profileVC.user = user
                     self?.navigationController?.pushViewController(profileVC, animated: true)
                 }
             case .failure(let error):
-                DispatchQueue.main.async {
-                    self?.showErrorAlert(error: error)
+                self?.view.makeToast("Ошибка: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    @objc private func presentSignupAlert() {
+        let alert = UIAlertController(title: "Регистрация", message: "Введите данные для регистрации", preferredStyle: .alert)
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Email"
+        }
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Пароль"
+            textField.isSecureTextEntry = true
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        
+        let signupAction = UIAlertAction(title: "Зарегистрировать", style: .default) { [weak self] _ in
+            if let emailField = alert.textFields?.first, let passwordField = alert.textFields?.last,
+               let email = emailField.text, !email.isEmpty,
+               let password = passwordField.text, !password.isEmpty {
+                self?.registerNewUser(email: email, password: password)
+            } else {
+                self?.view.makeToast("The password or login field is empty")
+            }
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(signupAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func registerNewUser(email: String, password: String) {
+        checkerService?.checkIfUserExists(email: email) { [weak self] userExists in
+            if !userExists {
+                self?.checkerService?.createUser(email: email, password: password) { [weak self] result in
+                    switch result {
+                    case .success:
+                        DispatchQueue.main.async {
+                            let profileVC = ProfileViewController(viewModel: ProfileViewModel())
+                            self?.navigationController?.pushViewController(profileVC, animated: true)
+                        }
+                    case .failure(let error):
+                        self?.view.makeToast("Ошибка: \(error.localizedDescription)")
+                    }
                 }
             }
         }
     }
+    
     
     private func showErrorAlert(error: AppError) {
         var errorMessage = ""
@@ -359,6 +350,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             errorMessage = "Ошибка сервиса пользователя: \(message)"
         case .unknownError:
             errorMessage = "Произошла неизвестная ошибка"
+        case .userExists:
+            errorMessage = "Юзер таким логином сущкствует"
         }
         
         let alert = UIAlertController(title: "Ошибка", message: errorMessage, preferredStyle: .alert)
