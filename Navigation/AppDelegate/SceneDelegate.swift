@@ -38,15 +38,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func logInProfile() -> UINavigationController {
         let loginVC = LogInViewController()
         loginVC.checkerService = loginFactory.makeLoginInspector()
-        loginVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+        loginVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 2)
         
         return UINavigationController(rootViewController: loginVC)
     }
     
+    func creatFavoriteVC() -> UINavigationController {
+        let favoriteVC = FavoriteController()
+        favoriteVC.title = "Favorite"
+        favoriteVC.tabBarItem = UITabBarItem(title: "Favorite", image: UIImage(systemName: "heart.circle"), tag: 1)
+        
+        return UINavigationController(rootViewController: favoriteVC)
+    }
+    
+    
     func createTBController() -> UITabBarController {
         let tbController = UITabBarController()
         UITabBar.appearance().backgroundColor = .white
-        tbController.viewControllers = [creatFeedNC(), logInProfile()]
+        tbController.viewControllers = [creatFeedNC(), creatFavoriteVC(), logInProfile()]
         
         return tbController
     }
