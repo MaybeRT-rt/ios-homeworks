@@ -61,8 +61,11 @@ class FavoriteController: UIViewController {
     }
     
     func removePostFromFavorite(_ post: Post) {
-        coreDataManager.savePost(post, isFavorite: false)
-        loadFavoritePosts()
+        
+        coreDataManager.deletePost(post) {
+            self.coreDataManager.savePost(post, isFavorite: false)
+            self.loadFavoritePosts() 
+        }
     }
     
     // Загрузка избранных постов

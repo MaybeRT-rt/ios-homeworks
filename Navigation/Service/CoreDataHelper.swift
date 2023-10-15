@@ -60,70 +60,140 @@ class CoreDataHelper {
     }
     
     
+//    func savePost(_ post: Post, isFavorite: Bool) {
+//        let managedContext = persistentContainer.viewContext
+//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Posts")
+//
+//        let predicate = NSPredicate(format: "postId == %@", post.postId as CVarArg)
+//        fetchRequest.predicate = predicate
+//
+//        do {
+//            let result = try managedContext.fetch(fetchRequest)
+//            if let coreDataPost = result.first {
+//                coreDataPost.setValue(isFavorite, forKey: "isFavorite")
+//                coreDataPost.setValue(post.likes, forKey: "likes") // Обновление количества лайков
+//
+//                do {
+//                    try managedContext.save()
+//                    print("Пост с postId \(post.postId) успешно обновлен в Core Data")
+//                } catch {
+//                    print("Ошибка при сохранении изменений в Core Data: \(error)")
+//                }
+//            } else if isFavorite && post.likes > 0 { 
+//                if let entityDescription = NSEntityDescription.entity(forEntityName: "Posts", in: managedContext) {
+//                    let coreDataPost = NSManagedObject(entity: entityDescription, insertInto: managedContext)
+//                    coreDataPost.setValue(post.postId, forKey: "postId")
+//                    coreDataPost.setValue(post.author, forKey: "author")
+//                    coreDataPost.setValue(post.text, forKey: "text")
+//                    coreDataPost.setValue(post.image, forKey: "image")
+//                    coreDataPost.setValue(post.likes, forKey: "likes")
+//                    coreDataPost.setValue(post.view, forKey: "view")
+//                    coreDataPost.setValue(true, forKey: "isFavorite")
+//
+//                    do {
+//                        try managedContext.save()
+//                        print("Пост с postId \(post.postId) успешно сохранен в Core Data")
+//                    } catch {
+//                        print("Ошибка при сохранении в Core Data: \(error)")
+//                    }
+//                }
+//            }
+//        } catch {
+//            print("Ошибка при запросе или обновлении поста: \(error)")
+//        }
+//    }
+    
     func savePost(_ post: Post, isFavorite: Bool) {
-        let managedContext = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Posts")
+        // Создайте фоновый контекст
+        let backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        backgroundContext.parent = persistentContainer.viewContext
 
+        // Используйте фоновый контекст для сохранения данных
+        backgroundContext.perform {
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Posts")
+            let predicate = NSPredicate(format: "postId == %@", post.postId as CVarArg)
+            fetchRequest.predicate = predicate
+
+            do {
+                let result = try backgroundContext.fetch(fetchRequest)
+                if let coreDataPost = result.first {
+                    coreDataPost.setValue(isFavorite, forKey: "isFavorite")
+                    coreDataPost.setValue(post.likes, forKey: "likes") // Обновление количества лайков
+
+                    do {
+                        try backgroundContext.save()
+                        print("Пост с postId \(post.postId) успешно обновлен в Core Data (в фоновом контексте)")
+                        
+                        // Сохранение изменений в основном контексте
+                        self.persistentContainer.viewContext.perform {
+                            do {
+                                try self.persistentContainer.viewContext.save()
+                                print("Изменения сохранены в основном контексте")
+                            } catch {
+                                print("Ошибка при сохранении в основном контексте: \(error)")
+                            }
+                        }
+                    } catch {
+                        print("Ошибка при сохранении изменений в фоновом контексте: \(error)")
+                    }
+                } else if isFavorite && post.likes > 0 {
+                    if let entityDescription = NSEntityDescription.entity(forEntityName: "Posts", in: backgroundContext) {
+                        let coreDataPost = NSManagedObject(entity: entityDescription, insertInto: backgroundContext)
+                        coreDataPost.setValue(post.postId, forKey: "postId")
+                        coreDataPost.setValue(post.author, forKey: "author")
+                        coreDataPost.setValue(post.text, forKey: "text")
+                        coreDataPost.setValue(post.image, forKey: "image")
+                        coreDataPost.setValue(post.likes, forKey: "likes")
+                        coreDataPost.setValue(post.view, forKey: "view")
+                        coreDataPost.setValue(true, forKey: "isFavorite")
+
+                        do {
+                            try backgroundContext.save()
+                            print("Пост с postId \(post.postId) успешно сохранен в Core Data (в фоновом контексте)")
+                            
+                            // Сохранение изменений в основном контексте
+                            self.persistentContainer.viewContext.perform {
+                                do {
+                                    try self.persistentContainer.viewContext.save()
+                                    print("Изменения сохранены в основном контексте")
+                                } catch {
+                                    print("Ошибка при сохранении в основном контексте: \(error)")
+                                }
+                            }
+                        } catch {
+                            print("Ошибка при сохранении в фоновом контексте: \(error)")
+                        }
+                    }
+                }
+            } catch {
+                print("Ошибка при запросе или обновлении поста: \(error)")
+            }
+        }
+    }
+
+    func deletePost(_ post: Post, completion: @escaping () -> Void) {
+        let managedContext = persistentContainer.viewContext
+
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Posts")
         let predicate = NSPredicate(format: "postId == %@", post.postId as CVarArg)
         fetchRequest.predicate = predicate
 
         do {
             let result = try managedContext.fetch(fetchRequest)
-            if let coreDataPost = result.first {
-                coreDataPost.setValue(isFavorite, forKey: "isFavorite")
-                coreDataPost.setValue(post.likes, forKey: "likes") // Обновление количества лайков
-
-                do {
-                    try managedContext.save()
-                    print("Пост с postId \(post.postId) успешно обновлен в Core Data")
-                } catch {
-                    print("Ошибка при сохранении изменений в Core Data: \(error)")
-                }
-            } else if isFavorite && post.likes > 0 { 
-                if let entityDescription = NSEntityDescription.entity(forEntityName: "Posts", in: managedContext) {
-                    let coreDataPost = NSManagedObject(entity: entityDescription, insertInto: managedContext)
-                    coreDataPost.setValue(post.postId, forKey: "postId")
-                    coreDataPost.setValue(post.author, forKey: "author")
-                    coreDataPost.setValue(post.text, forKey: "text")
-                    coreDataPost.setValue(post.image, forKey: "image")
-                    coreDataPost.setValue(post.likes, forKey: "likes")
-                    coreDataPost.setValue(post.view, forKey: "view")
-                    coreDataPost.setValue(true, forKey: "isFavorite")
-
-                    do {
-                        try managedContext.save()
-                        print("Пост с postId \(post.postId) успешно сохранен в Core Data")
-                    } catch {
-                        print("Ошибка при сохранении в Core Data: \(error)")
-                    }
-                }
-            }
-        } catch {
-            print("Ошибка при запросе или обновлении поста: \(error)")
-        }
-    }
-
-    
-    func deletePost(_ post: Post) {
-        let managedContext = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Posts")
-
-        let predicate = NSPredicate(format: "postId == %@", post.postId as CVarArg)
-        let textPredicate = NSPredicate(format: "text == %@", post.text)
-            let compoundPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [predicate, textPredicate])
-        fetchRequest.predicate = compoundPredicate
-
-        do {
-            let result = try managedContext.fetch(fetchRequest)
-            if let postToDelete = result.first {
+            for postToDelete in result {
                 managedContext.delete(postToDelete)
-                saveContext()
+            }
+            
+            DispatchQueue.main.async {
+                self.saveContext()
                 print("Пост с postId \(post.postId) успешно удален из Core Data")
+                completion()
             }
         } catch {
             print("Error deleting post: \(error)")
         }
     }
+
     
     func fetchLikedPosts() -> [Post] {
         let managedContext = persistentContainer.viewContext
