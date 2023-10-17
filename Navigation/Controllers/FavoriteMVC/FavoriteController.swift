@@ -111,23 +111,22 @@ class FavoriteController: UIViewController {
     }
     
     func updateFilter() {
-        print("Author filter: \(authorFilter ?? "nil")")
-        
         var filteredPosts: [Post]
         
         if let authorFilter = authorFilter, !authorFilter.isEmpty {
             filteredPosts = favoritePosts.filter { $0.author.lowercased() == authorFilter.lowercased() }
-            print("Filtered posts by author: \(filteredPosts)")
         } else {
-            print("No author filter applied.")
-            filteredPosts = favoritePosts
+            filteredPosts = coreDataManager.fetchLikedPosts()
         }
         
         updateTableView(with: filteredPosts)
     }
-
+    
     func updateTableView(with posts: [Post]) {
         favoritePosts = posts
-        self.favoritePostsView.tableView.reloadData()
+        
+        DispatchQueue.main.async {
+            self.favoritePostsView.tableView.reloadData()
+        }
     }
 }
