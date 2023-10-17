@@ -40,11 +40,12 @@ public struct Post {
 extension Post {
     public static func make() -> [Post] {
         [
-            Post(postId: UUID(), author: "No name", text: "Пожилые жуки больше ухаживают за потомством, чем молодые.", image: "bug.jpg", likes: 10, view: 14, isFavorite: true),
+            Post(postId: UUID(), author: "No name", text: "Пожилые жуки больше ухаживают за потомством, чем молодые.", image: "bug.jpg", likes: 10, view: 14, isFavorite: false),
             Post(postId: UUID(), author: "apple", text: "Apple работает над созданием платного тренера для помощи в поддержании здорового образа жизни Quartz на основе искусственного интеллекта. Он поможет пользователям в комплексном оздоровлении, укреплении сна и приобретении привычек здорового питания, сообщил Bloomberg. По данным ресурса, сервис Quartz будет «использовать ИИ и данные Apple Watch, чтобы вносить рекомендации и предлагать обучающие программы, адаптированные для конкретных пользователей».", image: "1.jpg", likes: 20, view: 32, isFavorite: false),
             Post(postId:  UUID(), author: "Мотивационные цитаты", text: "Правило 3 Н: Нет Ничего Невозможного", image: "no.jpg", likes: 100, view: 101, isFavorite: false),
             Post(postId:  UUID(), author: "My name", text: "Рада всех видеть!", image: "hello.jpg", likes: 2, view: 10, isFavorite: false),
-            Post(postId:  UUID(), author: "My", text: "WOW", image: "hello.jpg", likes: 0, view: 0, isFavorite: false)
+            Post(postId:  UUID(), author: "My name", text: "WOW", image: "hello.jpg", likes: 0, view: 0, isFavorite: false),
+            Post(postId: UUID(), author: "apple", text: "Apple пообещала решить проблему перегрева iPhone 15 в обновлении iOS 17", image: "14.jpg", likes: 3, view: 132, isFavorite: false)
         ]
     }
 }

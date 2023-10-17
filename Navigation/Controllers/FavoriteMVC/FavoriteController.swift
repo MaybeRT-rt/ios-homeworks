@@ -15,7 +15,7 @@ class FavoriteController: UIViewController {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.favoritePostsView.tableView.reloadData()
-                self?.favoritePostsView.emptyStateLabel.isHidden = !(self?.favoritePosts.isEmpty)! 
+                self?.favoritePostsView.emptyStateLabel.isHidden = !(self?.favoritePosts.isEmpty)!
             }
         }
     }
@@ -23,9 +23,14 @@ class FavoriteController: UIViewController {
     let coreDataManager = CoreDataHelper.shared
     let favoritePostsView = FavoriteView()
     
+    var authorFilter: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        let resetButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(resetButtonTapped))
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
+        navigationItem.rightBarButtonItems = [resetButton, searchButton]
         setupUI()
     }
     
@@ -61,10 +66,9 @@ class FavoriteController: UIViewController {
     }
     
     func removePostFromFavorite(_ post: Post) {
-        
         coreDataManager.deletePost(post) {
             self.coreDataManager.savePost(post, isFavorite: false)
-            self.loadFavoritePosts() 
+            self.loadFavoritePosts()
         }
     }
     
@@ -76,5 +80,54 @@ class FavoriteController: UIViewController {
             self.favoritePostsView.emptyStateLabel.isHidden = !self.favoritePosts.isEmpty
         }
     }
-}
+    
+    @objc func searchButtonTapped() {
+        let alertController = UIAlertController(title: "Фильтр по автору", message: "Введите имя автора", preferredStyle: .alert)
+        
+        alertController.addTextField { textField in
+            textField.placeholder = "Имя автора"
+        }
+        
+        let applyAction = UIAlertAction(title: "Применить", style: .default) { [weak self] _ in
+            if let authorTextField = alertController.textFields?.first, let author = authorTextField.text, !author.isEmpty {
+                self?.authorFilter = author
+            } else {
+                self?.authorFilter = nil
+            }
+            self?.updateFilter()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        
+        alertController.addAction(applyAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func resetButtonTapped() {
+        authorFilter = nil
+        updateFilter()
+    }
+    
+    func updateFilter() {
+        print("Author filter: \(authorFilter ?? "nil")")
+        
+        var filteredPosts: [Post]
+        
+        if let authorFilter = authorFilter, !authorFilter.isEmpty {
+            filteredPosts = favoritePosts.filter { $0.author.lowercased() == authorFilter.lowercased() }
+            print("Filtered posts by author: \(filteredPosts)")
+        } else {
+            print("No author filter applied.")
+            filteredPosts = favoritePosts
+        }
+        
+        updateTableView(with: filteredPosts)
+    }
 
+    func updateTableView(with posts: [Post]) {
+        favoritePosts = posts
+        self.favoritePostsView.tableView.reloadData()
+    }
+}
