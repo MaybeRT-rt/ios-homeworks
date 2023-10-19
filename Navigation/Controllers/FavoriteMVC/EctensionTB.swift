@@ -36,7 +36,7 @@ extension FavoriteController: UITableViewDataSource, UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { [weak self] (_, _, completionHandler) in
             if let postToRemove = self?.favoritePosts[indexPath.row] {
                 self?.removePostFromFavorite(postToRemove)
-                self?.loadFavoritePosts() 
+                self?.loadFavoritePosts()
             }
             completionHandler(true)
         }

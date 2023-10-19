@@ -58,57 +58,12 @@ class CoreDataHelper {
             return false
         }
     }
-    
-    
-//    func savePost(_ post: Post, isFavorite: Bool) {
-//        let managedContext = persistentContainer.viewContext
-//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Posts")
-//
-//        let predicate = NSPredicate(format: "postId == %@", post.postId as CVarArg)
-//        fetchRequest.predicate = predicate
-//
-//        do {
-//            let result = try managedContext.fetch(fetchRequest)
-//            if let coreDataPost = result.first {
-//                coreDataPost.setValue(isFavorite, forKey: "isFavorite")
-//                coreDataPost.setValue(post.likes, forKey: "likes") // Обновление количества лайков
-//
-//                do {
-//                    try managedContext.save()
-//                    print("Пост с postId \(post.postId) успешно обновлен в Core Data")
-//                } catch {
-//                    print("Ошибка при сохранении изменений в Core Data: \(error)")
-//                }
-//            } else if isFavorite && post.likes > 0 { 
-//                if let entityDescription = NSEntityDescription.entity(forEntityName: "Posts", in: managedContext) {
-//                    let coreDataPost = NSManagedObject(entity: entityDescription, insertInto: managedContext)
-//                    coreDataPost.setValue(post.postId, forKey: "postId")
-//                    coreDataPost.setValue(post.author, forKey: "author")
-//                    coreDataPost.setValue(post.text, forKey: "text")
-//                    coreDataPost.setValue(post.image, forKey: "image")
-//                    coreDataPost.setValue(post.likes, forKey: "likes")
-//                    coreDataPost.setValue(post.view, forKey: "view")
-//                    coreDataPost.setValue(true, forKey: "isFavorite")
-//
-//                    do {
-//                        try managedContext.save()
-//                        print("Пост с postId \(post.postId) успешно сохранен в Core Data")
-//                    } catch {
-//                        print("Ошибка при сохранении в Core Data: \(error)")
-//                    }
-//                }
-//            }
-//        } catch {
-//            print("Ошибка при запросе или обновлении поста: \(error)")
-//        }
-//    }
+
     
     func savePost(_ post: Post, isFavorite: Bool) {
-        // Создайте фоновый контекст
         let backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         backgroundContext.parent = persistentContainer.viewContext
 
-        // Используйте фоновый контекст для сохранения данных
         backgroundContext.perform {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Posts")
             let predicate = NSPredicate(format: "postId == %@", post.postId as CVarArg)
@@ -124,7 +79,6 @@ class CoreDataHelper {
                         try backgroundContext.save()
                         print("Пост с postId \(post.postId) успешно обновлен в Core Data (в фоновом контексте)")
                         
-                        // Сохранение изменений в основном контексте
                         self.persistentContainer.viewContext.perform {
                             do {
                                 try self.persistentContainer.viewContext.save()
@@ -151,7 +105,6 @@ class CoreDataHelper {
                             try backgroundContext.save()
                             print("Пост с postId \(post.postId) успешно сохранен в Core Data (в фоновом контексте)")
                             
-                            // Сохранение изменений в основном контексте
                             self.persistentContainer.viewContext.perform {
                                 do {
                                     try self.persistentContainer.viewContext.save()
@@ -227,5 +180,4 @@ class CoreDataHelper {
             return []
         }
     }
-
 }
