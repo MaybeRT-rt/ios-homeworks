@@ -5,6 +5,20 @@
 //  Created by Liz-Mary on 29.09.2023.
 //
 
+
+/*
+1. Решила использовать батчевые запросы в CoreData для эффективной выборки данныз из БД. Тем самым уменьшая нагрузку на память и повышая производительность.
+
+ Основная идея батчевых запросов заключается в том, что вы не извлекаете все данные сразу, а частями (батчами). Это делает запросы более эффективными.
+ 
+ У нас пока немного постов, но уверена, что в будущем мы будем их брать из какой-то апишки :)
+ 
+ 2. Та же мы используем сохранение в фоновом режиме для того, чтобы не блокировался главный поток.
+ 
+ 3(!) Самое актулальное в данном случае  - это кеширование данных. Что помогает нам быстрее их доставать.
+ Я так понимаю, что данные которые кешируются извлекаются из локального хранилища, а не бегают запросами к бд
+ 
+ */
 import CoreData
 import StorageService
 
@@ -18,6 +32,12 @@ class CoreDataHelper {
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "FavoriteModel")
+        
+        if let description = container.persistentStoreDescriptions.first {
+            description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+            description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+        }
+        
         container.loadPersistentStores { (_, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -124,23 +144,56 @@ class CoreDataHelper {
         }
     }
 
+//    func deletePost(_ post: Post, completion: @escaping () -> Void) {
+//        let managedContext = persistentContainer.viewContext
+//
+//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Posts")
+//        let predicate = NSPredicate(format: "postId == %@", post.postId as CVarArg)
+//        fetchRequest.predicate = predicate
+//
+//        do {
+//            let result = try managedContext.fetch(fetchRequest)
+//            for postToDelete in result {
+//                managedContext.delete(postToDelete)
+//            }
+//            
+//            DispatchQueue.main.async {
+//                self.saveContext()
+//                print("Пост с postId \(post.postId) успешно удален из Core Data")
+//                completion()
+//            }
+//        } catch {
+//            print("Error deleting post: \(error)")
+//        }
+//    }
+
     func deletePost(_ post: Post, completion: @escaping () -> Void) {
         let managedContext = persistentContainer.viewContext
-
+        
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Posts")
         let predicate = NSPredicate(format: "postId == %@", post.postId as CVarArg)
         fetchRequest.predicate = predicate
-
+        
         do {
             let result = try managedContext.fetch(fetchRequest)
-            for postToDelete in result {
+            if let postToDelete = result.first {
+                // Удаление из Core Data
                 managedContext.delete(postToDelete)
-            }
-            
-            DispatchQueue.main.async {
-                self.saveContext()
-                print("Пост с postId \(post.postId) успешно удален из Core Data")
-                completion()
+                
+                // Удаление из кеша
+                if var cachedLikedPosts = CachedPosts.shared.cachedLikedPosts(),
+                   let index = cachedLikedPosts.firstIndex(where: { $0.postId == post.postId }) {
+                    cachedLikedPosts.remove(at: index)
+                    CachedPosts.shared.cacheLikedPosts(cachedLikedPosts)
+                }
+                
+                DispatchQueue.main.async {
+                    self.saveContext()
+                    print("Пост с postId \(post.postId) успешно удален из Core Data и кеша")
+                    completion()
+                }
+            } else {
+                print("Пост не найден в Core Data")
             }
         } catch {
             print("Error deleting post: \(error)")
@@ -149,35 +202,42 @@ class CoreDataHelper {
 
     
     func fetchLikedPosts() -> [Post] {
-        let managedContext = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Posts")
         
+        if let cachedLikedPosts = CachedPosts.shared.cachedPosts {
+            return cachedLikedPosts
+        }
+        
+        let managedContext = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "isFavorite == true")
-
+        fetchRequest.fetchBatchSize = 5
+        fetchRequest.resultType = .managedObjectResultType
+        
         do {
             let result = try managedContext.fetch(fetchRequest)
+            
+            // Создаем массив для хранения постов
             var likedPosts: [Post] = []
-
-            for data in result {
-                guard let postId = data.value(forKey: "postId") as? UUID,
-                      let author = data.value(forKey: "author") as? String,
-                      let text = data.value(forKey: "text") as? String,
-                      let image = data.value(forKey: "image") as? String,
-                      let likes = data.value(forKey: "likes") as? Int,
-                      let view = data.value(forKey: "view") as? Int else {
-                    continue
-                }
-
-                let post = Post(postId: postId, author: author, text: text, image: image, likes: likes, view: view, isFavorite: true)
-
+            
+            for coreDataPost in result {
+                let post = Post(
+                    postId: coreDataPost.postId ?? UUID(),
+                    author: coreDataPost.author ?? "",
+                    text: coreDataPost.text ?? "",
+                    image: coreDataPost.image ?? "",
+                    likes: Int(coreDataPost.likes),
+                    view: Int(coreDataPost.view),
+                    isFavorite: coreDataPost.isFavorite
+                )
                 likedPosts.append(post)
             }
-
-            return likedPosts
             
+            CachedPosts.shared.cacheLikedPosts(likedPosts)
+            return likedPosts
         } catch let error as NSError {
             print("Could not fetch liked posts. \(error), \(error.userInfo)")
             return []
         }
     }
+
 }

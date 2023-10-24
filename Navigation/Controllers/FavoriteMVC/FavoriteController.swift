@@ -63,6 +63,7 @@ class FavoriteController: UIViewController {
     func savePostToFavorite(_ post: Post) {
         coreDataManager.savePost(post, isFavorite: true)
         loadFavoritePosts()
+        NotificationCenter.default.post(name: Notification.Name("PostSavedToCoreData"), object: nil)
     }
     
     func removePostFromFavorite(_ post: Post) {

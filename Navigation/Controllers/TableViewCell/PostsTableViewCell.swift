@@ -139,6 +139,14 @@ class PostsTableViewCell: UITableViewCell {
         viewLabel.text = "View: \(model.view)"
     }
     
+    func configure(for post: Post) {
+        if post.isFavorite {
+            likeImageView.tintColor = .red // Изменяем цвет на красный
+        } else {
+            likeImageView.tintColor = .gray // Изменяем цвет на серый
+        }
+    }
+    
     @objc func handleLikeTap(_ sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             if let currentLikes = likeLabel.text, var likes = Int(currentLikes) {
@@ -146,19 +154,22 @@ class PostsTableViewCell: UITableViewCell {
                    likeImageView.tintColor = .red
                     likes += 1
                     post?.likes = likes 
+                    post?.isFavorite = true
                     coreDataManager.savePost(post!, isFavorite: true)
                     updateTableViewClosure?()
-                    
                     likeLabel.text = "\(likes)"
+                    
                 } else if likes > 0 {
                     likeImageView.tintColor = .gray
                     likes -= 1
                     post?.likes = likes
+                    post?.isFavorite = false
                     coreDataManager.savePost(post!, isFavorite: false)
                     updateTableViewClosure?()
                     
                     likeLabel.text = "\(likes)"
                 }
+                
                 // Анимация сердца
                 UIView.animate(withDuration: 0.3, animations: {
                     self.likeImageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -167,6 +178,7 @@ class PostsTableViewCell: UITableViewCell {
                         self.likeImageView.transform = .identity
                     }
                 }
+                updateTableViewClosure?()
             }
         }
     }

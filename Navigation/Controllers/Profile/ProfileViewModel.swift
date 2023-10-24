@@ -11,6 +11,7 @@ import StorageService
 class ProfileViewModel {
     
     var reloadData: (() -> Void)?
+    var updateTableViewClosure: (() -> Void)?
     var user: User?
     var data: [Post] = [] {
         didSet {
@@ -47,6 +48,12 @@ class ProfileViewModel {
             return nil
         }
         return data[index]
+    }
+    
+    func removePostFromFavorites(at index: Int) {
+        if index >= 0, index < data.count {
+            data[index].isFavorite = false
+        }
     }
 }
 
