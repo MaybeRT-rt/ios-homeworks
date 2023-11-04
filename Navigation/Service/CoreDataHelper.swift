@@ -144,29 +144,6 @@ class CoreDataHelper {
         }
     }
 
-//    func deletePost(_ post: Post, completion: @escaping () -> Void) {
-//        let managedContext = persistentContainer.viewContext
-//
-//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Posts")
-//        let predicate = NSPredicate(format: "postId == %@", post.postId as CVarArg)
-//        fetchRequest.predicate = predicate
-//
-//        do {
-//            let result = try managedContext.fetch(fetchRequest)
-//            for postToDelete in result {
-//                managedContext.delete(postToDelete)
-//            }
-//            
-//            DispatchQueue.main.async {
-//                self.saveContext()
-//                print("Пост с postId \(post.postId) успешно удален из Core Data")
-//                completion()
-//            }
-//        } catch {
-//            print("Error deleting post: \(error)")
-//        }
-//    }
-
     func deletePost(_ post: Post, completion: @escaping () -> Void) {
         let managedContext = persistentContainer.viewContext
         
@@ -239,5 +216,4 @@ class CoreDataHelper {
             return []
         }
     }
-
 }
