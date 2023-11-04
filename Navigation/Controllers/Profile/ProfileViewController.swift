@@ -49,6 +49,9 @@ class ProfileViewController: UIViewController {
         tuneTableView()
         bindViewModel()
         
+        viewModelProfile.updateTableViewClosure = { [weak self] in
+            self?.profileTableView.reloadData()
+        }
     }
     
     private func changeBackgraund() {
@@ -118,6 +121,7 @@ extension ProfileViewController: UITableViewDataSource {
             let cell: PostsTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell_ReuseID", for: indexPath)) as! PostsTableViewCell
             cell.selectionStyle = .none
             guard let model = viewModelProfile.post(at: indexPath.row) else { return UITableViewCell() }
+            cell.configure(for: model)
             cell.update(model)
             return cell
         default:

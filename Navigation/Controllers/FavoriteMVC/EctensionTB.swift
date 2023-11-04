@@ -32,6 +32,22 @@ extension FavoriteController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { [weak self] (_, _, completionHandler) in
+            if let postToRemove = self?.favoritePosts[indexPath.row] {
+                self?.removePostFromFavorite(postToRemove)
+                self?.loadFavoritePosts()
+            }
+            completionHandler(true)
+        }
+
+        deleteAction.backgroundColor = .gray
+
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+
+        return configuration
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let post = favoritePosts[indexPath.row]
         removePostFromFavorite(post)
